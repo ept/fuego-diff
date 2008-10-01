@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Copyright %YEAR% Helsinki Institute for Information Technology
+
+This file is a part of Fuego middleware.  Fuego middleware is free
+software; you can redistribute it and/or modify it under the terms
+of the MIT license, included as the file MIT-LICENSE in the Fuego
+middleware source distribution.  If you did not receive the MIT
+license with the distribution, write to the Fuego Core project at
+%ADDRESS%.
+-->
+
+
+<project name="util" default="compile" basedir=".">
+
+  <property name="test.class" value="fc.test.junit.UtilSuite"/>
+
+  <!-- Imports many common definitions and provides
+       default implementations for tasks -->	
+  <import file="../subproject.xml" optional="true"/>
+  <fail unless="subproject.xml.included" 
+        message="Project not set up; run ant -f project-setup.xml" />
+
+</project>
+<!-- arch-tag: 154dd1c8-c408-423e-a457-116e9a2a3dfc
+-->
