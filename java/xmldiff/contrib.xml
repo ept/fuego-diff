@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!-- $Id: contrib.xml,v 1.3 2006/02/02 16:08:21 ctl Exp $ -->
+<!-- 
+
+Contrib builder
+===============
+
+The purpose of this build file is to fetch all required contrib stuff from
+a reliable source. The main mechanism is the <wget> macro which has the
+following attributes. 
+
+id: Unqiue id of the task. You must assign a unique id to the task 
+    that Ant can use for property names.
+
+target: name of target file that is fetched
+
+href1,href2: Links to the package holding the target file. href1 is first tried,
+then href2 if href1 fails. Note use of ${proto} prefix which allows us to
+swap all URIs to e.g. point to the local file system (fast testing).
+
+sha: sha1 hash that the target file must have after download. Used to
+verify that we got the right file. We also check the hash before downloading
+to see if perhaps the target is already up-to-date. Thus, if a hash is given,
+we only download a file if necessary.
+
+target.get: Name to store downloaded package in. Set to target is not
+explicitly given. Use with unpack
+
+unpack1,unpack2: Ant tasks to call to unpack the downloaded packages.
+unpack1 is for href1, unpack2 for href2.
+
+unpackdir: Passed as a propoert to unpacker; set to . if not given.
+Used here for unpacking to a named subdir of ${src} 
+
+Source packages are handled by downloading the package to ${sarch},
+checking its hash, and then unpacking to ${src}
+
+-->
+
+<project name="3dm-contrib" default="get-contrib" basedir=".">
+
+  <property name="lib" value="../contrib/jar" />
+  <property name="llib" value="contrib" />
+
+  <!-- Default soureforge mirror -->
+  <property name="sf-mirror" value="switch" />
+  <property name="sourceforge" 
+    value="${sf-mirror}.dl.sourceforge.net/sourceforge" />
+
+  <import file="../contrib-helper.xml" />
+
+  <target name="get-contrib" >
+    <mkdir dir="${lib}" />
+
+    <!-- Apache commons-logging.jar -->
+    <wget id="commons-logging"
+          href1="http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.tar.gz"
+          target="${lib}/commons-logging-1.1.1.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-tgz"
+          unpackloc1="commons-logging-1.1.1/commons-logging-1.1.1.jar"
+          sha="2d859791fbf7d880591864bd4004d8442a8a3b81" />
+
+    <!--- XMLPull API -->
+    <wget id="xmlpull-api"
+	  href1="http://www.xmlpull.org/v1/download/xmlpull_1_1_3_4c.jar"
+	  target="${lib}/xmlpull_1_1_3_4c.jar" 
+          sha = "25df3046aed28cb0e774e5cf7d8437bc1bee00f3" />
+
+    <!-- junit -->
+    <wget id="junit"
+          href1="http://${sourceforge}/sourceforge/junit/junit3.8.1.zip"
+          target="${lib}/junit-3.8.1.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-zip"
+	  unpackloc1="junit3.8.1/junit.jar"
+          sha="99129f16442844f6a4a11ae22fbbee40b14d774f" />
+
+    <!-- FC Util -->
+    <wget id="fc-util"
+	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-util/fc-util-0.1.0.jar"
+	  target="${llib}/fc-util-0.1.0.jar"
+	  sha = "6c8b6e8c3801c0cc672c421a994f5ddb04be46f5" />
+
+    <!-- FC XAS -->
+    <wget id="fc-xas"
+	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-xas/fc-xas-0.1.0.jar"
+	  target="${llib}/fc-xas-0.1.0.jar"
+	  sha = "4288fc78591e0fe8e240701607b4fd6fb7cbdef6" />
+
+
+    <!-- FC RAXS -->
+    <wget id="fc-raxs"
+	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-raxs/fc-raxs-0.1.0.jar"
+	  target="${llib}/fc-raxs-0.1.0.jar"
+	  sha = "e8bcf2b134d97ce86ce82b27cae6e65ab9cb7f96" />
+
+    </target>
+</project>
+<!-- arch-tag: 9fb1944c-c56c-4bda-a961-bc5ce2c44295
+-->

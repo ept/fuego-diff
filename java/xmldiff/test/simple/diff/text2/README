@@ -1,0 +1,2 @@
+Simple case to test that attribute deletion is detected by diff
+(Tests for bug 060313-1)

@@ -1,0 +1,69 @@
+<!-- Aunt Maija's homepage; after moving -> new tel and address -->
+<!-- $Id: m.xml,v 1.1 2005/10/07 14:04:18 ctl Exp $ -->
+<!-- xmlns="http://www.w3.org/1999/xhtml" -->
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy, see www.w3.org" />
+    <title>Welcome to the homepage of</title>
+    <meta name="GENERATOR" content="Microsoft FrontPage 3.0" />
+  </head>
+
+  <body background="flower.jpg">
+    <p align="center"><u><font face="Arial">Welcome to the homepage
+    of</font></u></p>
+
+    <p align="center"><big><big><big><big><big><big><font
+    face="Comic Sans MS">Maija
+    Mellunmaki</font></big></big></big></big></big></big></p>
+
+    <p><font face="Book Antiqua">Thank you for visiting my corner
+    of the web! This is the first home page I have ever mad, hope
+    you like it. I will add some more later on! For now, I can say
+    that my hobbies include reading and growing roses.</font></p>
+
+    <p><font face="Book Antiqua">List of best <blink>
+    films</blink></font></p>
+
+    <ul>
+      <li><font face="Book Antiqua">Sleepless in
+      seattle</font></li>
+
+      <li><font face="Book Antiqua">Gone by the Wind</font></li>
+
+      <li><font face="Book Antiqua">Mission Impossinble
+      2</font></li>
+
+      <li><font face="Book Antiqua">Top Gun</font></li>
+    </ul>
+
+    <p><font face="Book Antiqua">List of my favourite <blink>
+    music</blink></font></p>
+
+    <ul>
+      <li><font face="Book Antiqua">Mozart</font></li>
+
+      <li><font face="Book Antiqua">The Rolling Stones</font></li>
+
+      <li><font face="Book Antiqua">Leonard Cohen</font></li>
+
+      <li><font face="Book Antiqua">Toto</font></li>
+
+      <li><font face="Book Antiqua">Eurythmics</font></li>
+    </ul>
+
+    <p><font face="Book Antiqua">I work as a techer at the <a
+    href="http://elementaryschool.peraseinajoki.fi">elmentary
+    school</a> in <a href="http://peraseinajoki.fi">
+    Takaseinajoki<!--Changed--></a>.</font></p>
+
+    <p><font face="Book Antiqua">If you want to contact me, call me
+    at +358-12-34567777 or come visit at<!--Should Change--></font></p>
+
+    <p><font face="Century Gothic">Maija Mellunmaki<br />
+    Etukatu 34 B 12<!--Changed --><br />
+    04321 Takaseinajoki<!--Should change --><br />
+    Finland</font></p>
+
+  </body>
+</html>
+

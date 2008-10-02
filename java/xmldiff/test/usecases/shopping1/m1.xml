@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Mom starts reviewing the list. First Lisa and Dads lists are
+     downloaded and merged (=the listbelow). The merged list
+     is sent to Lisa's & Dad's PDA:s (as they are already online) -->
+<!-- $Id: m1.xml,v 1.1 2005/10/07 14:04:23 ctl Exp $ -->
+<shoppinglist>
+	<item>
+		<name>Emmentaler Cheese</name>
+		<quantity>500g</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Wheat toast</name>
+		<quantity>1 packet</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>	
+		<name>Smoked salmon</name>
+		<quantity>250g</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Calvin &amp; Hobbes Comic (for Kalle's Xmas party!)</name>
+		<quantity>1</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Apples</name>
+		<quantity>3</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+</shoppinglist>

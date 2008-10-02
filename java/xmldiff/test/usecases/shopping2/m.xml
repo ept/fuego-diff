@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- The computer looks up prices for Dad's and Lisas additions,
+     as well as suggests new food amounts (and warns about the salomon!) -->
+<!-- $Id: m.xml,v 1.1 2005/10/07 14:04:24 ctl Exp $ -->
+<shoppinglist>
+	<item>
+		<name>Emmentaler Cheese</name>
+		<quantity>500g</quantity>
+		<price>3.12</price>
+		<shop>LMart</shop>
+	</item>
+	<item>
+		<name>Wheat toast</name>
+		<quantity>1 packet</quantity>
+		<price>0.66</price>
+		<shop>LMart</shop>
+	</item>	
+	<item>
+		<name>Smoked salmon</name>
+		<quantity>250g</quantity>
+		<price>2.55</price>
+		<shop>LMart</shop>
+	</item>
+	<item>
+		<name>Apples</name>
+		<quantity>3</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Calvin &amp; Hobbes Comic (for Kalle's Xmas party!)</name>
+		<quantity>1</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Orange juice</name>
+		<quantity>2l</quantity>
+		<price>1.96</price>
+		<shop>LMart</shop>
+	</item>
+	<item>
+		<name>Toilet paper</name>
+		<quantity>1 packet</quantity>
+		<price>3.80</price>
+		<shop>LMart</shop>
+	</item>
+</shoppinglist>

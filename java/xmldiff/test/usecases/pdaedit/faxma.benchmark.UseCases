@@ -1,0 +1,13 @@
+# $Id: faxma.benchmark.UseCases,v 1.1 2006/03/22 09:33:17 ctl Exp $
+# Run ronnau-towards cases
+# small
+base=b.xml
+new=1.xml
+name=b-1
+1.base=2.xml
+1.new=m.xml
+1.name=2-m
+
+
+
+
