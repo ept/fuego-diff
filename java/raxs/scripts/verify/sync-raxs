@@ -1,0 +1,49 @@
+# Basic RAXS Sync test initial, remote, local sync
+# NOTE: The sleep 2 commands are necessary because the store
+# modflags is derived from the modtime of the containing dir
+# which has 1 sec granularity
+
+createprop fc.log.level=DEBUG syxaw.http.retries=0
+createprop syxaw.firstversion=1000 syxaw.uid.seed=42 SyncTest=fc.syxaw.raxs.test.SyncTest
+create --clean buzz
+createprop syxaw.firstversion=2000 syxaw.uid.seed=314
+create --clean rex
+
+# Setup
+:buzz @@{SyncTest}.registerMerger
+:rex @@{SyncTest}.registerMerger
+
+# Make initial store & links
+sys cp ../../raxs/test/simple/simple.xml buzz/simple.xml
+:buzz @@{SyncTest}.setupStore simple.xml raxs-store
+#:buzz lls raxs-store
+
+:rex touchf empty.xml
+:rex @@{SyncTest}.setupStore empty.xml raxs-store
+:rex ln --nolmod buzz/5DwIT0u7K_GDne5GbYUstQ raxs-store
+#:rex lls raxs-store
+
+# Initial sync
+:rex sync raxs-store
+:buzz ls raxs-store
+:rex ls raxs-store
+
+# Remote mod
+sleep 2
+:buzz @@{SyncTest}.makeMod raxs-store mod-1
+:buzz lls //raxs-store 
+:rex sync raxs-store
+:rex  @@{SyncTest}.testMod raxs-store mod-1
+:rex verify ok-mod-1
+
+# Local mod
+sleep 2
+:rex @@{SyncTest}.makeMod raxs-store mod-2
+:rex lls //raxs-store
+
+:rex sync raxs-store
+:buzz @@{SyncTest}.testMod raxs-store mod-2
+:buzz verify ok-mod-2
+:rex lls //raxs-store
+
+# arch-tag: e7841133-990e-49d8-9580-31f17490b894

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- A simple example. This comment acts as preamble -->
+<tree>
+  <file name="a"></file>
+  <file name="b"></file>
+  <dir name="c.">
+    <file name="c.a"></file>
+  </dir>
+</tree>
+<!-- arch-tag: 51318ef2-1e9d-40e3-8039-d97e1a0eeb89
+-->

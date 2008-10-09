@@ -1,0 +1,83 @@
+# Random read test
+
+createprop fc.log.level=DEBUG 
+createprop pdf=u
+
+
+create --clean buzz
+:buzz cdef test=fc.raxs.exper.RandomEdits.randomRead
+# Random reads (time)
+# Store 1
+createprop by=time test=rndrg size=1000 reads=20 max=25000 step=1000
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --incremental --repick-edits-src \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+# Store 2
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --incremental --repick-edits-src \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Localized reads (time)
+createprop test=rndrl size=1000 lsize=500 reads=20 max=25000 step=1000
+createprop store=fc.raxs.DeweyStore 
+# Store 1
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --localsize @@{lsize} --incremental \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+# Store 2
+createprop store=fc.raxs.IdStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --localsize @@{lsize} --incremental \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Random reads (mem)
+# Store 1
+createprop by=memory test=rndrg size=1000 reads=20 max=25000 step=1000
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --incremental --repick-edits-src \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+# Store 2
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --incremental --repick-edits-src \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Localized reads (mem)
+createprop test=rndrl size=1000 lsize=500 reads=20 max=25000 step=1000
+createprop store=fc.raxs.DeweyStore 
+# Store 1
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --localsize @@{lsize} --incremental \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+# Store 2
+createprop store=fc.raxs.IdStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --localsize @@{lsize} --incremental \
+	--edits @@{reads} --maxedits @@{reads} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Copy results if we are running in update mode
+if @@{fc.raxs.exper.update} echo Updating results...
+if @@{fc.raxs.exper.update} sys /bin/sh -c "cp -v buzz/rndr* \
+ ../../../../docs/deliverables/result/data/raxs"
+
+echo Done
+# arch-tag: 5a74ab19-46fc-415b-99bb-d46afcd79f3e

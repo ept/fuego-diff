@@ -1,0 +1,84 @@
+# Random edit test
+
+createprop fc.log.level=WARN
+createprop pdf=Iidduumm
+createprop store=fc.raxs.IdStore 
+
+create --clean buzz
+:buzz cdef test=fc.raxs.exper.RandomEdits.randomEdit
+
+# Random global edits; size=fixed, vary edits
+# Store 1
+createprop test=rndee size=10000 min=1 max=100 step=1 by=time
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --repeats 1 \
+	--edits @@{min} --maxedits @@{max} --step @@{step}
+
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --repeats 1 \
+	--edits @@{min} --maxedits @@{max} --step @@{step}
+
+# Random global edits; edits=fixed, vary size
+# Store 1
+createprop test=rndes size=1000 edits=20 max=50000 step=1000 by=time
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} \   
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} \ 
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Random global edits; edits=fixed, vary size, measure memory
+# Store 1
+createprop test=rndemg size=1000 edits=20 max=50000 step=1000 by=memory
+
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size}  \
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+# Store 2
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} \
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+
+# Random local edits; edits=fixed, vary size, measure memory
+# Store 1
+createprop test=rndeml size=500 lsize=500 edits=20 max=50000 step=1000 by=memory
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size}  --localsize @@{lsize} --incremental \
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Store 2
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size}  --localsize @@{lsize} --incremental \
+	--edits @@{edits} --maxedits @@{edits} --step 1 \
+	--maxsize @@{max} --sizestep @@{step}
+
+# Copy results if we are running in update mode
+if @@{fc.raxs.exper.update} echo Updating results...
+if @@{fc.raxs.exper.update} sys /bin/sh -c "cp -v buzz/rnde* \
+ ../../../../docs/deliverables/result/data/raxs"
+
+# arch-tag: 2a9883a2-f70b-4c4d-905e-751ff2f90d02
