@@ -1,0 +1,81 @@
+<html>
+<head>
+<style>
+h1, h2, h3, h4 {font-family: Helvetica, Arial,  sans-serif; font-size: -1;}
+li {margin-bottom: 1ex;}
+hr {margin-top: 2ex;}
+pre {margin-left: 2em; background-color: #ffffc0;}
+</style>
+</head>
+<body>
+  <h1>Fuego Core XML Diff and Patch Tool</h1>
+
+The Fuego Core XML Diff and Patch tool is a fast and memory-efficient
+general-purpose tool for diffing and patching XML files. The underlying
+algorithms have been described in  
+T. Lindholm, J. Kangasharju, and S. Tarkoma: 
+  <i>Fast and Simple XML Tree Differencing by Sequence Alignment</i>, 
+Proceedings of ACM DocEng 2006. 
+<a href="http://doi.acm.org/10.1145/1166160.1166183">[acm.org]</a> 
+<a href="http://www.hiit.fi/files/fi/fc/papers/doceng06-pc.pdf">[hiit.fi]</a>.
+
+<p>The source code for the tool is released under the permissive
+  <a href="http://en.wikipedia.org/wiki/MIT_License">MIT license</a></p>
+
+<h2>Installation from Source</h2>
+
+<p>At this point, we only provide source-based installation from the
+  <a href="http://subversion.tigris.org/">Subversion</a> repository
+here at Hoslab. Sorry. We're looking into providing more
+straightforward methods, such as a downloadable binary. Please request
+an alternate method if you find that you'll need one.
+
+<p>To install the tool using the subversion repository at Hoslab, 
+proceed as follows.
+
+<ol>
+<li>Make sure you have Subversion, a Java Development Kit (>=version
+  1.6), and Apache Ant (>=1.7, older ones may work) installed. In
+  Debian based-distributions, make sure the
+  package <code>ant-optional</code> is installed.</li>
+<li>Check out the sources using Subversion:
+<pre>
+svn co svn://hoslab.cs.helsinki.fi/svnfc-xmldiff
+</pre></li>
+<li>Then, <pre>cd trunk/java/xmldiff</pre></li>
+<li>Run<pre>ant</pre>to get instructions on how to proceed project setup.
+The project setup phase should download all dependencies automatically.</li>
+<li>After project setup is completed, invoke (again)
+<pre>ant</pre>
+to compile the sources.
+</li>
+</ol>
+
+<h2>Diffing XML</h2>
+
+The easiest way to get the diff between the files <code>old.xml</code>
+and <code>new.xml</code> into <code>diff.xml</code> is to invoke
+the <code>diff</code> Ant task:
+<pre>
+ant -Dbase=old.xml -Dnew=new.xml -Ddiff=diff.xml diff
+</pre>
+Naturally, you may invoke the tool using <code>java</code> directly with
+the appropriate classpath. For instance,
+<pre>
+java -Djava.ext.dirs=../contrib/jar:contrib -cp =build/lib/xmldiff.jar fc.xml.diff.Diff old.xml new.xml diff.xml
+</pre>
+
+<h2>Patching XML</h2>
+
+As for diffing, their is an Ant target for patching. To patch 
+<code>old.xml</code> with <code>diff.xml</code> to get 
+<code>new.xml</code>, you run
+<pre>
+ant -Dbase=old.xml -Ddiff=diff.xml -Dnew=new.xml patch
+</pre>
+As in the previous case, direct invocation can also be used. In this case
+the main class is <code>fc.xml.diff.Patch</code>
+<hr>
+Last update <i>$Id:$</i>
+</body>
+</html>
