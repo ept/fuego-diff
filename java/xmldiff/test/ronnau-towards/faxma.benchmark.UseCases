@@ -1,0 +1,33 @@
+# $Id: faxma.benchmark.UseCases,v 1.1 2006/03/21 16:48:02 ctl Exp $
+# Run ronnau-towards cases
+# small
+basec=small-base.sxw
+newc=small-mindelta.sxw
+name=ss
+1.basec=small-base.sxw
+1.newc=small-mindelta.sxw
+1.name=sm
+2.basec=small-base.sxw
+2.newc=small-maxdelta.sxw
+2.name=sl
+# med
+3.basec=medium-base.sxw
+3.newc=medium-mindelta.sxw
+3.name=ms
+4.basec=medium-base.sxw
+4.newc=medium-meddelta.sxw
+4.name=mm
+5.basec=medium-base.sxw
+5.newc=medium-maxdelta.sxw
+5.name=ml
+# max
+6.basec=large-base.sxw
+6.newc=large-mindelta.sxw
+6.name=ls
+7.basec=large-base.sxw
+7.newc=large-meddelta.sxw
+7.name=lm
+8.basec=large-base.sxw
+8.newc=large-maxdelta.sxw
+8.name=ll
+

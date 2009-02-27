@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Dad adds suggestion for Christmas party present -->
+<!-- $Id: 2.xml,v 1.1 2005/10/07 14:04:22 ctl Exp $ -->
+<shoppinglist>
+	<item>
+		<name>Emmentaler Cheese</name>
+		<quantity>500g</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Wheat toast</name>
+		<quantity>1 packet</quantity>
+		<price></price>
+		<shop></shop>
+	</item>	
+	<item>
+		<name>Smoked salmon</name>
+		<quantity>250g</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+	<item>
+		<name>Calvin &amp; Hobbes Comic (for Kalle's Xmas party!)</name>
+		<quantity>1</quantity>
+		<price></price>
+		<shop></shop>
+	</item>
+</shoppinglist>

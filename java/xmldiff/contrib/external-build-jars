@@ -1,0 +1,14 @@
+# List of path elements in fuego core common pool
+# needed by the build system
+# Build system stuff
+../${fc.contrib}/antenna.jar
+../${fc.contrib}/antlr.jar
+../${fc.contrib}/findbugs-0.9.4-ant.jar
+../${fc.contrib}/findbugsGUI.jar
+../${fc.contrib}/findbugs-0.9.4.jar
+../${fc.contrib}/findbugs-0.9.4-bcel.jar
+../${fc.contrib}/plugin/coreplugin.jar
+../${fc.contrib}/jse.jar
+../${fc.contrib}/junit-3.8.1.jar
+# arch-tag: 243ae8f2-b4ae-43e2-b28b-956a6de8c9ee
+

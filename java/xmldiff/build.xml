@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--- This is a template build file for subprojects.
+	Customize as needed at locations marked @@.
+-->
+<!--
+Copyright %YEAR% Helsinki Institute for Information Technology
+
+This file is a part of Fuego middleware.  Fuego middleware is free
+software; you can redistribute it and/or modify it under the terms
+of the MIT license, included as the file MIT-LICENSE in the Fuego
+middleware source distribution.  If you did not receive the MIT
+license with the distribution, write to the Fuego Core project at
+%ADDRESS%.
+-->
+
+
+<project name="xmldiff" default="compile" basedir=".">
+
+  <property name="test.class" value="fc.xml.diff.test.RootSuite"/>
+  <property name="fc.main.class" value="fc.xml.diff.Diff"/>
+
+  <!-- Imports many common definitions and provides
+       default implementations for tasks -->	
+  <import file="../subproject.xml" optional="true"/>
+  <fail unless="subproject.xml.included" 
+	message="Project not set up; run ant -f project-setup.xml" />
+
+  <propertyset id="faxma-properties">
+    <propertyref name="encoder" />
+    <propertyref name="filter" />
+    <propertyref name="fc.log.level" />
+  </propertyset>
+    
+  <target name="diff" depends="compile" >
+    <property name="usage" 
+       value="Usage: ant diff -Dbase=1.xml -Dnew=2.xml [-Ddiff=d.xml]" />
+    <fail unless="base" message="${usage}" />
+    <fail unless="new" message="${usage}" />
+    <property name="diff" value="-"/>    
+    <java classname="fc.xml.diff.Diff" fork="true">
+      <jvmarg line="-Dfc.log.level=WARN" />
+      <arg line="${base}" />
+      <arg line="${new}" />
+      <arg line="${diff}" />
+      <classpath>
+        <fileset dir="${build.lib}" includes="*.jar" />
+	<path refid="classpath.contrib.se" />
+      </classpath>
+      <syspropertyset refid="faxma-properties" />
+    </java>
+  </target>
+
+  <target name="patch" depends="compile" >
+    <property name="usage" 
+       value="Usage: ant patch -Dbase=1.xml -Ddiff=diff.xml [-Dnew=2.xml]" />
+    <fail unless="base" message="${usage}" />
+    <fail unless="diff" message="${usage}" />
+    <property name="new" value="-"/>    
+    <property name="fc.log.level" value="WARN"/>    
+    <java classname="fc.xml.diff.Patch" fork="true">
+      <arg line="${base}" />
+      <arg line="${diff}" />
+      <arg line="${new}" />
+      <classpath>
+        <fileset dir="${build.lib}" includes="*.jar" />
+	<path refid="classpath.contrib.se" />
+      </classpath>
+      <syspropertyset refid="faxma-properties" />
+    </java>
+  </target>
+
+</project>
+<!-- arch-tag: 1e5eb183-4a5c-415f-b295-525f64775cd4
+-->
+

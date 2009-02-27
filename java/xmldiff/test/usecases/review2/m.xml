@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<office:document office:class="text" office:version="0.9" xmlns:office="http://openoffice.org/2000/office" xmlns:style="http://openoffice.org/2000/style" xmlns:text="http://openoffice.org/2000/text" xmlns:table="http://openoffice.org/2000/table" xmlns:draw="http://openoffice.org/2000/drawing" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="http://openoffice.org/2000/meta" xmlns:number="http://openoffice.org/2000/datastyle" xmlns:svg="http://www.w3.org/2000/svg" xmlns:chart="http://openoffice.org/2000/chart" xmlns:dr3d="http://openoffice.org/2000/dr3d" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="http://openoffice.org/2000/form" xmlns:script="http://openoffice.org/2000/script">
+ <office:meta>
+  <meta:generator>StarOffice/5.2 (Linux)</meta:generator><!--614r(Build:6004)-->
+  <meta:creation-date>2001-03-06T15:02:39</meta:creation-date>
+  <dc:creator>Tancred Lindholm</dc:creator>
+  <dc:date>2001-03-06T17:28:48</dc:date>
+  <meta:editing-cycles>4</meta:editing-cycles>
+  <meta:editing-duration>PT0S</meta:editing-duration>
+  <meta:user-defined meta:name="Info 0"></meta:user-defined>
+  <meta:user-defined meta:name="Info 1"></meta:user-defined>
+  <meta:user-defined meta:name="Info 2"></meta:user-defined>
+  <meta:user-defined meta:name="Info 3"></meta:user-defined>
+  <meta:document-statistic meta:table-count="0" meta:image-count="0" meta:object-count="0" meta:page-count="8" meta:paragraph-count="98" meta:word-count="107" meta:character-count="23088"/>
+ </office:meta>
+ <office:script>
+  <script:library-embedded script:name="Standard"/>
+ </office:script>
+ <office:font-decls>
+  <style:font-decl style:name="starbats" fo:font-family="starbats" style:font-charset="x-symbol"/>
+  <style:font-decl style:name="Arial" fo:font-family="Arial"/>
+  <style:font-decl style:name="Times New Roman" fo:font-family="&apos;Times New Roman&apos;"/>
+  <style:font-decl style:name="Courier" fo:font-family="Courier" style:font-family-generic="roman" style:font-pitch="fixed"/>
+ </office:font-decls>
+ <office:styles>
+  <style:style style:name="Standard" style:family="paragraph" style:class="text" style:master-page-name="">
+   <style:properties style:text-position="0% 100%" fo:font-size="12pt" fo:text-align="end" style:justify-single-word="false" fo:margin-left="0cm" fo:margin-right="0cm" fo:text-indent="0.15cm" fo:margin-top="0.199cm" fo:margin-bottom="0cm" style:page-number="0"/>
+  </style:style>
+  <style:style style:name="Heading" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text body" style:class="text">
+   <style:properties style:font-name="Arial" fo:font-size="14pt" fo:margin-top="0.423cm" fo:margin-bottom="0.212cm" fo:keep-with-next="true"/>
+  </style:style>
+  <style:style style:name="Text body" style:family="paragraph" style:parent-style-name="Standard" style:class="text">
+   <style:properties fo:margin-top="0cm" fo:margin-bottom="0.212cm"/>
+  </style:style>
+  <style:style style:name="List" style:family="paragraph" style:parent-style-name="Text body" style:class="list">
+   <style:properties style:font-name="Times New Roman"/>
+  </style:style>
+  <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
+   <style:properties style:font-name="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:margin-top="0.212cm" fo:margin-bottom="0.212cm"/>
+  </style:style>
+  <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard" style:class="index">
+   <style:properties style:font-name="Times New Roman"/>
+  </style:style>
+  <style:style style:name="Heading 2" style:family="paragraph" style:parent-style-name="Heading" style:next-style-name="Text body" style:class="text">
+   <style:properties fo:font-size="14pt" fo:font-style="italic" fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Heading 1" style:family="paragraph" style:parent-style-name="Heading" style:next-style-name="Text body" style:class="text">
+   <style:properties fo:font-size="20pt" fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Numbering Symbols" style:family="text"/>
+  <style:style style:name="Bullet Symbols" style:family="text">
+   <style:properties style:font-name="starbats" fo:font-size="9pt"/>
+  </style:style>
+  <style:style style:name="Source Text" style:family="text">
+   <style:properties style:font-name="Courier"/>
+  </style:style>
+  <style:style style:name="Section reference" style:family="text">
+   <style:properties fo:font-style="italic"/>
+  </style:style>
+  <text:outline-style>
+   <text:outline-level-style text:level="1" style:num-format=""/>
+   <text:outline-level-style text:level="2" style:num-format=""/>
+   <text:outline-level-style text:level="3" style:num-format=""/>
+   <text:outline-level-style text:level="4" style:num-format=""/>
+   <text:outline-level-style text:level="5" style:num-format=""/>
+   <text:outline-level-style text:level="6" style:num-format=""/>
+   <text:outline-level-style text:level="7" style:num-format=""/>
+   <text:outline-level-style text:level="8" style:num-format=""/>
+   <text:outline-level-style text:level="9" style:num-format=""/>
+   <text:outline-level-style text:level="10" style:num-format=""/>
+  </text:outline-style>
+  <text:list-style style:name="List 1">
+   <text:list-level-style-bullet text:level="1" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="2" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="0.401cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="3" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="0.799cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="4" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="1.2cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="5" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="1.6cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="6" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="2.001cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="7" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="2.399cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="8" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="2.8cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="9" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="3.2cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="10" text:style-name="Numbering Symbols" text:bullet-char="">
+    <style:properties text:space-before="3.601cm" text:min-label-width="0.4cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+  </text:list-style>
+  <text:list-style style:name="Numbering 1">
+   <text:list-level-style-number text:level="1" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="2" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="0.501cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="3" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="1cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="4" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="1.501cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="5" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="2cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="6" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="2.501cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="7" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="3.001cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="8" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="3.502cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="9" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="4.001cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="10" text:style-name="Numbering Symbols" style:num-suffix="." style:num-format="1">
+    <style:properties text:space-before="4.502cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+  </text:list-style>
+  <text:list-style style:name="Numbering 2">
+   <text:list-level-style-number text:level="1" text:style-name="Numbering Symbols" style:num-format="1">
+    <style:properties text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="2" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="2">
+    <style:properties text:space-before="0.499cm" text:min-label-width="0.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="3" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="3">
+    <style:properties text:space-before="0.998cm" text:min-label-width="1cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="4" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="4">
+    <style:properties text:space-before="1.998cm" text:min-label-width="1.251cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="5" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="5">
+    <style:properties text:space-before="3.249cm" text:min-label-width="1.499cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="6" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="6">
+    <style:properties text:space-before="4.748cm" text:min-label-width="1.801cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="7" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="7">
+    <style:properties text:space-before="6.549cm" text:min-label-width="2.3cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="8" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="8">
+    <style:properties text:space-before="8.849cm" text:min-label-width="2.6cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="9" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="9">
+    <style:properties text:space-before="11.449cm" text:min-label-width="2.801cm"/>
+   </text:list-level-style-number>
+   <text:list-level-style-number text:level="10" text:style-name="Numbering Symbols" style:num-format="1" text:start-value="10">
+    <style:properties text:space-before="14.25cm" text:min-label-width="3.101cm"/>
+   </text:list-level-style-number>
+  </text:list-style>
+  <text:footnotes-configuration style:num-format="1" text:offset="0" text:footnotes-position="page" text:start-numbering-at="document"/>
+  <text:endnotes-configuration style:num-format="i" text:offset="0"/>
+  <text:bibliography-configuration text:prefix="[" text:suffix="]"/>
+ </office:styles>
+ <office:automatic-styles>
+  <style:style style:name="P1" style:family="paragraph" style:parent-style-name="Standard" style:list-style-name="L1"/>
+  <style:style style:name="P2" style:family="paragraph" style:parent-style-name="Standard">
+   <style:properties fo:margin-left="0cm" fo:margin-right="0cm" fo:text-indent="0cm"/>
+  </style:style>
+  <style:style style:name="P3" style:family="paragraph" style:parent-style-name="Standard" style:list-style-name="L2"/>
+  <text:list-style style:name="L1">
+   <text:list-level-style-bullet text:level="1" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="2" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="0.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="3" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="1cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="4" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="1.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="5" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="2cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="6" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="2.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="7" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="3.001cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="8" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="3.502cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="9" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="4.001cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="10" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="4.502cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+  </text:list-style>
+  <text:list-style style:name="L2">
+   <text:list-level-style-bullet text:level="1" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="2" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="0.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="3" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="1cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="4" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="1.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="5" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="2cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="6" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="2.501cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="7" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="3.001cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="8" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="3.502cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="9" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="4.001cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+   <text:list-level-style-bullet text:level="10" text:style-name="Bullet Symbols" style:num-suffix="." text:bullet-char="">
+    <style:properties text:space-before="4.502cm" text:min-label-width="0.499cm" style:font-name="starbats"/>
+   </text:list-level-style-bullet>
+  </text:list-style>
+  <style:page-master style:name="pm1">
+   <style:properties fo:page-width="20.999cm" fo:page-height="29.699cm" style:num-format="1" style:print-orientation="portrait" fo:margin-top="2.54cm" fo:margin-bottom="2.54cm" fo:margin-left="3.175cm" fo:margin-right="3.175cm"/>
+   <style:header-style/>
+   <style:footer-style/>
+  </style:page-master>
+ </office:automatic-styles>
+ <office:master-styles>
+  <style:master-page style:name="Standard" style:page-master-name="pm1"/>
+ </office:master-styles>
+ <office:body>
+  <text:sequence-decls>
+   <text:sequence-decl text:display-outline-level="0" text:name="Illustration"/>
+   <text:sequence-decl text:display-outline-level="0" text:name="Table"/>
+   <text:sequence-decl text:display-outline-level="0" text:name="Text"/>
+   <text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
+  </text:sequence-decls>
+  <text:h text:style-name="Heading 1" text:level="1">Troubleshooting</text:h>
+  <text:h text:style-name="Heading 2" text:level="2">My Modem is Physically There but Can&apos;t be Found</text:h>
+  <text:p text:style-name="Standard">The error messages could be something like &quot;No modem detected&quot;, &quot;Modem not responding&quot;, or (strange) &quot;You are already online&quot; (from Minicom). If you have installed an internal modem (serial port is builtin) or are using an external one and don&apos;t know what serial port it&apos;s connected to then the problem is to find the serial port. See <text:span text:style-name="Section reference">My Serial Port is Physically There but Can&apos;t be Found</text:span>. This section is about finding out which serial port has the modem on it.</text:p>
+  <text:p text:style-name="Standard">There&apos;s a program that looks for modems on commonly used serial ports called &quot;wvdialconf&quot;. Just type &quot;wvdialconf &lt;a-new-file-name&gt;&quot;. It will create the new file as a configuration file but you don&apos;t need this file unless you are going to use &quot;wvdial&quot; for dialing. See What is wvdialconf? Unfortunately, if your modem is in &quot;online data&quot; mode, wvdialconf will report &quot;No modem detected&quot; See No response to AT</text:p>
+  <text:p text:style-name="Standard">Your problem could be due to a winmodem (or the like) which usually can&apos;t be used with Linux. The &quot;setserial program may be used to detect serial ports but will not detect modems on them. Thus &quot;wvdialconf&quot; is best to try first.</text:p>
+  <text:p text:style-name="Standard">Another way try to find out if there&apos;s a modem on a port is to start &quot;minicom&quot; on the port (after first setting up minicom for the correct serial port - you will need to save the setup and then exit minicom and start it again). Then type &quot;AT&quot; and you should see OK (or 0 if it&apos;s set for &quot;digit result codes&quot;). The results may be:</text:p>
+  <text:unordered-list text:style-name="L1">
+   <text:list-item>
+    <text:p text:style-name="P1">No response. See <text:span text:style-name="Section reference">No response to AT</text:span></text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P1">It takes many seconds to get an expected truncated response (including only the cursor moving down one line). See Extremely Slow: Text appears on the screen slowly after long delays</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P1">Some strange characters appear but they are not in response to AT. This likely means that your modem is still connected to something at the <text:s/>other end of the phone line which is sending some cryptic packets or the like.</text:p>
+   </text:list-item>
+  </text:unordered-list>
+  <text:h text:style-name="Heading 2" text:level="2">No response to AT</text:h>
+  <text:p text:style-name="Standard">The modem should send you &quot;OK&quot; in response to your &quot;AT&quot; which you type to the modem (using minicom or the like). If you don&apos;t see &quot;OK&quot; (and in most cases don&apos;t even see the &quot;AT&quot; you typed either) then the modem is not responding (often because what you type doesn&apos;t even get to the modem). </text:p>
+  <text:p text:style-name="Standard">A common cause is that there is no modem on the serial port you are typing to. For the case of an internal modem, that serial port likely doesn&apos;t exist either. That&apos;s because the PnP modem card (which has a built-in serial port) has either not been configured or has been configured incorrectly. See My Serial Port is Physically There but Can&apos;t be Found.</text:p>
+  <text:p text:style-name="Standard">If what you type is really getting thru to a modem, then the lack of response could be due to the modem being in &quot;online data&quot; mode where it can&apos;t accept any AT commands. You may have been using the modem and then abruptly disconnected (such as killing the process with signal 9). In that case your modem did not get reset to &quot;command mode&quot; where it can interact to AT commands. Thus the message from minicom &quot;You are already online. Hangup first.&quot; Well, you are sort of online but you are may not be connected to anything over the phone line. Wvdial will report &quot;modem not responding&quot; for the same situation.</text:p>
+  <text:p text:style-name="Standard">To fix this as a last resort you could reboot the computer. Another way to try to fix this is to send +++ to the modem to tell it to escape back to &quot;command mode&quot; from &quot;online data mode&quot;. On both sides of the +++ sequence there must be about 1 second of delay (nothing sent during &quot;guard time&quot;). This may not work if another process is using the modem since the +++ sequence could wind up with other characters inserted in between them or after the +++ (during the guard time). Ironically, even if the modem line is idle, typing an unexpected +++ is likely to set off an exchange of control packets (that you never see) that will violate the required guard time so that the +++ doesn&apos;t do what you wanted. +++ is usually in the string that is named &quot;hangup string&quot; so if you command minicom (or the like) to hangup it might work. Another way to do this is to just exit minicom and then run minicom again.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">My Serial Port is Physically There but Can&apos;t be Found</text:h>
+  <text:p text:style-name="Standard">If a physical device (such as a modem) doesn&apos;t work at all it may mean that the device is not at the I/O address that setserial thinks it&apos;s at. It could also mean (for a PnP card) that is doesn&apos;t yet have an address. Thus it can&apos;t be found.</text:p>
+  <text:p text:style-name="Standard">Check the BIOS menus and BIOS messages. For the PCI bus use lspci or scanpci. If it&apos;s an ISA bus PnP serial port, try &quot;pnpdump --dumpregs&quot; and/or see Plug-and-Play-HOWTO. Using &quot;scanport&quot; will scan all ISA bus ports and may discover an unknown port that could be a serial port (but it doesn&apos;t probe the port). It could hang your PC. You may try probing with setserial. See Probing. If nothing seems to get thru the port it may be accessible but have a bad interrupt. See Extremely Slow: Text appears on the screen slowly after long delays. Use setserial -g to see what the serial driver thinks and check for IRQ and I0 address conflicts. Even if you see no conflicts the driver may have incorrect information (view it by &quot;setserial&quot; and conflicts may still exist.</text:p>
+  <text:p text:style-name="Standard">If two ports have the same IO address then probing it will erroneously indicate only one port. Plug-and-play detection will find both ports so this should only be a problem if at least one port is not plug-and-play. All sorts of errors may be reported/observed for devices illegally &quot;sharing&quot; a port but the fact that there are two devices on the same a port doesn&apos;t seem to get detected (except hopefully by you). In the above case, if the IRQs are different then probing for IRQs with setserial might &quot;detect&quot; this situation by failing to detect any IRQ. See Probing.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Modem is busy&quot;</text:h>
+  <text:p text:style-name="Standard">What this means depends on what program sent it. The modem could actually be in use (busy). Another cause reported for the SuSE distribution is that there may be two serial drivers present instead of one. One driver was built into the kernel and the second was a module.</text:p>
+  <text:p text:style-name="Standard">In kppp, this message is sent when an attempt to get/set the serial port parameters fails. These parameters are the one you see if you give the <text:span text:style-name="Source Text">stty -a</text:span> command. It&apos;s similar to the &quot;Input/output error&quot; one may get when trying to use <text:span text:style-name="Source Text">stty -F /dev/ttyS</text:span><text:span text:style-name="Section reference">x</text:span>. Although the port is already opened when you see this message, I think it&apos;s possible to open a non-existent device (or one with the wrong IRQ or IO address). Now getting certain port parameters (such as the speed) means communicating with the serial port hardware. So this error message may mean that there is no serial port there (or that the modem&apos;s serial port has an incorrect (or no) IRQ or I0 address. It could be a wrong ttySx number. If /dev/modem is used it should be linked to the correct ttySx. In these cases the error message should have said: &quot;Modem can&apos;t be found&quot; which really means that it&apos;s serial port (often built into the modem) can&apos;t be found.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">I can&apos;t get near 56k on my 56k modem</text:h>
+  <text:p text:style-name="Standard">There must be very low noise on the line for it to work at even close to 56k. Some phone lines are so bad that the speeds obtainable are much slower than 56k (like 28.8k or even slower). Sometimes extension phones connected to the same line can cause problems. To test this you might connect your modem directly at the point where the telephone line enters the building with the feeds for everything else on that line disconnected (if others can tolerate such a test).</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Uploading (downloading) files is broken/slow</text:h>
+  <text:p text:style-name="Standard">Flow control (both at your PC and/or modem-to-modem) may not be enabled. For the uploading case: If you have set a high DTE speed (like 115.2k) then flow from your modem to your PC may work OK but uploading flow in the other direction will not all get thru due to the telephone line bottleneck. This will result in many errors and the resending of packets. It may thus take far too long to send a file. In some cases, files don&apos;t make it thru at all</text:p>
+  <text:p text:style-name="Standard">For the downloading case: If you&apos;re downloading long uncompressed files or web pages (and your modem uses data compression) or if you&apos;ve set a low DTE speed, then downloading may also be broken due to no flow control.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">I Keep Getting: ``Id &quot;S3&quot; respawning too fast: disabled for 5 minutes&apos;&apos;</text:h>
+  <text:p text:style-name="Standard">Id &quot;S3&quot; is just an example. In this case look on the line which starts with &quot;S3&quot; in /etc/inittab and calls getty. This line causes the problem. Make sure the syntax for this line is correct and that the device (ttyS3) exists and can be found. If the modem has negated CD and getty opens the port, you&apos;ll get this error message since negated CD will kill getty. Then getty will respawn only to be killed again, etc. Thus it respawns over and over (too fast). It seems that if the cable to the modem is disconnected or you have the wrong serial port, it&apos;s just like CD is negated. All this can occur when your modem is chatting with getty. Make sure your modem is configured correctly. Look at AT commands E and Q.</text:p>
+  <text:p text:style-name="Standard">If you use uugetty, verify that your /etc/gettydefs syntax is correct by doing the following:</text:p>
+  <text:p text:style-name="Standard"><text:s text:c="5"/><text:span text:style-name="Source Text">linux# getty -c /etc/gettydefs</text:span></text:p>
+  <text:p text:style-name="Standard">This can also happen when the uugetty initialization is failing. See section uugetty Still Doesn&apos;t Work.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">My Modem is Hosed after Someone Hangs Up, or uugetty doesn&apos;t respawn</text:h>
+  <text:p text:style-name="Standard">This can happen when your modem doesn&apos;t reset when DTR is dropped. Greg Hankins saw his RD and SD LEDs go crazy when this happened. You need to have your modem reset. Most Hayes compatible modems do this with &amp;D3, but for USR Courier, SupraFax, and other modems, you must set &amp;D2 (and S13=1 for USR Courier). Check your modem manual (if you have one).</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">uugetty Still Doesn&apos;t Work</text:h>
+  <text:p text:style-name="Standard">There is a DEBUG option that comes with getty_ps. Edit your config file /etc/conf.{uu}getty.ttySN and add DEBUG=NNN. Where NNN is one of the following combination of numbers according to what you are trying to debug:</text:p>
+  <text:p text:style-name="P2"><text:span text:style-name="Source Text"><text:s text:c="5"/>D_OPT <text:s text:c="2"/>001 <text:s text:c="11"/>option settings<text:line-break/> <text:s text:c="4"/>D_DEF <text:s text:c="2"/>002 <text:s text:c="11"/>defaults file processing<text:line-break/> <text:s text:c="4"/>D_UTMP <text:s/>004 <text:s text:c="11"/>utmp/wtmp processing<text:line-break/> <text:s text:c="4"/>D_INIT <text:s/>010 <text:s text:c="11"/>line initialization (INIT)<text:line-break/> <text:s text:c="4"/>D_GTAB <text:s/>020 <text:s text:c="11"/>gettytab file processing<text:line-break/> <text:s text:c="4"/>D_RUN <text:s text:c="2"/>040 <text:s text:c="11"/>other runtime diagnostics<text:line-break/> <text:s text:c="4"/>D_RB <text:s text:c="3"/>100 <text:s text:c="11"/>ringback debugging<text:line-break/> <text:s text:c="4"/>D_LOCK <text:s/>200 <text:s text:c="11"/>uugetty lockfile processing<text:line-break/> <text:s text:c="4"/>D_SCH <text:s text:c="2"/>400 <text:s text:c="11"/>schedule processing<text:line-break/> <text:s text:c="4"/>D_ALL <text:s text:c="2"/>777 <text:s text:c="11"/>everything</text:span></text:p>
+  <text:p text:style-name="P2">Setting DEBUG=010 is a good place to start.</text:p>
+  <text:p text:style-name="Standard">If you are running syslogd, debugging info will appear in your log files. If you aren&apos;t running syslogd info will appear in <text:span text:style-name="Source Text">/tmp/getty:ttySN</text:span> for debugging getty and <text:span text:style-name="Source Text">/tmp/uugetty:ttySN</text:span> for uugetty, and in <text:span text:style-name="Source Text">/var/adm/getty.log</text:span>. Look at the debugging info and see what is going on. Most likely, you will need to tune some of the parameters in your config file, and reconfigure your modem.</text:p>
+  <text:p text:style-name="Standard">You could also try mgetty. Some people have better luck with it.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Extremely Slow: Text appears on the screen slowly after long delays</text:h>
+  <text:p text:style-name="Standard">It&apos;s likely mis-set/conflicting interrupts. Here are some of the symptoms which will happen the first time you try to use a modem, terminal, or serial printer. In some cases you type something but nothing appears on the screen until many seconds later. Only the last character typed may show up. It may be just an invisible &lt;return&gt; character so all you notice is that the cursor jumps down one line. In other cases where a lot of data should appear on the screen, only a batch of about 16 characters appear. Then there is a long wait of many seconds for the next batch of characters. You might also get &quot;input overrun&quot; error messages (or find them in logs).</text:p>
+  <text:p text:style-name="Standard">If it involves Plug-and-Play devices, see also Plug-and-Play-HOWTO.</text:p>
+  <text:p text:style-name="Standard">As a quick check to see if it really is an interrupt problem, set the IRQ to 0 with &quot;setserial&quot;. This will tell the driver to use polling instead of interrupts. If this seems to fix the &quot;slow&quot; problem then you had an interrupt problem. You should still try to solve the problem since polling uses excessive computer resources.</text:p>
+  <text:p text:style-name="Standard">Checking to find the interrupt conflict may not be easy since Linux supposedly doesn&apos;t permit any interrupt conflicts and will send you a /dev/ttyS?: Device or resource busy error message if it thinks you are attempting to create a conflict. But a real conflict can be created if &quot;setserial&quot; has told the kernel incorrect info. The kernel has been lied to and thus doesn&apos;t think there is any conflict. Thus using &quot;setserial&quot; will not reveal the conflict (nor will looking at /proc/interrupts which bases</text:p>
+  <text:p text:style-name="Standard">its info on &quot;setserial&quot;). You still need to know what &quot;setserial&quot; thinks so that you can pinpoint where it&apos;s wrong and change it when you determine what&apos;s really set in the hardware.</text:p>
+  <text:p text:style-name="Standard">What you need to do is to check how the hardware is set by checking jumpers or using PnP software to check how the hardware is actually set. For PnP run either &quot;pnpdump --dumpregs&quot; (if ISA bus) or run &quot;lspci&quot; (if PCI bus). Compare this to how Linux (e.g. &quot;setserial&quot;) thinks the hardware is set.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Somewhat Slow: I expected it to be a few times faster</text:h>
+  <text:p text:style-name="Standard">One reason may be that whatever is on the serial port (such as a modem, terminal, printer) doesn&apos;t work as fast as you thought it did. A 56k Modem seldom works at 56k and the Internet often has congestion and bottlenecks that slow things down. If the modem on the other end does not have a digital connection to the phone line (and uses a special &quot;digital modem&quot; not sold in most computer stores), then speeds above 33.6k are not possible.</text:p>
+  <text:p text:style-name="Standard">Use &quot;setserial -g /dev/ttyS*&quot;. If it shows anything less than a 16550A, this may be your problem. If you think that &quot;setserial&quot; has it wrong check it out. See What is Setserial for more info. If you really do have an obsolete serial port, lying about it to setserial will only make things worse.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">The Startup Screen Show Wrong IRQs for the Serial Ports.</text:h>
+  <text:p text:style-name="Standard">Linux does not do any IRQ detection on startup. When the serial module loads it only does serial device detection. Thus, disregard what it says about the IRQ, because it&apos;s just assuming the standard IRQs. This is done, because IRQ detection is unreliable, and can be fooled. But if and when setserial runs from a start-up script, it changes the IRQ&apos;s and displays the new (and hopefully correct) state on on the startup screen. If the wrong IRQ is not corrected by a later display on the screen, then you&apos;ve got a problem.</text:p>
+  <text:p text:style-name="Standard">So, even though I have my ttyS2 set at IRQ 5, I still see</text:p>
+  <text:p text:style-name="Standard"><text:s text:c="5"/>ttyS02 at 0x03e8 (irq = 4) is a 16550A</text:p>
+  <text:p text:style-name="Standard">at first when Linux boots. (Older kernels may show &quot;ttyS02&quot; as &quot;tty02&quot; which is the same as ttyS2). You may need to use setserial to tell Linux the IRQ you are using.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Cannot create lockfile. Sorry&quot;</text:h>
+  <text:p text:style-name="Standard">When a port is &quot;opened&quot; by a program a lockfile is created in /var/lock/. Wrong permissions for the lock directory will not allow a lockfile to be created there. Use &quot;ls -ld /var/lock&quot; to see if the permissions are OK: usually rwx for everyone (repeated 3 times). If it&apos;s wrong, use &quot;chmod&quot; to fix it. Of course, if there is no &quot;lock&quot; directory no lockfile can be created there. For more info on lockfiles see the Serial-HOWTO subsection:&quot;What Are Lock Files&quot;.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Cannot open /dev/ttyS?: Permission denied&quot;</text:h>
+  <text:p text:style-name="Standard">Check the file permissions on this port with &quot;ls -l /dev/ttyS?&quot;_ If you own the ttyS? then you need read and write permissions: crw with the c (Character device) in col. 1. It you don&apos;t own it then it should show rw- in cols. 8 &amp; 9 which means that everyone has read and write permission on it. Use &quot;chmod&quot; to change permissions. There are more complicated ways to get access like belonging to a &quot;group&quot; that has group permission.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Operation not supported by device&quot; for ttyS?</text:h>
+  <text:p text:style-name="Standard">This means that an operation requested by setserial, stty, etc. couldn&apos;t be done because the kernel doesn&apos;t support doing it. Formerly this was often due to the &quot;serial&quot; module not being loaded. But with the advent of PnP, it may likely mean that there is no modem (or other serial device) at the address where the driver (and setserial) thinks it is. If there is no modem there, commands (for operations) sent to that address obviously don&apos;t get done. See What is set in my serial port hardware?</text:p>
+  <text:p text:style-name="Standard">If the &quot;serial&quot; module wasn&apos;t loaded but &quot;lsmod&quot; shows you it&apos;s now loaded it might be the case that it&apos;s loaded now but wasn&apos;t loaded when you got the error message. In many cases the module will automatically loaded when needed (if it can be found). To force loading of the &quot;serial&quot; module it may be listed in the file: /etc/modules.conf or /etc/modules. The actual module should reside in: /lib/modules/.../misc/serial.o.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Device /dev/ttyS? is locked.&quot;</text:h>
+  <text:p text:style-name="Standard">This means that someone else (or some other process) is supposedly using the serial port. There are various ways to try to find out what process is &quot;using&quot; it. One way is to look at the contents of the lockfile (/var/lock/LCK...). It should be the process id. If the process id is say 100 type &quot;ps 100&quot; to find out what it is. Then if the process is no longer needed, it may be gracefully killed by &quot;kill 100&quot;. If it refuses to be killed use &quot;kill -9 100&quot; to force it to be killed, but then the lockfile will not be removed and you&apos;ll need to delete it manually. Of course if there is no such process as 100 then you may just remove the lockfile but in most cases the lockfile should have been automatically removed if it contained a stale process id (such as 100).</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;/dev/tty? Device or resource busy&quot;</text:h>
+  <text:p text:style-name="Standard">This means that the device you are trying to access (or use) is supposedly busy (in use) or that a resource it needs (such as an IRQ) is supposedly being used by another device (the resource is &quot;busy&quot;). This message is easy to understand if it only means that the device is busy (in use). But it often means that a resource is in use. What makes it even more confusing is that in some cases neither the device not the resources that it needs are actually &quot;busy&quot;.</text:p>
+  <text:p text:style-name="Standard">The ``resource busy&apos;&apos; part often means (example for ttyS2) ``You can&apos;t use ttyS2 since another device is using ttyS2&apos;s interrupt.&apos;&apos; The potential interrupt conflict is inferred from what &quot;setserial&quot; thinks. A more accurate error message would be ``Can&apos;t use ttyS2 since the setserial data (and kernel data) indicates that another device is using ttyS2&apos;s interrupt&apos;&apos;. If two devices use the same IRQ and you start up only one of the devices, everything is OK because there is no conflict yet. But when you next try to start the second device (without quitting the first device) you get a &quot;... busy&quot; error message. This is because the kernel only keeps track of what RQs are actually in use and actual conflicts don&apos;t happen unless the devices are in use (open). The situation for I/O address (such as 0x3f8) conflict is similar.</text:p>
+  <text:p text:style-name="Standard">This error is sometimes due to having two serial drivers: one a module and the other compiled into the kernel. Both drivers try to grab the same resources and one driver finds them &quot;busy&quot;.</text:p>
+  <text:p text:style-name="Standard">There are two possible cases when you see this message:</text:p>
+  <text:p text:style-name="Standard"><text:s text:c="2"/>1. There may be a real resource conflict that is being avoided.</text:p>
+  <text:p text:style-name="Standard"><text:s text:c="2"/>2. Setserial has it wrong and the only reason ttyS2 can&apos;t be used is that</text:p>
+  <text:p text:style-name="Standard"><text:s text:c="5"/>setserial erroneously predicts a conflict.</text:p>
+  <text:p text:style-name="Standard">What you need to do is to find the interrupt setserial thinks ttyS2 is using. Look at /proc/tty/driver/serial (if you have it). You should also be able to find it with the &quot;setserial&quot; command for ttyS2. But due to a bug (reported by me in Nov. 2000) you get the same &quot;... busy&quot; error message when you try this with &quot;setserial&quot;.</text:p>
+  <text:p text:style-name="Standard">To try to resolve this problem reboot or: exit or gracefully kill all likely conflicting processes. If you reboot: 1. Watch the boot-time messages for the serial ports. 2. Hope that the file that runs &quot;setserial&quot; at boot-time doesn&apos;t (by itself) create the same conflict again.</text:p>
+  <text:p text:style-name="Standard">If you think you know what IRQ say ttyS2 is using then you may look at <text:s/>/proc/interrupts to find what else (besides another serial port) is currently using this IRQ. You might also want to double check that any suspicious IRQs shown here (and by &quot;setserial&quot;) are correct (the same as set in the hardware). A way to test whether or not it&apos;s a potential interrupt conflict is to set the IRQ to 0 (polling) using &quot;setserial&quot;. Then if the busy message goes away, it was likely a potential interrupt conflict. It&apos;s not a good idea to leave it permanently set at 0 since it will make the CPU work too hard.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">&quot;Input/output error&quot; from setserial or stty</text:h>
+  <text:p text:style-name="Standard">You may have typed &quot;ttys&quot; instead of &quot;ttyS&quot;. You will see this error message if you try to use the setserial command for any device that is not a serial port. It also may mean that the serial port is in use (busy or opened) and thus the attempt to get/set parameters by setserial or stty failed. It could also mean that there isn&apos;t any serial port at the IO address that setserial thinks your port is at.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Overrun errors on serial port</text:h>
+  <text:p text:style-name="Standard">This is an overrun of the hardware FIFO buffer and you can&apos;t increase its size. See &quot;Higher Serial Thruput&quot; in the Serial-HOWTO.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Modem doesn&apos;t pick up incoming calls</text:h>
+  <text:p text:style-name="Standard">This paragraph is for the case where a modem is used for both dial-in and dial-out. If the modem generates a DCD (=CD) signal, some programs (but not mgetty) will think that the modem is busy. This will cause a problem when you are trying to dial out with a modem and the modem&apos;s DCD or DTR are not</text:p>
+  <text:p text:style-name="Standard">implemented correctly. The modem should assert DCD only hen there is an actual connection (ie someone has dialed in), not when getty is watching the</text:p>
+  <text:p text:style-name="Standard">port. Check to make sure that your modem is configured to only assert DCD when there is a connection (&amp;C1). DTR should be on (asserted) by the</text:p>
+  <text:p text:style-name="Standard">communications program whenever something is using, or watching the line, like getty, kermit, or some other comm program.</text:p>
+  <text:h text:style-name="Heading 2" text:level="2">Troubleshooting Tools</text:h>
+  <text:p text:style-name="Standard">These are some of the programs you might want to use in troubleshooting:</text:p>
+  <text:unordered-list text:style-name="L2">
+   <text:list-item>
+    <text:p text:style-name="P3">&quot;lsof /dev/ttyS*&quot; will list serial ports which are open.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3">&quot;setserial&quot; shows and sets the low-level hardware configuration of a port (what the driver thinks it is). See What is Setserial</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s/>&quot;stty&quot; shows and sets the configuration of a port (except for that handled by &quot;setserial&quot;). See the Serial-HOWTO section: &quot;Stty&quot;.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="2"/>&quot;modemstat&quot; or &quot;statserial&quot; will show the current state of various modem signal lines (such as DTR, CTS, etc.)</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="2"/>&quot;irqtune&quot; will give serial port interrupts higher priority to improve performance.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="2"/>&quot;hdparm&quot; for hard-disk tuning may help some more.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="2"/>&quot;lspci&quot; shows the actual IRQs, etc. of hardware on the PCI bus.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="2"/>&quot;pnpdump --dumpregs&quot; shows the actual IRQs, etc. of hardware for PnP devices on the ISA bus.</text:p>
+   </text:list-item>
+   <text:list-item>
+    <text:p text:style-name="P3"><text:s text:c="3"/>Some &quot;files&quot; in the /proc tree (such as ioports, interrupts, and tty/driver/serial).</text:p>
+   </text:list-item>
+  </text:unordered-list>
+ </office:body>
+</office:document>

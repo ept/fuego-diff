@@ -1,0 +1,10 @@
+<project name="project-setup" default="project-setup">
+  <target name="project-setup">
+    <unzip src="buildres/fuego-common-buildfiles.zip" dest=".." />
+    <subant antfile="contrib.xml" buildpath="." /> 
+  </target>
+</project>
+<!-- arch-tag: 94655aca-70c3-4b77-8525-72e23cfe0821
+-->
+
+

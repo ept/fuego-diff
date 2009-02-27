@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aunt Maija infopage --><!-- $Id: 2.xml,v 1.2 2005/10/10 10:36:34 ctl Exp $ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="generator" content="HTML Tidy, see www.w3.org" />
+    <title>Our Dear Aunty Maija</title>
+  </head>
+
+  <body bgcolor="#9999CC">
+    <h1><small><font face="Arial">Our Dear <u>Aunty
+    Maija</u></font></small></h1>
+
+    <ul>
+      <li>Her <strong>birthday</strong> is January 26th, don't
+      forget!. She was born in 1965, so she'll be 35 in 2000.</li>
+
+      <li>In 98 she gave us an <strong>awful vase</strong>, but we
+      pretend to like it.</li>
+    </ul>
+
+    <p>Her contact information</p>
+
+    <p>Tel: +358-12-34567890</p>
+
+    <p>Addess:</p>
+
+    <p><tt>Maija Mellunmäki<br />
+    Takakatu 12 B 34<br />
+    01234 Peräseinäjoki<br />
+    Finland</tt></p>
+
+    <p>Her favourite music is (from her webpage:)</p>
+
+    <ul>
+      <li><font face="Book Antiqua">Mozart</font></li>
+
+      <li><font face="Book Antiqua">The Rolling Stones</font></li>
+
+      <li><font face="Book Antiqua">Leonard Cohen</font></li>
+
+      <li><font face="Book Antiqua">Toto</font></li>
+
+      <li><font face="Book Antiqua">Eurythmics</font></li>
+    </ul>
+    <hr />
+  </body>
+</html>
+
