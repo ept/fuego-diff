@@ -1,0 +1,6 @@
+<subproject name="xas">
+  <depend>util</depend>
+</subproject>
+
+<!-- arch-tag: 142047b8-9256-44f3-b39d-0ec5a60de0f5
+-->
