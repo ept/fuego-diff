@@ -1,0 +1,62 @@
+# Sequential read test
+
+createprop fc.log.level=DEBUG syxrunner.jvmargs=-Xmx512m
+createprop pdf=iIdduumm test=seq by=time size=1000 max=100000 step=1000
+
+create --clean buzz
+:buzz cdef test=fc.raxs.exper.RandomEdits.sequentialRead
+# Store 1
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 2
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 3
+createprop store=fc.raxs.exper.IdStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 4
+createprop store=fc.raxs.exper.DeweyStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# ==== Memory tests ========
+# Store 1
+createprop by=memory store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 2
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 3
+createprop store=fc.raxs.exper.IdStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Store 4
+createprop store=fc.raxs.exper.DeweyStore
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --maxsize @@{max} --sizestep @@{step}
+
+# Copy results if we are running in update mode
+if @@{fc.raxs.exper.update} sys /bin/sh -c "pwd; cp buzz/@@{test}* \
+ ../../../../docs/deliverables/result/data/raxs"
+
+echo Done
+# arch-tag: c5b18d7c-7b16-4334-8ff8-adf6bfcb252b

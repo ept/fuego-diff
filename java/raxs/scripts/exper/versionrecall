@@ -1,0 +1,33 @@
+# Version recall test
+
+createprop fc.log.level=DEBUG 
+createprop pdf=Iidduumm
+
+
+create --clean buzz
+:buzz cdef test=fc.raxs.exper.RandomEdits.versionRecall
+
+
+createprop test=vr size=10000 min=0 max=110 step=5 by=time
+
+# Store 1
+createprop store=fc.raxs.IdStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --versions 25 \
+	--edits @@{min} --maxedits @@{max} --step @@{step}
+
+# Store 2
+createprop store=fc.raxs.DeweyStore 
+:buzz test --@@{by} --file @@{test}-@@{by}-@@{store} \
+	--pdf @@{pdf} --seed 42 --store @@{store} \
+	--size @@{size} --versions 25 \
+	--edits @@{min} --maxedits @@{max} --step @@{step}
+
+
+# Copy results if we are running in update mode
+if @@{fc.raxs.exper.update} echo Updating results...
+if @@{fc.raxs.exper.update} sys /bin/sh -c "cp -v buzz/vr* \
+ ../../../../docs/deliverables/result/data/raxs"
+
+# arch-tag: fb920520-df9d-4ef9-90c2-a839cbb41c39

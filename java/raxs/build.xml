@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--- This is a template build file for subprojects.
+	Customize as needed at locations marked @@.
+-->
+<!--
+Copyright %YEAR% Helsinki Institute for Information Technology
+
+This file is a part of Fuego middleware.  Fuego middleware is free
+software; you can redistribute it and/or modify it under the terms
+of the MIT license, included as the file MIT-LICENSE in the Fuego
+middleware source distribution.  If you did not receive the MIT
+license with the distribution, write to the Fuego Core project at
+%ADDRESS%.
+-->
+
+
+<project name="raxs" default="compile" basedir=".">
+
+  <property name="test.class" 
+	    value="fc.raxs.test.RaxsAndXmlrSuite"/>
+
+  <property name="project.syxaw.path" value="../syxaw"/>
+
+  <!-- Imports many common definitions and provides
+       default implementations for tasks -->	
+  <import file="../subproject.xml" optional="true"/>
+  <fail unless="subproject.xml.included" 
+	message="Project not set up; run ant -f project-setup.xml" />
+  
+  <target name="verify-sync" depends="compile,verify-loadscripts" >
+   <available file="${project.syxaw.path}" type="dir" 
+	      property="raxs.syxaw.present"/>
+   <fail unless="raxs.syxaw.present" message=
+	 "This task requires the Syxaw project in ${project.syxaw.path}" />
+   <property name="scripts.dir" value="" /> <!-- if not set yet -->
+   <property name="syxrunner.scripts" value="scripts/verify/sync-raxs" />
+   <subant buildpath="${project.syxaw.path}" 
+	   target="verify" >
+     <property name="verify.asserts" value="-da" />
+     <property name="verify-extras.dir" value="../raxs/${build.lib}" />
+     <property name="syxrunner.logfile" value="../raxs/verify.log" />
+     <property name="taskdefs.xml" value="ALREADYINCLUDED.taskdefs.xml" />
+     <property name="syxrunner.scriptdir" 
+	       value="../raxs/${scripts.dir}"/>
+     <property name="syxrunner.scripts" value="${syxrunner.scripts}"/>
+   </subant>
+ </target>
+
+ <target name="verify-loadscripts" if="verifyset" unless="syxrunner.scripts" >
+   <property name="scripts.dir" value="scripts/verify" />
+   <property name="syxrunner.scriptdir" value="${scripts.dir}" />
+   <loadfile property="syxrunner.scripts" 
+	     srcFile="${verifyset}" >
+     <filterchain>
+       <striplinecomments><comment value="#" /></striplinecomments>
+     </filterchain>
+   </loadfile>	    
+ </target>
+
+
+</project>
+<!-- arch-tag: 7569313b-34ab-4359-b293-a1a0e4851d36 
+-->

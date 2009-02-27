@@ -1,0 +1,31 @@
+# Basic RAXS Sync test to verify initial sync
+createprop fc.log.level=WARNING syxaw.http.retries=0
+createprop syxaw.firstversion=1000 syxaw.uid.seed=42 SyncTest=fc.syxaw.raxs.test.SyncTest
+create --clean buzz
+createprop syxaw.firstversion=2000 syxaw.uid.seed=314
+create --clean rex
+
+# Setup
+:buzz @@{SyncTest}.registerMerger
+:rex @@{SyncTest}.registerMerger
+
+# Make initial store & links
+copy ../../raxs/test/simple/simple.xml buzz/simple.xml
+:buzz @@{SyncTest}.setupStore simple.xml raxs-store
+#:buzz lls raxs-store
+
+:rex touchf empty.xml
+:rex @@{SyncTest}.setupStore empty.xml raxs-store
+:rex ln --nolmod buzz/5DwIT0u7K_GDne5GbYUstQ raxs-store
+#:rex lls raxs-store
+
+# Initial sync
+:rex sync raxs-store
+:buzz lls raxs-store
+:rex lls raxs-store
+:buzz verify raxs-store 3 * -. * type=application/xml+raxs
+:rex verify raxs-store * 3 .- * type=application/xml+raxs
+copy -r buzz/raxs-store rex/buzz-raxs-store
+:rex @@{SyncTest}.storeComp buzz-raxs-store raxs-store
+
+# arch-tag: 53bca24c-85aa-4ebe-a9c3-3f0fc3fcadfa
