@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+Copyright %YEAR% Helsinki Institute for Information Technology
+
+This file is a part of Fuego middleware.  Fuego middleware is free
+software; you can redistribute it and/or modify it under the terms
+of the MIT license, included as the file MIT-LICENSE in the Fuego
+middleware source distribution.  If you did not receive the MIT
+license with the distribution, write to the Fuego Core project at
+%ADDRESS%.
+-->
+
+<!-- Common definitions -->
+<!-- The file contains some reasonable default tasks;
+ to override just define a task with the same name in
+ the build.xml importing this file -->
+
+<project name="common">
+
+  <property name="jarname" value="${ant.project.name}.jar"/>
+  <property name="src" value="src"/>
+  <property name="release.dir" value="+release"/>
+  <property name="build" value="=build"/>
+  <property name="build.class" value="${build}/classes"/>
+  <property name="build.lib" value="${build}/lib"/>
+  <property name="docs" value="docs"/>
+  <property name="doclists" value="${docs}/lists"/>
+  <property name="javadoc" value="${docs}/+api"/>
+  <property name="depend" value="+depend"/>
+  <property name="exclude" value="../exclude"/>
+  <property name="datadir" value="data"/>
+  <property name="resdir" value="res"/>
+  <property name="debug.level" value="DEBUG"/>
+
+  <property name="me.jarname" value="me-${jarname}"/>
+  <property name="me.javadoc" value="${docs}/+me-api"/>
+  <property name="me.build" value="${build}/me"/>
+  <property name="me.build.class" value="${me.build}/classes"/>
+
+
+
+  <property name="wtk.home" value="/opt/java/WTK2.2"/>
+  <property name="wtk.cldc.version" value="1.1"/>
+  <property name="wtk.midp.version" value="2.0"/>
+  <property name="wtk.cldc.lib" value="${wtk.home}/lib/cldcapi11.jar"/>
+  <property name="wtk.midp.lib" value="${wtk.home}/lib/midpapi20.jar"/>
+  <property name="wtk.bluetooth.enabled" value="true"/>
+  <property name="wtk.obfuscate" value="false"/>
+
+  <property name="fc.root" value="." /> 
+  <property name="fc.contrib" value="contrib/jar" /> 
+  <property name="contrib" value="contrib" /> 
+  <property name="contrib.shared.se" 
+	    value="${contrib}/external-se-jars"/>
+
+  <property name="contrib.shared.build" 
+	    value="${contrib}/external-build-jars"/>
+
+  <!-- Foundation profile -->
+  <property name="fp.jarname" value="fp-${jarname}"/>
+  <property name="fp.build.class" value="${build}/fp-classes"/>
+  <property name="fp.build.lib" value="${build}/lib"/>
+  <property name="fp.depend" value="+fp.depend"/>
+  <property name="contrib.sys.fp" value="contrib/sys/fp"/>
+  <property name="contrib.shared.fp" 
+	    value="${contrib}/external-fp-jars"/>
+
+  <!-- This loads a path from a file with 1 path elem/line 
+       There has to be a better way...
+  -->
+  <macrodef name="loadpath">
+    <attribute name="pathid"/>
+    <attribute name="file"/>
+    <sequential>
+    <loadfile property="@{pathid}.1"
+      srcFile="@{file}"
+      failonerror="false" >
+      <filterchain>
+	<striplinecomments>
+	  <comment value="#"/>
+	</striplinecomments>	
+	<expandproperties/>
+	<prefixlines prefix="${path.separator}" />
+	<striplinebreaks/>
+      </filterchain>
+    </loadfile>
+    <!---  load @{pathid}.ws as a list of
+     space-separated files from which any initial ../ has been
+     stripped -->
+    <loadfile property="@{pathid}.ws"
+      srcFile="@{file}"
+      failonerror="false" >
+      <filterchain>
+	<striplinecomments>
+	  <comment value="#"/>
+	</striplinecomments>	
+	<expandproperties/>
+	<prefixlines prefix=" //" />
+	<tokenfilter>
+	  <replacestring from="//../" to=""/>
+	</tokenfilter>
+	<striplinebreaks/>
+      </filterchain>
+    </loadfile>
+    <!-- <echo>Loaded into @{pathid}.ws</echo> -->
+    <path id="@{pathid}">
+      <pathelement path="${@{pathid}.1}" />
+    </path>
+    <!-- <echo>Loaded ${@{pathid}.1} into @{pathid}</echo> -->
+    </sequential>
+  </macrodef>
+
+
+  <target name="init">
+    <echo>========  Project ${ant.project.name} ===========</echo>
+    <mkdir dir="${build.class}" />
+    <mkdir dir="${build.lib}" />
+    <depend srcdir="${src}" destdir="${build.class}" cache="${depend}"
+            closure="true" />
+  </target>
+
+  <target name="fp-init" depends="init">
+    <loadpath pathid="classpath.contrib.fp.1" 
+	    file="${contrib.shared.fp}" />
+    <path id="classpath.contrib.fp">
+      <path refid="classpath.contrib.fp.1" />
+      <fileset dir="${contrib}" includes="*.jar,*.zip" />
+    </path>
+    <mkdir dir="${fp.build.class}" />
+    <mkdir dir="${fp.build.lib}" />
+    <depend srcdir="${src}" destdir="${fp.build.class}" cache="${fp.depend}"
+            closure="true" />
+  </target>
+
+  <target name="clean" depends="init">
+    <delete dir="${build}"/>
+  </target>
+
+  <target name="bugs" depends="compile">
+    <!--pluginlist="../${fc.contrib}/plugin/coreplugin.jar" -->
+    <property name="bugs.classpath.contrib.se" 
+	      refid="classpath.contrib.se" />
+    <findbugs outputFile="+bugs.xml" reportLevel="low"
+	      jvmargs="-Xmx256m"
+	      pluginlist="../${fc.contrib}/plugin/coreplugin.jar">
+	<!--      excludeFilter="${datadir}/fb-exclude.xml"> -->
+      <class location="${build.class}"/>
+      <classpath refid="classpath.build" />
+      <auxClasspath refid="classpath.contrib.se" />
+      <sourcePath path="${src}"/>
+    </findbugs>
+  </target>
+
+  <target name="test-da" depends="compile">
+    <property name="tests.assertflag" value="-da" />
+    <antcall target="test" />
+  </target>
+
+  <target name="test" depends="compile">
+    <fail unless="test.class"
+	  message="You need to set test.class before calling"/>
+    <property name="tests.assertflag" value="-ea" />
+    <echo>Note: If you see this, tests are being run. 
+    If the build fails at this point, it means that some test failed.
+    See output in +test.log. Assert flag is  ${tests.assertflag}</echo>
+    <java classname="junit.textui.TestRunner" output="+test.log" 
+	  fork="true" failonerror="true" >
+      <jvmarg value="${tests.assertflag}"/>
+      <jvmarg value="-Dfc.log.level=${debug.level}"/>
+      <jvmarg value="-Dfc.log.logger=fc.util.log.SysoutLogger"/>
+      <arg value="${test.class}"/>
+      <syspropertyset>
+        <propertyref prefix="fc" />
+      </syspropertyset>
+      <classpath>
+	<pathelement location="${build.class}"/>
+	<path refid="classpath.build" />
+	<path refid="classpath.contrib.se" />
+      </classpath>
+    </java>
+  </target>
+
+  <target name="compile" depends="init">
+    <!-- <property name="path.debug" refid="classpath.contrib.se" />-->
+    <echo>Using default compile target... </echo>
+    <javac srcdir="${src}" destdir="${build.class}" debug="on"
+           deprecation="on"
+	   excludesfile="${exclude}">
+      <include name="**"/>
+      <classpath>
+	<path refid="classpath.contrib.se" />
+	<path refid="classpath.build" />
+      </classpath>
+    </javac>
+
+    <!--
+	XXX Should check whether ${resdir} exists instead of ignoring
+	errors
+    -->
+    <copy todir="${build.class}" failonerror="false">
+      <fileset dir="${resdir}">
+	<exclude name="**/.arch-ids/**"/>
+      </fileset>
+    </copy>
+
+    <jar jarfile="${build.lib}/${jarname}" basedir="${build.class}">
+      <include name="**"/>
+    </jar>
+  </target>
+
+  <target name="distro-standalone" depends="compile">
+    <property name="fc.dist.sa" value="+distrib"/>
+    <mkdir dir="${fc.dist.sa}" />
+      <filelist files=""  id="foo" />
+    <echo>CP.ws is ${classpath.contrib.se.1.ws}</echo>
+    <copy todir="${fc.dist.sa}" failonerror="true" verbose="false"
+	  flatten="true">
+      <fileset dir="${contrib}">
+	<include name="*.jar"/>
+      </fileset>
+      <!-- Use the kludgy .1.ws space-separated file list to get
+        the common contrib files. This is a really horrible hack
+        around missing ant 1.6 fileset/path conversion.
+	In Ant 1.7, this is fixed.
+      -->
+      <fileset dir=".." includes="${classpath.contrib.se.1.ws}" />
+      <fileset dir="." file="${build.lib}/${jarname}" /> 
+    </copy>  
+  </target>
+
+  <target name="eclipse-project" depends="init" >
+    <property name="eclipse.project.name" value="${ant.project.name}"/>
+    <property name="eclipse.project.prefix" value="fc-"/>
+    <property name="eclipse.project.flags" value=""/>
+    <exec executable="../make-eclipse-proj.sh" >
+      <arg line="${eclipse.project.flags} ${eclipse.project.name}" />
+      <arg value="${eclipse.project.prefix}" />
+      <arg value="${classpath.contrib.se.1.1}" />
+    </exec>
+  </target>
+
+  <target name="release-jar" depends="compile">
+    <fail unless="fc.version">
+    You need to set the fc.version ant property</fail>
+    <echo>Java used to build is version ${java.version}</echo>
+    <mkdir dir="${release.dir}" />
+    <tstamp>
+      <format property="build.stamp" pattern="yyyy.MM.dd.hh.mm.ss"/>
+    </tstamp>
+    <property name="fc.main.class" value="" />
+    <property name="release.jar" 
+      value="${release.dir}/fc-${ant.project.name}-${fc.version}.jar" />
+    <jar jarfile="${release.jar}">
+      <manifest>
+	<attribute name="Built-By" value="${user.name}"/>
+	<attribute name="Main-Class" value="${fc.main.class}"/>
+	<attribute name="Specification-Title" value="fc-${ant.project.name}"/>
+	<attribute name="Specification-Version" value="${fc-version}"/>
+	<attribute name="Implementation-Title" 
+		   value="Fuego Core ${ant.project.name}"/>
+	<attribute name="Implementation-Version" 
+		   value="${fc.version}-${build.stamp}"/>
+      </manifest>
+      <zipfileset src="${build.lib}/${jarname}" />
+    </jar>
+    <echo>Binary release JAR successfully built as ${release.jar}</echo>
+  </target>
+
+</project>
+<!-- arch-tag: 496ed911-f7af-40a0-9870-5ee775b65e17
+-->

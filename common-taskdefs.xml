@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Task definitions. This is split separately, because
+     ant will complain about duplicate taskdefs iw we 
+     import it twice ... -->
+<project name="common-taskdefs">
+  <!--
+  <taskdef name="findbugs" classpathref="classpath.build"
+	   classname="edu.umd.cs.findbugs.anttask.FindBugsTask"/>
+  -->
+  <!--
+  <taskdef resource="proguard/ant/task.properties"
+	   classpathref="classpath.build" />
+  -->
+</project>
+<!-- arch-tag: 703c163d-294e-46d8-81e5-f913bc265a24
+ -->

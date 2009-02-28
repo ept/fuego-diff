@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!-- $Id: contrib-helper.xml,v 1.1 2006/01/31 20:16:14 ctl Exp $ -->
+<project name="fc-contrib-get-macros" basedir=".">
+
+  <tempfile prefix="wget-" property="temp.file" />
+  <tempfile prefix="wget-" property="temp.dir" />
+
+  <macrodef name="wget" >
+    <attribute name="id" /> <!-- Unique id for wget. Must be unique,
+                                 because of teh way we stretch Ant --> 
+    <attribute name="href1" /> <!-- First href -->
+    <attribute name="target" /> <!-- Target file name -->
+    <attribute name="href2" default=""/> <!-- Optional href -->
+    <attribute name="unpack1" default="" /> <!-- Name of target that unpacks href1 -->
+    <attribute name="unpack2" default="" /> <!-- Ditto for href 2 -->
+    <attribute name="unpackloc1" default="" /> <!-- Ditto for href 2 -->
+    <attribute name="unpackloc2" default="" /> <!-- Ditto for href 2 -->
+    <attribute name="unpackdir" default="." /> <!-- Helper passed to unpacker -->
+    <attribute name="sha" default="" /> <!-- Expected SHA1 of target -->
+    <attribute name="target.get" default="" /> <!-- File to get to 
+           (used with unpack, unpack fixes target.get->target) -->
+    <sequential>
+      <condition property="@{id}.imtarget" value="@{target}">
+        <equals arg1="@{target.get}" arg2="" />
+      </condition>
+      <!-- Use target.get if it was set -->
+      <property name="@{id}.imtarget" value="@{target.get}" /> 
+      <!-- Precheck hash, if OK no download -->
+      <condition property="@{id}.preverify.value">
+        <and>
+          <available file="@{target}" />
+          <checksum file="@{target}" algorithm="SHA" property="@{sha}" />
+        </and>
+      </condition>
+<!--      <checksum file="@{target}" algorithm="SHA" property="@{sha}"
+              verifyproperty="@{id}.preverify.value" /> -->
+      <condition property="@{id}.preverify.ok" >
+          <istrue value="${@{id}.preverify.value}" />
+      </condition> 
+      <condition property="@{id}.preverify.message" 
+                 value="Module @{id} is up-to-date (by SHA hash)" >
+        <isset property="@{id}.preverify.ok" />
+      </condition>
+      <property name="@{id}.preverify.message" 
+                value="Fetching module @{id}..." /> 
+      <echo>${@{id}.preverify.message}</echo>
+      <echo>----------------------------------------------------</echo>
+      <antcall target="wget-task">
+        <param name="id" value="@{id}" />
+        <param name="href1" value="@{href1}" />
+        <param name="href2" value="@{href2}" />
+        <param name="target" value="@{target}" />
+        <param name="target.get" value="${@{id}.imtarget}" />
+        <param name="unpack1" value="@{unpack1}" />
+        <param name="unpackloc1" value="@{unpackloc1}" />
+        <param name="unpack2" value="@{unpack2}" />
+        <param name="unpackloc2" value="@{unpackloc2}" />
+        <param name="unpackdir" value="@{unpackdir}" />
+        <param name="sha" value="@{sha}" />
+      </antcall>
+    </sequential>
+  </macrodef>
+
+  <target name="wget-task" unless="${id}.preverify.ok" >
+    <delete file="${target.get}" />
+    <get src="${href1}" dest="${target.get}" verbose="false" ignoreerrors="true"/>
+    <available property="${id}.get1.ok" file="${target.get}" />
+    <condition property="${id}.get1.ok+unpack" >
+      <and>
+        <isset property="${id}.get1.ok" />
+        <not>
+          <equals arg1="${unpack1}" arg2="" />
+        </not>
+      </and>
+    </condition>
+    <antcall target="get1-finish" />
+    <condition property="${id}.get2" >
+        <not>
+          <equals arg1="${href2}" arg2="" />
+        </not>
+    </condition>
+    <antcall target="get2" />
+    <condition property="${id}.verify.sha" >
+        <not>
+          <equals arg1="${sha}" arg2="" />
+        </not>
+    </condition>
+    <antcall target="verify" />
+  </target>
+
+  <target name="get1-finish" if="${id}.get1.ok+unpack">
+    <antcall target="${unpack1}"/>
+  </target>
+
+  <target name="get2" unless="${id}.get1.ok" if="${id}.get2" >
+    <get src="${href2}" dest="${target.get}" verbose="false" ignoreerrors="false"/>
+    <condition property="${id}.get2.unpack" >
+        <not>
+          <equals arg1="${unpack2}" arg2="" />
+        </not>
+    </condition>
+    <antcall target="get2-finish"/>    
+  </target>
+
+  <target name="get2-finish" if="${id}.get2.unpack">
+    <antcall target="${unpack2}"/>
+  </target>
+
+  <macrodef name="verify-m">
+    <attribute name="id" />
+    <sequential>
+    <checksum file="${target}" algorithm="SHA" property="${sha}"
+              verifyproperty="@{id}.verify.value" />
+    <checksum file="${target}" algorithm="SHA" property="sha.downloaded" />
+    <condition property="@{id}.verify.ok" >
+          <istrue value="${@{id}.verify.value}" />
+    </condition> 
+    <fail message="SHA hash does not match (download SHA=${sha.downloaded} for ${target})" 
+	  unless="@{id}.verify.ok" />
+    <echo>SHA-1 hash verified to be ${sha}</echo>
+    </sequential>
+  </macrodef>
+
+  <target name="verify" if="${id}.verify.sha">
+    <verify-m id="${id}" />
+  </target>
+
+  <target name="unpack-tgz" >
+    <mkdir dir="${temp.dir}" />
+    <untar src="${target.get}" dest="${temp.dir}" compression="gzip" />
+    <copy file="${temp.dir}/${unpackloc1}" tofile="${target}" 
+          overwrite="true" />
+    <delete dir="${temp.dir}" />
+    <delete file="${target.get}" />
+  </target>
+
+  <target name="unpack-zip" >
+    <mkdir dir="${temp.dir}" />
+    <unzip src="${target.get}" dest="${temp.dir}" />
+    <copy file="${temp.dir}/${unpackloc1}" tofile="${target}" 
+          overwrite="true" />
+    <delete dir="${temp.dir}" />
+    <delete file="${target.get}" />
+  </target>
+
+</project>
+<!-- arch-tag: 8a7d561e-746d-429f-bb7f-f117ceb14e7b
+-->

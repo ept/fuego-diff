@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="subproject">
+  <import file="common.xml" />
+
+  <loadpath pathid="classpath.contrib.se.1" 
+	    file="${contrib.shared.se}" />
+
+  <loadpath pathid="classpath.build.1" 
+	    file="${contrib.shared.build}" />
+
+
+  <path id="classpath.contrib.se">
+    <path refid="classpath.contrib.se.1" />
+    <fileset dir="${contrib}" includes="*.jar,*.zip" />
+  </path>
+
+  <path id="classpath.build">
+    <path refid="classpath.build.1" />
+    <fileset dir="${contrib}" includes="*.jar,*.zip" />
+  </path>
+
+  <property name="common-taskdefs.xml" value="common-taskdefs.xml" />
+  <import file="${taskdefs.xml}" optional="true" />
+
+  <property name="subproject.xml.included" value="true" />
+
+</project>
+<!-- arch-tag: 9e2f5bec-0601-4cf0-8d3c-bef03c934471
+ -->
