@@ -107,7 +107,7 @@ public class StartTag extends Item {
 	return parent;
     }
 
-    @NonNull
+    // @NonNull
     public String getPrefix () {
 	return getPrefix(name.getNamespace());
     }
@@ -130,7 +130,7 @@ public class StartTag extends Item {
 	insertPrefix(new PrefixNode(namespace, prefix));
     }
 
-    @NonNull
+    // @NonNull
     public String getNamespace (String prefix) {
 	Verifier.checkNotNull(prefix);
 	String namespace = null;
@@ -145,7 +145,7 @@ public class StartTag extends Item {
 	return namespace;
     }
 
-    @NonNull
+    // @NonNull
     public String getPrefix (String namespace) {
 	Verifier.checkNotNull(namespace);
 	String prefix = null;
