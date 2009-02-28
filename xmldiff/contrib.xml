@@ -82,20 +82,116 @@ checking its hash, and then unpacking to ${src}
 	  target="${llib}/fc-util-0.1.0.jar"
 	  sha = "6c8b6e8c3801c0cc672c421a994f5ddb04be46f5" />
 
-    <!-- FC XAS -->
-    <wget id="fc-xas"
-	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-xas/fc-xas-0.1.0.jar"
-	  target="${llib}/fc-xas-0.1.0.jar"
-	  sha = "4288fc78591e0fe8e240701607b4fd6fb7cbdef6" />
-
-
     <!-- FC RAXS -->
     <wget id="fc-raxs"
 	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-raxs/fc-raxs-0.1.0.jar"
 	  target="${llib}/fc-raxs-0.1.0.jar"
 	  sha = "e8bcf2b134d97ce86ce82b27cae6e65ab9cb7f96" />
 
-    </target>
+    <!-- Bouncy Castle. We're sorry for the inconvenience (25MB archive). -->
+    <wget id="bouncy-castle-cldc"
+	  href1="file:///tmp/crypto-140.tar.gz"
+	  href2="http://bouncycastle.org/download/crypto-140.tar.gz"
+	  target="${lib}/bouncy-castle-cldc-1.40.zip"
+          target.get="${temp.file}"
+          unpack1="unpack-tgz"
+          unpack2="unpack-tgz"	  
+	  unpackloc1="crypto-140/zips/cldc_classes.zip"
+	  unpackloc2="crypto-140/zips/cldc_classes.zip"
+	  sha="2c7ff4f406f71595abd72fe8a992767a26e72c78" />
+
+    <!-- Apache commons-codec -->
+    <wget id="commons-codec"
+          href1="http://archive.apache.org/dist/commons/codec/binaries/commons-codec-1.3.zip"
+          target="${lib}/commons-codec-1.3.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-zip"
+          unpackloc1="commons-codec-1.3/commons-codec-1.3.jar"
+          sha="fd32786786e2adb664d5ecc965da47629dca14ba" />
+
+    <!-- Apache commons-fileupload -->
+    <wget id="commons-fileupload"
+          href1="http://archive.apache.org/dist/commons/fileupload/binaries/commons-fileupload-1.0.zip"
+          target="${lib}/commons-fileupload-1.0.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-zip"
+          unpackloc1="commons-fileupload-1.0/commons-fileupload-1.0.jar"
+          sha="2366159e25523d99e96d05211a2fa5399c938735" />
+
+    <!-- Apache commons-httpclient -->
+    <wget id="commons-httpclient"
+          href1="http://archive.apache.org/dist/httpcomponents/commons-httpclient/3.0/binary/commons-httpclient-3.0.tar.gz"
+          target="${lib}/commons-httpclient-3.0.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-tgz"
+          unpackloc1="commons-httpclient-3.0/commons-httpclient-3.0.jar"
+          sha="336a280d178bb957e5233189f0f32e067366c4e5" />
+
+
+    <!--servlet-api.jar. NOTE: Also in debian libservlet2.3-java package, 
+        but we can't expand debs :( in Ant. So we eat this 2.3M archive instead :(-->
+    <wget id="servlet-api"
+          href1=
+"http://archive.apache.org/dist/tomcat/tomcat-5/archive/v5.5.15/bin/apache-tomcat-5.5.15-embed.tar.gz"
+          target.get="${temp.file}"
+          target="${lib}/servlet-api-2.3.jar"
+          unpack1="unpack-tgz"
+          unpackloc1="apache-tomcat-5.5.15-embed/lib/servlet-api.jar"
+          sha="2bdbb4faff35908eb7121884886a81018d8e21e2" />
+
+    <!--org.mortbay.jetty.jar-->
+    <wget id="jetty"
+          href1="http://repo1.maven.org/maven/jetty/jars/org.mortbay.jetty-5.1.4.jar"
+          target="${lib}/org.mortbay.jetty-5.1.4.jar"
+          sha="9f8b9485ef1ac5a3e7549f21287510280f460371" />
+
+    <!-- Xebu (aka XAS1) -->
+    <wget id="fc-util-2004"
+         href1="http://hoslab.cs.helsinki.fi/downloads/xebu/fc-util.jar"
+         target="${lib}/fc-util-2004.jar"
+         sha="efb1ea5712cf01b387dd414f850246beec66adce" />
+
+    <!-- ########## Build System Jars ######## -->
+
+    <!-- Findbugs -->
+    <wget id="findbugs"
+          href1="http://${sourceforge}/sourceforge/findbugs/findbugs-0.9.4.tar.gz"
+          target="${lib}/findbugs-0.9.4.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-findbugs-bin"
+          sha="574aad6cefe0a5076d86dcd61af4e48e09813cb3" />
+
+    <!-- dom4j (probably not used by anything but FindBugs) -->
+    <wget id="dom4j"
+          href1="http://${sourceforge}/sourceforge/findbugs/findbugs-0.9.4.tar.gz"
+          target="${lib}/findbugs-0.9.4-dom4j-full.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-findbugs-bin"
+          sha="69e7812ed2309b4c3713d3961260cb9458ddd5a1" />
+
+    <!-- proguard -->
+    <wget id="proguard"
+          href1="http://${sourceforge}/sourceforge/proguard/proguard3.5.tar.gz"
+          target.get="${temp.file}"
+          target="${lib}/proguard-3.5.jar"
+          unpack1="unpack-tgz"
+	  unpackloc1="proguard3.5/lib/proguard.jar"
+          sha="4b5a9ce786d00f53c9687fe0affb65a864cb6f3f" />
+  </target>
+  <target name="unpack-findbugs-bin" >
+    <mkdir dir="${temp.dir}" />
+    <untar src="${target.get}" dest="${temp.dir}" compression="gzip" />
+    <copy file="${temp.dir}/findbugs-0.9.4/lib/findbugs.jar" 
+	    tofile="${lib}/findbugs-0.9.4.jar" overwrite="true" />
+    <copy file="${temp.dir}/findbugs-0.9.4/lib/findbugs-ant.jar" 
+	    tofile="${lib}/findbugs-0.9.4-ant.jar" overwrite="true" />
+    <copy file="${temp.dir}/findbugs-0.9.4/lib/bcel.jar" 
+	    tofile="${lib}/findbugs-0.9.4-bcel.jar" overwrite="true" />
+    <copy file="${temp.dir}/findbugs-0.9.4/lib/dom4j-full.jar" 
+	    tofile="${lib}/findbugs-0.9.4-dom4j-full.jar" overwrite="true" />
+    <copy file="${temp.dir}/findbugs-0.9.4/plugin/coreplugin.jar" 
+	    tofile="${lib}/findbugs-0.9.4-coreplugin.jar" overwrite="true" />
+    <delete dir="${temp.dir}" />
+    <delete file="${target.get}" />
+  </target>
 </project>
-<!-- arch-tag: 9fb1944c-c56c-4bda-a961-bc5ce2c44295
--->

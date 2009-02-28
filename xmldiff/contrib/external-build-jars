@@ -10,5 +10,6 @@
 ../${fc.contrib}/plugin/coreplugin.jar
 ../${fc.contrib}/jse.jar
 ../${fc.contrib}/junit-3.8.1.jar
-# arch-tag: 243ae8f2-b4ae-43e2-b28b-956a6de8c9ee
-
+../${fc.contrib}/findbugs-0.9.4-dom4j-full.jar
+../${fc.contrib}/findbugs-0.9.4-coreplugin.jar
+../${fc.contrib}/proguard-3.5.jar
