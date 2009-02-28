@@ -135,6 +135,9 @@ license with the distribution, write to the Fuego Core project at
 
   <target name="clean" depends="init">
     <delete dir="${build}"/>
+    <delete dir="${depend}"/>
+    <delete file="+test.log"/>
+    <delete dir="+tmp-test"/>
   </target>
 
   <target name="bugs" depends="compile">
