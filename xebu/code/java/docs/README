@@ -1,0 +1,14 @@
+This directory is intended for all sorts of Java-code-related
+documentation.  Any API documentation built from the Java code will be
+built here.  There are also package-list files used in building API
+documentation to get working links to external classes.
+
+The package-list files are stored under the lists directory.  For each
+external package that is linked to in documentation comments, there
+exists a subdirectory under lists containing the package-list
+file from that package.
+
+Other documentation is:
+event-admin.txt: Instructions for Web management of the event system
+event-ticker-me.txt: Instructions for the Mobile Ticker FCME demo
+fcme.txt: Instructions on writing code for FCME

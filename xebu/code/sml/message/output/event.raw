@@ -1,0 +1,126 @@
+namespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema"
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+namespace mts = "http://www.hiit.fi/fuego/fc/mts"
+namespace local = ""
+datatypes mts = "http://www.hiit.fi/fuego/fc/mts"
+datatypes xas = "http://www.hiit.fi/fuego/fc/xas"
+namespace ev = "http://www.hiit.fi/fuego/fc/notify"
+datatypes ev = "http://www.hiit.fi/fuego/fc/notify"
+
+Grammar
+include "mts.rnc" {
+header-content = (target, identifier, sender?, twoway?, response?)
+message-content = notification
+}
+notification = element data {
+(attribute xsi:type { "ev:notification" }, notification-value, element type {
+xsd:string
+}
+, element order {
+xsd:int
+}
+, element deadline {
+xsd:long
+}
+, element priority {
+xsd:int
+}
+, element ra {
+xsd:boolean
+}
+, element rid {
+xsd:string
+}
+?, element id {
+xsd:string
+}
+?, element ac {
+xsd:string
+}
+?)
+}
+
+notification-value = element value {
+(attribute xsi:type { "ev:value" }, triplet*)
+}
+
+simple-notification-value = element value {
+(attribute xsi:type { "ev:value" }, simple-triplet*)
+}
+
+simple-triplet = element ev:triplet {
+(attribute xsi:type { "ev:triplet" }, element name {
+xsd:string
+}
+, (element int {
+xsd:int
+}
+ | element boolean {
+xsd:boolean
+}
+ | element double {
+xsd:double
+}
+ | element string {
+xsd:string
+}
+ | element date {
+xsd:dateTime
+}
+))
+}
+
+triplet = element ev:triplet {
+(attribute xsi:type { "ev:triplet" }, element name {
+xsd:string
+}
+, (element int {
+xsd:int
+}
+ | element boolean {
+xsd:boolean
+}
+ | element double {
+xsd:double
+}
+ | element string {
+xsd:string
+}
+ | element date {
+xsd:dateTime
+}
+ | element serialized {
+(attribute xsi:type { "ev:notification" }, simple-notification-value, element type {
+xsd:string
+}
+, element source {
+xsd:string
+}
+, element order {
+xsd:int
+}
+, element deadline {
+xsd:long
+}
+, element priority {
+xsd:int
+}
+, element ra {
+xsd:boolean
+}
+, element rid {
+xsd:string
+}
+?, element id {
+xsd:string
+}
+?, element ac {
+xsd:string
+}
+?)
+}
+))
+}
+
+

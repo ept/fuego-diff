@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Copyright 2006 Helsinki Institute for Information Technology
+
+# This file is a part of Fuego middleware.  Fuego middleware is free
+# software; you can redistribute it and/or modify it under the terms
+# of the MIT license, included as the file MIT-LICENSE in the Fuego
+# middleware source distribution.  If you did not receive the MIT
+# license with the distribution, write to the Fuego Core project at
+# fuego-core-users@hoslab.cs.helsinki.fi.
+
+source ../setup
+
+if [ $# -ge 1 -a "$1" = "--help" ]; then
+    echo "Usage: $0 [<type>] <files...>"
+    exit 0
+fi
+
+if [ $# -lt 1 ]; then
+    echo "At least one file name is mandatory" >&2
+    exit 1
+fi
+
+case "$1" in
+     xml) type=xmlb; shift ;;
+     xmlz|none|item|data|elem|elit|elid) type=$1; shift ;;
+     *) type=elid ;;
+esac
+
+$FUEGOCORE_HOME/utils/java --nodebug fuegocore.examples.util.XmlSerializer $type "$@"

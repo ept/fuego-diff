@@ -1,0 +1,17 @@
+# Copyright 2006 Helsinki Institute for Information Technology
+
+# This file is a part of Fuego middleware.  Fuego middleware is free
+# software; you can redistribute it and/or modify it under the terms
+# of the MIT license, included as the file MIT-LICENSE in the Fuego
+# middleware source distribution.  If you did not receive the MIT
+# license with the distribution, write to the Fuego Core project at
+# fuego-core-users@hoslab.cs.helsinki.fi.
+
+# Variables needed for making Fuego Core SML code
+
+# Remember to set BASEDIR in the Makefile
+SMLDIR=$(BASEDIR)/code/sml
+
+SML=mlton
+SMLFLAGS=-verbose 1 -const 'Exn.keepHistory true'
+RM=rm -f

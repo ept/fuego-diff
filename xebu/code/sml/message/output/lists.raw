@@ -1,0 +1,17 @@
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+namespace ns = "http://www.hiit.fi/fuego/fc/test"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema"
+datatypes ns = "http://www.hiit.fi/fuego/fc/test"
+
+Grammar
+start = element ns:lists {
+element * {
+(attribute xsi:type { "ns:list" }, element ns:item {
+xsd:int
+}
+*)
+}
+*
+}
+
+

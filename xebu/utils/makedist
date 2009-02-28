@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Copyright 2006 Helsinki Institute for Information Technology
+
+# This file is a part of Fuego middleware.  Fuego middleware is free
+# software; you can redistribute it and/or modify it under the terms
+# of the MIT license, included as the file MIT-LICENSE in the Fuego
+# middleware source distribution.  If you did not receive the MIT
+# license with the distribution, write to the Fuego Core project at
+# fuego-core-users@hoslab.cs.helsinki.fi.
+
+PROGLIST="tla mktemp tar zip"
+if ! which $PROGLIST >/dev/null; then
+    echo "One of the programs in '$PROGLIST' is missing" >&2
+    exit 1
+fi
+
+if [ ! -d ./{arch} ] ; then
+    echo "Not in tree root" >&2
+    exit 2
+fi
+
+if [ ! -e ./utils/package-info ] ; then
+    echo "Could not find file ./utils/package-info" >&2
+    exit 1
+fi
+
+source ./utils/package-info
+
+if [ $(tla parse-package-name --package-version $(tla tree-version)) != "$TLA_VERSION" ]
+    then
+    echo "Not in correct Arch tree" >&2
+    exit 2
+fi
+
+MANIFEST=$(mktemp)
+
+tla inventory --source | grep -v '\.arch-' | grep -v '\.cvs' >$MANIFEST
+
+DIST_DIR=$DIST_NAME-$DIST_VERSION
+
+if ! mkdir $DIST_DIR; then
+    echo "Unable to create directory $DIST_DIR for distribution" >&2
+    exit 3
+fi
+
+tar -cf - -T $MANIFEST | ( cd $DIST_DIR && tar -xf - ) || exit 3
+
+tar czf $DIST_DIR.tar.gz $DIST_DIR || exit 4
+zip -r $DIST_DIR.zip $DIST_DIR || exit 4
+
+# arch-tag: cecb177a-7ab0-4554-89e2-10caa35568ad

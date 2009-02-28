@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Copyright 2006 Helsinki Institute for Information Technology
+
+# This file is a part of Fuego middleware.  Fuego middleware is free
+# software; you can redistribute it and/or modify it under the terms
+# of the MIT license, included as the file MIT-LICENSE in the Fuego
+# middleware source distribution.  If you did not receive the MIT
+# license with the distribution, write to the Fuego Core project at
+# fuego-core-users@hoslab.cs.helsinki.fi.
+
+usage ()
+{
+cat <<EOF
+
+$0: a Java Virtual Machine wrapper script for Fuego Core
+Usage: $0 [options] arguments to JVM
+
+This wrapper script is intended to eliminate any need to set
+classpaths by defining the extension directories suitably.  It is also
+possible to set some options with more ease than with the standard JVM
+options.  The variable FUEGOCORE_CODE should be set to point to the
+Fuego Core code directory; if the variable is not set, current
+directory is assumed.
+
+The accepted options are
+--help		show this help
+--nodebug	turn off normal debugging output
+--debug         turn on more debugging output
+--profile       output profiling information to java.hprof.txt
+--noassert      turn off assertions (they are enabled by default)
+
+EOF
+exit 0
+}
+
+
+if [ -z "$FUEGOCORE_CODE" ] ; then
+    FUEGOCORE_CODE=`dirname $0`/../code
+fi
+
+opts=''
+
+# The options to JVM (at least Sun's) all start with a single hyphen.
+# So our options start with a double hyphen.  Fiendishy clever and
+# about as non-fragile as a handful of eggs :)
+while echo "$1" | grep -q "^--" ; do
+    case "$1" in
+	--help) usage ;;
+	--nodebug) opts="$opts -Dlog4j.configuration=log4j/nodebug.properties" ;;
+	--debug) opts="$opts -Dlog4j.configuration=log4j/debug.properties" ;;
+	--profile) opts="$opts -Xrunhprof:cpu=samples,depth=18,thread=y" ;;
+	--noassert) opts="$opts -disableassertions"; assert="no" ;;
+	*) echo "Unknown option: $1" ;;
+    esac
+    shift
+done
+
+if [ -z "$assert" ] ; then
+    opts="$opts -enableassertions"
+fi
+
+exec java -Djava.ext.dirs=$FUEGOCORE_CODE/java/=build/lib:$FUEGOCORE_CODE/java/contrib/jar $opts "$@"

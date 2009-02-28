@@ -1,0 +1,18 @@
+Grammar
+start = envelope
+envelope = element {http://schemas.xmlsoap.org/soap/envelope/}Envelope {
+envelope-content
+}
+
+header = element {http://schemas.xmlsoap.org/soap/envelope/}Header {
+header-content
+}
+
+body = element {http://schemas.xmlsoap.org/soap/envelope/}Body {
+body-content
+}
+
+envelope-content = (header?, body)
+header-content = empty
+body-content = empty
+

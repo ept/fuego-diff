@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <title>The fuegocore.util.xas package</title>
+  </head>
+
+  <body>
+    <p>
+      Utilities for handling XML in programs.  This package contains a
+      generic event-sequence-based framework for programmatic use of
+      XML.  The intent is to support transparently through the same
+      interfaces both reading and writing XML Infoset documents,
+      regardless of how they are encoded as byte sequences.
+    </p>
+
+    <p>
+      The underlying interfaces that the framework expects are the
+      XmlPull <code>org.xmlpull.v1.XmlPullParser</code> for input and
+      <code>org.xmlpull.v1.XmlSerializer</code> for output.  These
+      interfaces need to be implemented by new serialization formats.
+    </p>
+
+    <p>
+      In actuality the output interface to implement is an extension
+      of the XmlPull one, {@link fuegocore.util.xas.TypedXmlSerializer},
+      which provides a method for outputting typed content.  The
+      corresponding view on the parsing side is asymmetrically the
+      {@link fuegocore.util.xas.TypedEventStream}.  The best example
+      source of using this feature is in the XAS unit test class
+      {@link fuegocore.util.tests.XasTest}.
+    </p>
+  </body>
+</html>

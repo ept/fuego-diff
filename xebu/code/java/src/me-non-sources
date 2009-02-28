@@ -1,0 +1,16 @@
+fcme/tests/**/*.java
+fuegocore/message/protocol/URLHandler.java
+fuegocore/util/xas/Sax*.java
+fuegocore/util/xas/XmlCodecFactory.java
+fuegocore/util/xas/CodecIndustry.java
+fuegocore/util/xas/XasExtUtil.java
+fuegocore/util/xas/XmlTee.java
+fuegocore/util/xas/DataEventSequence.java
+fuegocore/message/encoding/XebuCodecFactory.java
+fuegocore/message/encoding/XebuParser.java
+fuegocore/message/encoding/XebuSerializer.java
+fuegocore/message/encoding/SequenceCache.java
+fuegocore/message/encoding/OutCache.java
+fuegocore/message/service/*Rpc*.java
+fuegocore/message/service/MessageService.java
+fuegocore/message/service/ReturnValueHandler.java

@@ -1,0 +1,47 @@
+Grammar
+start = envelope
+envelope = element {http://schemas.xmlsoap.org/soap/envelope/}Envelope {
+envelope-content
+}
+
+header = element {http://schemas.xmlsoap.org/soap/envelope/}Header {
+header-content
+}
+
+body = element {http://schemas.xmlsoap.org/soap/envelope/}Body {
+body-content
+}
+
+envelope-content = (header, body)
+header-content = (target, identifier, sender, twoway?, response?)
+body-content = invoke
+target = element {http://www.hiit.fi/fuego/fc/mts}target {
+xsd:string
+}
+
+identifier = element {http://www.hiit.fi/fuego/fc/mts}identifier {
+xsd:int
+}
+
+sender = element {http://www.hiit.fi/fuego/fc/mts}sender {
+xsd:string
+}
+
+twoway = element {http://www.hiit.fi/fuego/fc/mts}twoway {
+empty
+}
+
+response = element {http://www.hiit.fi/fuego/fc/mts}response {
+xsd:int
+}
+
+invoke = element {http://www.hiit.fi/fuego/fc/mts}invoke {
+message
+}
+
+message = element {}message {
+message-content
+}
+
+message-content = empty
+

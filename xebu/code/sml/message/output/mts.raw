@@ -1,0 +1,44 @@
+namespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema"
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+namespace mts = "http://www.hiit.fi/fuego/fc/mts"
+namespace local = ""
+datatypes mts = "http://www.hiit.fi/fuego/fc/mts"
+datatypes xas = "http://www.hiit.fi/fuego/fc/xas"
+
+Grammar
+include "soap.rnc" {
+envelope-content = (header, body)
+}
+header-content = (target, identifier, sender, twoway?, response?)
+target = element mts:target {
+xsd:string
+}
+
+identifier = element mts:identifier {
+xsd:int
+}
+
+sender = element mts:sender {
+xsd:string
+}
+
+twoway = element mts:twoway {
+empty
+}
+
+response = element mts:response {
+xsd:int
+}
+
+body-content = invoke
+invoke = element mts:invoke {
+message
+}
+
+message = element local:message {
+message-content
+}
+
+message-content = empty
+

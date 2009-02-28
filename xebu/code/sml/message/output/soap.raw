@@ -1,0 +1,23 @@
+namespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/"
+default namespace = "http://schemas.xmlsoap.org/soap/envelope/"
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema"
+
+Grammar
+start = envelope
+envelope = element soapenv:Envelope {
+envelope-content
+}
+
+header = element soapenv:Header {
+header-content
+}
+
+body = element soapenv:Body {
+body-content
+}
+
+envelope-content = (header?, body)
+header-content = empty
+body-content = empty
+

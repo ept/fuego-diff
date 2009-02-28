@@ -1,0 +1,10 @@
+Grammar
+start = inline
+inline = (text | element {}code {
+inline
+}
+ | element {}em {
+inline
+}
+)*
+

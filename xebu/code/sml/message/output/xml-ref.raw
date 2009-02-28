@@ -1,0 +1,17 @@
+namespace ref = "http://www.hiit.fi/fuego/fc/xml/ref"
+
+Grammar
+reftarget = (generic | path)+
+generic = attribute target { text }
+path = attribute path { text }
+reftree-content = reftarget
+refnode-content = reftarget
+reftree = element ref:tree {
+reftree-content
+}
+
+refnode = element ref:node {
+refnode-content
+}
+
+

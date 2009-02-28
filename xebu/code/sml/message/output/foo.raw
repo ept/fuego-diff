@@ -1,0 +1,7 @@
+
+Grammar
+start = element foo {
+empty
+}
+
+

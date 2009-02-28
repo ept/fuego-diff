@@ -1,0 +1,7 @@
+MicroEdition-Configuration: CLDC-1.0
+MicroEdition-Profile: MIDP-1.0
+MIDlet-Name: FuegoCore
+MIDlet-Vendor: Fuego Core project
+MIDlet-Version: 2.0
+MIDlet-Jar-URL: fcme.jar
+MIDlet-1: XebuDemo, , fcme.examples.message.XebuDemo

@@ -1,0 +1,36 @@
+# An attempt to exercise as much of RELAX NG as possible to make sure
+# that the parser functions correctly.
+default namespace t = "http://www.hiit.fi/fuego/fc/test"
+
+start = foo
+
+foo = element t:foo {
+   attribute t:x { "y" | "zz" | "f" ~ "g" },
+   attribute x { token },
+   (bar | baz),
+   (quux & xyzzy),
+   star*
+}
+
+bar = element t:bar {
+   string
+}
+
+baz = element t:baz {
+   xsd:int
+}
+
+quux = element t:quux {
+   xsd:short
+}
+
+xyzzy = element t:xyzzy {
+   xsd:dateTime { maxInclusive = "2035-06-19T23:46:00" }
+}
+
+star = element t:star {
+   bar,
+   baz?,
+   quux+,
+   xyzzy
+}

@@ -1,0 +1,10 @@
+
+Grammar
+include "xml-ref.rnc" {
+}
+include "syxaw.rnc" {
+}
+refnode-content &= dir-content
+reftarget &= id?
+dir-content &= (reftree* & refnode*)
+
