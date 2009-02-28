@@ -9,6 +9,9 @@
 ../${fc.contrib}/fc-message.jar
 ../${fc.contrib}/fc-notify.jar
 ../${fc.contrib}/fc-util.jar
+# ../util/=build/lib/util.jar
+# ../xebu/code/java/=build/lib/fc-message.jar
+# ../xebu/code/java/=build/lib/fc-util.jar
 ../${fc.contrib}/JainSipApi1.1.jar
 ../${fc.contrib}/javax.servlet.jar
 ../${fc.contrib}/nist-sdp-1.0.jar

@@ -8,6 +8,7 @@
 ../${fc.contrib}/fc-xebu-0.1.jar
 # Alternate jar for xebu classes
 ../${fc.contrib}/fc-util-2004.jar
+# ../xebu/code/java/=build/lib/fc-util.jar
 ../${fc.contrib}/servlet-api-2.3.jar
 ../${fc.contrib}/org.mortbay.jetty-5.1.4.jar
 ../${fc.contrib}/xmlpull_1_1_3_4c.jar

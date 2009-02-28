@@ -55,7 +55,7 @@ checking its hash, and then unpacking to ${src}
     <!-- Bouncy Castle. We're sorry for the inconvenience (25MB archive). -->
     <wget id="bouncy-castle-cldc"
 	  href1="file:///tmp/crypto-140.tar.gz"
-	  href2="http://downloads.bouncycastle.org/java/crypto-140.tar.gz"
+	  href2="http://bouncycastle.org/download/crypto-140.tar.gz"
 	  target="${lib}/bouncy-castle-cldc-1.40.zip"
           target.get="${temp.file}"
           unpack1="unpack-tgz"
@@ -135,15 +135,15 @@ checking its hash, and then unpacking to ${src}
 
     <!-- Xebu (aka XAS1) -->
     <wget id="fc-util-2004"
-	  href1="http://hoslab.cs.helsinki.fi/downloads/xebu/fc-util.jar"
-	  target="${lib}/fc-util-2004.jar"
-	  sha="efb1ea5712cf01b387dd414f850246beec66adce" />
+         href1="http://hoslab.cs.helsinki.fi/downloads/xebu/fc-util.jar"
+         target="${lib}/fc-util-2004.jar"
+         sha="efb1ea5712cf01b387dd414f850246beec66adce" />
 
     <!-- FC Util -->
     <wget id="fc-util"
-	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-util/fc-util-0.1.0.jar"
-	  target="${llib}/fc-util-0.1.0.jar"
-	  sha = "6c8b6e8c3801c0cc672c421a994f5ddb04be46f5" />
+         href1="http://hoslab.cs.helsinki.fi/downloads/fc-util/fc-util-0.1.0.jar"
+         target="${llib}/fc-util-0.1.0.jar"
+         sha = "6c8b6e8c3801c0cc672c421a994f5ddb04be46f5" />
 
     <!-- ########## Build System Jars ######## -->
 
