@@ -121,6 +121,14 @@ checking its hash, and then unpacking to ${src}
           unpackloc1="commons-httpclient-3.0/commons-httpclient-3.0.jar"
           sha="336a280d178bb957e5233189f0f32e067366c4e5" />
 
+    <!-- Apache Xerces2 -->
+    <wget id="xerces2"
+          href1="http://www.apache.org/dist/xerces/j/Xerces-J-bin.2.9.1.tar.gz"
+          target="${lib}/xercesImpl-2.9.1.jar"
+          target.get="${temp.file}"
+          unpack1="unpack-tgz"
+          unpackloc1="xerces-2_9_1/xercesImpl.jar"
+          sha="7bc7e49ddfe4fb5f193ed37ecc96c12292c8ceb6" />
 
     <!--servlet-api.jar. NOTE: Also in debian libservlet2.3-java package, 
         but we can't expand debs :( in Ant. So we eat this 2.3M archive instead :(-->
@@ -138,6 +146,7 @@ checking its hash, and then unpacking to ${src}
           href1="http://repo1.maven.org/maven/jetty/jars/org.mortbay.jetty-5.1.4.jar"
           target="${lib}/org.mortbay.jetty-5.1.4.jar"
           sha="9f8b9485ef1ac5a3e7549f21287510280f460371" />
+
 
     <!-- ########## Build System Jars ######## -->
 
