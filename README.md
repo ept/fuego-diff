@@ -7,6 +7,7 @@ applying edits to a document (like the `patch` tool). It can thus be used e.g.
 for three-way merging between documents modified by different people.
 
 Feature highlights:
+
 * Structural diff based on XML semantics (attribute order does not matter,
   child element order does matter)
 * Detects movement of subtrees from one part of the document to another
@@ -30,6 +31,7 @@ Installation
 
 Fuego Diff is currently available only in source form. You can download the
 source from GitHub:
+
 * Download Fuego Diff [as tarball](http://github.com/ept/fuego-diff/tarball/master)
 * Download Fuego Diff [as ZIP file](http://github.com/ept/fuego-diff/zipball/master)
 
