@@ -6,10 +6,6 @@
 ../${fc.contrib}/commons-codec-1.3.jar
 ../${fc.contrib}/commons-fileupload-1.0.jar
 ../${fc.contrib}/commons-httpclient-3.0.jar
-../${fc.contrib}/fc-xebu-0.1.jar
-# Alternate jar for xebu classes
-../${fc.contrib}/fc-util-2004.jar
-# ../xebu/code/java/=build/lib/fc-util.jar
 ../${fc.contrib}/servlet-api-2.3.jar
 ../${fc.contrib}/org.mortbay.jetty-5.1.4.jar
 ../${fc.contrib}/3dm-0.1.5b1.jar

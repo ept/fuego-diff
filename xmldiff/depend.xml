@@ -1,6 +1,2 @@
 <subproject name="xmldiff">
-  <depend>util</depend>
 </subproject>
-
-<!-- arch-tag: 7dc661af-0029-4e60-acc1-d5719c0603c0
--->

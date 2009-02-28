@@ -1,9 +1,0 @@
-## Represents an
-## address book.
-start =
-element addressBook {
-  element card {
-    element name { text },
-    element email { text }
-  }*
-}

@@ -6,12 +6,6 @@
 ../${fc.contrib}/commons-httpclient-3.0-rc2.jar
 ../${fc.contrib}/commons-logging.jar
 ../${fc.contrib}/dom4j-full.jar
-../${fc.contrib}/fc-message.jar
-../${fc.contrib}/fc-notify.jar
-../${fc.contrib}/fc-util.jar
-# ../util/=build/lib/util.jar
-# ../xebu/code/java/=build/lib/fc-message.jar
-# ../xebu/code/java/=build/lib/fc-util.jar
 ../${fc.contrib}/JainSipApi1.1.jar
 ../${fc.contrib}/javax.servlet.jar
 ../${fc.contrib}/nist-sdp-1.0.jar
@@ -21,5 +15,3 @@
 ../${fc.contrib}/tracesviewer.jar
 ../${fc.contrib}/xmlpull_1_1_3_1.jar
 ../${fc.contrib}/junit.jar
-# arch-tag: c4f2e4cc-c18c-4c1d-8216-32f73b8da37d
-
