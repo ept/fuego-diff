@@ -16,6 +16,10 @@ import java.util.List;
 import fc.xml.diff.Segment;
 import fc.xml.xas.Item;
 
+/**
+ * A DiffEncoder takes the two input document and the list of matched segments, and encodes
+ * it in a particular diff format. A variety of different formats are implemented.
+ */
 public interface DiffEncoder {
 
     public void encodeDiff(List<Item> base, List<Item> doc, List<Segment<Item>> matches,

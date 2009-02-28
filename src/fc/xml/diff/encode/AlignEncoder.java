@@ -22,7 +22,29 @@ import fc.util.Util;
 import fc.xml.diff.Segment;
 import fc.xml.xas.Item;
 
+
+/**
+ * AlignEncoder produces human-readable textual output showing how the sequences
+ * from each document align side by side. Useful for observing what is going on.
+ */
 public class AlignEncoder implements DiffEncoder {
+    
+    enum SectionPos {
+        SECTION_START("\\"),
+        SECTION_MIDDLE("|"),
+        SECTION_END("/"),
+        NONE(" ");
+        
+        private final String marker;
+        
+        private SectionPos(String marker) {
+            this.marker = marker;
+        }
+        
+        public String getMarker() {
+            return marker;
+        }
+    }
 
     public void encodeDiff(List<Item> base, List<Item> doc, List<Segment<Item>> matches,
                            List<Item> preamble, OutputStream out) throws IOException {
@@ -43,36 +65,40 @@ public class AlignEncoder implements DiffEncoder {
                     // dump ins (ins dumped after copies)
                     for (int i = 0; i < s.getInsert().size(); i++)
                         emitLine(pw, -1, "-", s.getInsert().get(i), s.getOp() == UPDATE,
-                                 s.getPosition() + i, lpt, rpt);
+                                 s.getPosition() + i, lpt, rpt, SectionPos.NONE);
                 } else if (s.getOffset() == pos && s.getOp() != INSERT) {
                     found = true;
                     match = s;
                     int slen = s.getLength();
                     for (int i = 0; i < slen; i++) {
                         Object updated = null;
-                        if (s.getOp() == UPDATE) updated = i < s.getInsert().size() ? s.getInsert().get(
-                                                                                                        i)
-                                : "-";
+                        if (s.getOp() == UPDATE) updated = i < s.getInsert().size() ? s.getInsert().get(i) : "-";
                         else updated = base.get(pos);
-                        if (i > 2 && slen > 5 && i < slen - 2 && s.getOp() != UPDATE) {
-                            if (i < 5)
-                                pw.println(StringUtil.format(".",
-                                                             -(EVENT_COLWIDTH + POS_COLWIDTH + 2)));
+                        SectionPos sectionPos = (slen == 1) ? SectionPos.NONE :
+                            (i == 0) ? SectionPos.SECTION_START : 
+                            (i == slen - 1) ? SectionPos.SECTION_END : SectionPos.SECTION_MIDDLE; 
+                        // For long copied sections, print only the first & last 3 lines, and dots in between
+                        if (i > 2 && slen > 9 && i < slen - 3 && s.getOp() != UPDATE) {
+                            if (i < 6) {
+                                String dots = (i != 4) ? ":" : "(skipped) :";
+                                pw.println(StringUtil.format(dots, -(EVENT_COLWIDTH + POS_COLWIDTH + 2)) +
+                                           StringUtil.format(SectionPos.SECTION_MIDDLE.getMarker(), -(EVENT_COLWIDTH + POS_COLWIDTH + 5)));
+                            }
                         } else emitLine(pw, pos, base.get(pos), updated, s.getOp() == UPDATE,
-                                        s.getPosition() + i, lpt, rpt);
+                                        s.getPosition() + i, lpt, rpt, sectionPos);
                         pos++;
                     }
                     // update && ins > basematch
                     if (s.getOp() == UPDATE) {
                         for (int i = s.getLength(); i < s.getInsert().size(); i++)
                             emitLine(pw, -1, "-", s.getInsert().get(i), s.getOp() == UPDATE,
-                                     s.getPosition() + i, lpt, rpt);
+                                     s.getPosition() + i, lpt, rpt, SectionPos.NONE);
                     }
                 } else match = null;
             }
             if (!found) {
                 // Dump del
-                emitLine(pw, pos, base.get(pos), "-", false, -1, lpt, rpt);
+                emitLine(pw, pos, base.get(pos), "-", false, -1, lpt, rpt, SectionPos.NONE);
                 pos++;
             }
         }
@@ -84,7 +110,7 @@ public class AlignEncoder implements DiffEncoder {
 
 
     private static void emitLine(PrintWriter out, int pos, Object base, Object mod, boolean update,
-                                 int rpos, PosTransformer lpt, PosTransformer rpt) {
+                                 int rpos, PosTransformer lpt, PosTransformer rpt, SectionPos sectionPos) {
         String baseS = Util.toPrintable(base.toString());
         String brS = Util.toPrintable(mod.toString());
         if (baseS.length() > EVENT_COLWIDTH)
@@ -96,7 +122,8 @@ public class AlignEncoder implements DiffEncoder {
         out.println(StringUtil.format(lpt.transform(pos), -POS_COLWIDTH, ' ') + " " +
                     StringUtil.format(baseS, -EVENT_COLWIDTH, ' ') + " " +
                     StringUtil.format(brS, EVENT_COLWIDTH, ' ') + (update ? " *" : "  ") +
-                    StringUtil.format(rpt.transform(rpos), POS_COLWIDTH, ' '));
+                    StringUtil.format(rpt.transform(rpos), -POS_COLWIDTH, ' ') + "  " +
+                    sectionPos.getMarker());
     }
 
     public static final PosTransformer DEFAULT_PT = new DefaultPosTranformer();
