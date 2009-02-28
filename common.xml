@@ -28,7 +28,7 @@ license with the distribution, write to the Fuego Core project at
   <property name="doclists" value="${docs}/lists"/>
   <property name="javadoc" value="${docs}/+api"/>
   <property name="depend" value="+depend"/>
-  <property name="exclude" value="../exclude"/>
+  <property name="exclude" value="exclude"/>
   <property name="datadir" value="data"/>
   <property name="resdir" value="res"/>
   <property name="debug.level" value="DEBUG"/>
@@ -50,7 +50,7 @@ license with the distribution, write to the Fuego Core project at
 
   <property name="fc.root" value="." /> 
   <property name="fc.contrib" value="contrib/jar" /> 
-  <property name="contrib" value="contrib" /> 
+  <property name="contrib" value="paths" /> 
   <property name="contrib.shared.se" 
 	    value="${contrib}/external-se-jars"/>
 
@@ -138,12 +138,12 @@ license with the distribution, write to the Fuego Core project at
   </target>
 
   <target name="bugs" depends="compile">
-    <!--pluginlist="../${fc.contrib}/plugin/coreplugin.jar" -->
+    <!--pluginlist="${fc.contrib}/plugin/coreplugin.jar" -->
     <property name="bugs.classpath.contrib.se" 
 	      refid="classpath.contrib.se" />
     <findbugs outputFile="+bugs.xml" reportLevel="low"
 	      jvmargs="-Xmx256m"
-	      pluginlist="../${fc.contrib}/plugin/coreplugin.jar">
+	      pluginlist="${fc.contrib}/plugin/coreplugin.jar">
 	<!--      excludeFilter="${datadir}/fb-exclude.xml"> -->
       <class location="${build.class}"/>
       <classpath refid="classpath.build" />
@@ -224,7 +224,7 @@ license with the distribution, write to the Fuego Core project at
         around missing ant 1.6 fileset/path conversion.
 	In Ant 1.7, this is fixed.
       -->
-      <fileset dir=".." includes="${classpath.contrib.se.1.ws}" />
+      <fileset dir="." includes="${classpath.contrib.se.1.ws}" />
       <fileset dir="." file="${build.lib}/${jarname}" /> 
     </copy>  
   </target>

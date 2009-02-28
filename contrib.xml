@@ -39,15 +39,14 @@ checking its hash, and then unpacking to ${src}
 
 <project name="3dm-contrib" default="get-contrib" basedir=".">
 
-  <property name="lib" value="../contrib/jar" />
-  <property name="llib" value="contrib" />
+  <property name="lib" value="contrib/jar" />
 
   <!-- Default soureforge mirror -->
   <property name="sf-mirror" value="switch" />
   <property name="sourceforge" 
     value="${sf-mirror}.dl.sourceforge.net/sourceforge" />
 
-  <import file="../contrib-helper.xml" />
+  <import file="contrib-helper.xml" />
 
   <target name="get-contrib" >
     <mkdir dir="${lib}" />

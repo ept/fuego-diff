@@ -21,7 +21,7 @@ license with the distribution, write to the Fuego Core project at
 
   <!-- Imports many common definitions and provides
        default implementations for tasks -->	
-  <import file="../subproject.xml" optional="true"/>
+  <import file="subproject.xml" optional="true"/>
   <fail unless="subproject.xml.included" 
 	message="Project not set up; run ant -f project-setup.xml" />
 
