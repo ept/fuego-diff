@@ -3,3 +3,6 @@
 +test.log
 +tmp-test
 contrib
+.classpath
+.project
+.settings
