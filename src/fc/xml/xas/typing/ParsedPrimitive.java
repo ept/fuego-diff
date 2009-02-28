@@ -1,12 +1,10 @@
 /*
  * Copyright 2005--2008 Helsinki Institute for Information Technology
- *
- * This file is a part of Fuego middleware.  Fuego middleware is free
- * software; you can redistribute it and/or modify it under the terms
- * of the MIT license, included as the file MIT-LICENSE in the Fuego
- * middleware source distribution.  If you did not receive the MIT
- * license with the distribution, write to the Fuego Core project at
- * fuego-xas-users@hoslab.cs.helsinki.fi.
+ * 
+ * This file is a part of Fuego middleware. Fuego middleware is free software; you can redistribute
+ * it and/or modify it under the terms of the MIT license, included as the file MIT-LICENSE in the
+ * Fuego middleware source distribution. If you did not receive the MIT license with the
+ * distribution, write to the Fuego Core project at fuego-xas-users@hoslab.cs.helsinki.fi.
  */
 
 package fc.xml.xas.typing;
@@ -22,8 +20,8 @@ import fc.xml.xas.SerializerTarget;
 import fc.xml.xas.Verifier;
 
 /**
- * A primitive typed value item. This class represents a primitive typed value
- * in a form that is directly usable by programs.
+ * A primitive typed value item. This class represents a primitive typed value in a form that is
+ * directly usable by programs.
  */
 public class ParsedPrimitive extends Item implements SerializableItem {
 
@@ -32,97 +30,102 @@ public class ParsedPrimitive extends Item implements SerializableItem {
     private Qname typeName;
     private Object value;
 
-    public static boolean isParsedPrimitive (Item i) {
-	return hasType(i, PARSED);
+
+    public static boolean isParsedPrimitive(Item i) {
+        return hasType(i, PARSED);
     }
+
 
     /**
-         * Verify that an item is a parsed primitive of the correct type.
-         * 
-         * @param item the item to check
-         * @param type the name of the type expected
-         * @return <code>item</code> as a {@link ParsedPrimitive}
-         * @throws IOException if <code>item</code> is not a
-         *         {@link ParsedPrimitive} or does not have type
-         *         <code>type</code>
-         */
-    public static ParsedPrimitive verifyParsedPrimitive (Item item, Qname type)
-	    throws IOException {
-	if (!isParsedPrimitive(item)) {
-	    throw new IOException("Expected parsed primitive, got " + item);
-	}
-	ParsedPrimitive pp = (ParsedPrimitive) item;
-	if (type != null && !pp.getTypeName().equals(type)) {
-	    throw new IOException("Expected parsed primitive with type " + type
-		+ ", got " + pp.getTypeName());
-	}
-	return pp;
+     * Verify that an item is a parsed primitive of the correct type.
+     * @param item
+     *            the item to check
+     * @param type
+     *            the name of the type expected
+     * @return <code>item</code> as a {@link ParsedPrimitive}
+     * @throws IOException
+     *             if <code>item</code> is not a {@link ParsedPrimitive} or does not have type
+     *             <code>type</code>
+     */
+    public static ParsedPrimitive verifyParsedPrimitive(Item item, Qname type) throws IOException {
+        if (!isParsedPrimitive(item)) { throw new IOException("Expected parsed primitive, got " +
+                                                              item); }
+        ParsedPrimitive pp = (ParsedPrimitive) item;
+        if (type != null && !pp.getTypeName().equals(type)) { throw new IOException(
+                                                                                    "Expected parsed primitive with type " +
+                                                                                            type +
+                                                                                            ", got " +
+                                                                                            pp.getTypeName()); }
+        return pp;
     }
 
-    public ParsedPrimitive (Qname typeName, Object value) {
-	super(PARSED);
-	Verifier.checkNotNull(typeName);
-	this.typeName = typeName;
-	this.value = value;
+
+    public ParsedPrimitive(Qname typeName, Object value) {
+        super(PARSED);
+        Verifier.checkNotNull(typeName);
+        this.typeName = typeName;
+        this.value = value;
     }
 
-    public Qname getTypeName () {
-	return typeName;
+
+    public Qname getTypeName() {
+        return typeName;
     }
 
-    public Object getValue () {
-	return value;
+
+    public Object getValue() {
+        return value;
     }
 
-    public void serialize (String type, SerializerTarget target)
-	    throws IOException {
-	PrimitiveCodec codec = Codec.getPrimitiveCodec(type, typeName);
-	if (codec != null) {
-	    Object token = Measurer.get(Measurer.TIMING).start();
-	    codec.encode(typeName, value, target);
-	    Measurer.get(Measurer.TIMING).finish(token,
-		"Primitive type encoding");
-	} else {
-	    throw new IOException("No encoder found for format " + type
-		+ " and type " + typeName);
-	}
+
+    public void serialize(String type, SerializerTarget target) throws IOException {
+        PrimitiveCodec codec = Codec.getPrimitiveCodec(type, typeName);
+        if (codec != null) {
+            Object token = Measurer.get(Measurer.TIMING).start();
+            codec.encode(typeName, value, target);
+            Measurer.get(Measurer.TIMING).finish(token, "Primitive type encoding");
+        } else {
+            throw new IOException("No encoder found for format " + type + " and type " + typeName);
+        }
     }
 
-    public int hashCode () {
-	int result = typeName.hashCode();
-	if (value != null) {
-	    result ^= value.hashCode();
-	}
-	return result;
+
+    public int hashCode() {
+        int result = typeName.hashCode();
+        if (value != null) {
+            result ^= value.hashCode();
+        }
+        return result;
     }
 
-    private static boolean valueEquals (Object o1, Object o2) {
-	if (o1 instanceof byte[]) {
-	    return o2 instanceof byte[]
-		&& Arrays.equals((byte[]) o1, (byte[]) o2);
-	} else {
-	    return o1.equals(o2);
-	}
+
+    private static boolean valueEquals(Object o1, Object o2) {
+        if (o1 instanceof byte[]) {
+            return o2 instanceof byte[] && Arrays.equals((byte[]) o1, (byte[]) o2);
+        } else {
+            return o1.equals(o2);
+        }
     }
 
-    public boolean equals (Object o) {
-	if (this == o) {
-	    return true;
-	} else if (!(o instanceof ParsedPrimitive)) {
-	    return false;
-	} else {
-	    ParsedPrimitive pp = (ParsedPrimitive) o;
-	    if (typeName.equals(pp.typeName)) {
-		return value == null ? pp.value == null : valueEquals(value,
-		    pp.value);
-	    } else {
-		return false;
-	    }
-	}
+
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (!(o instanceof ParsedPrimitive)) {
+            return false;
+        } else {
+            ParsedPrimitive pp = (ParsedPrimitive) o;
+            if (typeName.equals(pp.typeName)) {
+                return value == null ? pp.value == null : valueEquals(value, pp.value);
+            } else {
+                return false;
+            }
+        }
     }
 
-    public String toString () {
-	return "PP(" + String.valueOf(value) + ": " + typeName + ")";
+
+    public String toString() {
+        return "PP(" + String.valueOf(value) + ": " + typeName + ")";
     }
 
 }

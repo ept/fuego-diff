@@ -1,12 +1,10 @@
 /*
  * Copyright 2005--2008 Helsinki Institute for Information Technology
- *
- * This file is a part of Fuego middleware.  Fuego middleware is free
- * software; you can redistribute it and/or modify it under the terms
- * of the MIT license, included as the file MIT-LICENSE in the Fuego
- * middleware source distribution.  If you did not receive the MIT
- * license with the distribution, write to the Fuego Core project at
- * fuego-xas-users@hoslab.cs.helsinki.fi.
+ * 
+ * This file is a part of Fuego middleware. Fuego middleware is free software; you can redistribute
+ * it and/or modify it under the terms of the MIT license, included as the file MIT-LICENSE in the
+ * Fuego middleware source distribution. If you did not receive the MIT license with the
+ * distribution, write to the Fuego Core project at fuego-xas-users@hoslab.cs.helsinki.fi.
  */
 
 package fc.xml.xas;
@@ -23,42 +21,48 @@ public class TargetOutputStream extends FilterOutputStream {
     private int state = STATE_BYTES;
     private SerializerTarget target;
 
-    private void writingBytes () throws IOException {
-	if (state == STATE_ITEM) {
-	    target.flush();
-	    state = STATE_BYTES;
-	}
+
+    private void writingBytes() throws IOException {
+        if (state == STATE_ITEM) {
+            target.flush();
+            state = STATE_BYTES;
+        }
     }
 
-    public TargetOutputStream (SerializerTarget target, OutputStream out) {
-	super(out);
-	this.target = target;
+
+    public TargetOutputStream(SerializerTarget target, OutputStream out) {
+        super(out);
+        this.target = target;
     }
 
-    public void wroteItem () {
-	state = STATE_ITEM;
+
+    public void wroteItem() {
+        state = STATE_ITEM;
     }
 
-    @Override
-    public void write (byte[] b, int off, int len) throws IOException {
-	writingBytes();
-	// BUGFIX-20061212-3: Do not use super.write methods, as these will
-	// re-route trough n*write(int), which will completely destroy
-	// performance
-	out.write(b, off, len);
-    }
 
     @Override
-    public void write (byte[] b) throws IOException {
-	writingBytes();
-        // BUGFIX-20061212-3 
-	out.write(b);
+    public void write(byte[] b, int off, int len) throws IOException {
+        writingBytes();
+        // BUGFIX-20061212-3: Do not use super.write methods, as these will
+        // re-route trough n*write(int), which will completely destroy
+        // performance
+        out.write(b, off, len);
     }
 
+
     @Override
-    public void write (int b) throws IOException {
-	writingBytes();
-	out.write(b);
+    public void write(byte[] b) throws IOException {
+        writingBytes();
+        // BUGFIX-20061212-3
+        out.write(b);
+    }
+
+
+    @Override
+    public void write(int b) throws IOException {
+        writingBytes();
+        out.write(b);
     }
 
 }
