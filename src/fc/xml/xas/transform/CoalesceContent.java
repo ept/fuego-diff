@@ -12,7 +12,6 @@ package fc.xml.xas.transform;
 import java.io.IOException;
 
 import fc.util.RingBuffer;
-import fc.util.log.Log;
 import fc.xml.xas.EntityRef;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemTransform;

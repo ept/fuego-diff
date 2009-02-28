@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xmlr.model.TransientKey;
 
 /**
@@ -846,11 +847,13 @@ public class RefTrees {
         }
 
 
+        @Override
         public final Key getDestId(Key srcId, RefTreeNode src) throws NodeNotFoundException {
             return srcId;
         }
 
 
+        @Override
         public final Key getSrcId(Key dstId, RefTreeNode dest) throws NodeNotFoundException {
             return dstId;
         }
@@ -935,6 +938,7 @@ public class RefTrees {
             }
 
 
+            @Override
             public RefTreeNode getNode(Key id) {
                 return (RefTreeNode) index.get(id);
             }
@@ -947,7 +951,7 @@ public class RefTrees {
 
             private void init(RefTreeNode root) {
                 if (index.put(root.getId(), root) != null)
-                    Log.log("Duplicate id " + root.getId(), Log.ASSERTFAILED);
+                    Log.log("Duplicate id " + root.getId(), LogLevels.ASSERTFAILED);
                 for (Iterator i = root.getChildIterator(); i.hasNext();)
                     init((RefTreeNode) i.next());
             }
@@ -1009,6 +1013,7 @@ public class RefTrees {
         // Log.log("Allowed treerefs are "+allowedTrees[0],Log.INFO);
         return RefTrees.expandRefs(aRb, allowedTrees[0], new BaseSet() {
 
+            @Override
             public boolean contains(Object o) {
                 return RefTrees.isReferenced((Key) o, bRcAddr, c);
             }
@@ -1139,6 +1144,7 @@ public class RefTrees {
         public abstract boolean contains(Object o);
 
 
+        @Override
         public boolean equals(Object o) {
             return false;
         }
@@ -1185,6 +1191,7 @@ public class RefTrees {
         }
 
 
+        @Override
         public boolean contains(Object o) {
             return true;
         }
@@ -1200,6 +1207,7 @@ public class RefTrees {
         }
 
 
+        @Override
         public boolean contains(Object o) {
             return !s.contains(o);
         }

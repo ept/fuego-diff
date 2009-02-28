@@ -12,7 +12,6 @@ package fc.xml.xmlr.xas;
 import java.io.IOException;
 import java.util.Iterator;
 
-import fc.util.log.Log;
 import fc.xml.xas.AttributeNode;
 import fc.xml.xas.EndTag;
 import fc.xml.xas.Item;
@@ -64,6 +63,7 @@ public class RefNodeItem extends RefItem {
 
 
     // NOTE: Illegal to ask target of end tag
+    @Override
     public Object getTarget() throws IllegalStateException {
         if (target == null)
             throw new IllegalStateException("Tried to ask target from node ref end tag");

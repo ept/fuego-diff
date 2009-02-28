@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import fc.util.Util;
-import fc.util.log.Log;
 import fc.xml.xas.Item;
 import fc.xml.xas.Pointer;
 import fc.xml.xas.XasUtil;
@@ -21,7 +20,6 @@ import fc.xml.xas.index.Document;
 import fc.xml.xas.index.GlobalPointer;
 import fc.xml.xmlr.Key;
 import fc.xml.xmlr.NodeNotFoundException;
-import fc.xml.xmlr.XmlrDebug;
 import fc.xml.xmlr.model.IdentificationModel;
 import fc.xml.xmlr.model.KeyIdentificationModel;
 import fc.xml.xmlr.model.KeyModel;

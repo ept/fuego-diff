@@ -77,6 +77,7 @@ public class GroupLogger extends AbstractLogger {
     /**
      * Call the current group's logger's corresponding method.
      */
+    @Override
     public boolean isEnabled(int level) {
         ThreadGroup group = Thread.currentThread().getThreadGroup();
         Logger logger = loggers.get(group);
@@ -91,6 +92,7 @@ public class GroupLogger extends AbstractLogger {
     /**
      * Call the current group's logger's corresponding method.
      */
+    @Override
     public void log(Object message, int level) {
         ThreadGroup group = Thread.currentThread().getThreadGroup();
         Logger logger = loggers.get(group);
@@ -112,6 +114,7 @@ public class GroupLogger extends AbstractLogger {
     }
 
 
+    @Override
     public OutputStream getLogStream(int level) {
         ThreadGroup group = Thread.currentThread().getThreadGroup();
         Logger logger = loggers.get(group);

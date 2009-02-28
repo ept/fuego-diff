@@ -32,6 +32,7 @@ public class EventSequenceDecoder extends ChainedContentDecoder {
     }
 
 
+    @Override
     public Object decode(String namespace, String name, XmlReader reader, EventList attributes) {
         Object result = null;
         if (Util.equals(namespace, XasUtil.XAS_NAMESPACE) && Util.equals(name, "XmlEventSequence")) {

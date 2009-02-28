@@ -27,16 +27,19 @@ public class LazyPointer extends FragmentPointer {
     }
 
 
+    @Override
     public Item get() {
         return fragment.get(index);
     }
 
 
+    @Override
     public Pointer query(int[] path) {
         return lazyFragment.query(new LazyPointer(lazyFragment, index), path);
     }
 
 
+    @Override
     public void canonicalize() {
         Item item = get();
         while (item instanceof LazyFragment) {

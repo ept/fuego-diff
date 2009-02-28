@@ -12,7 +12,6 @@ package fc.test.junit;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,6 +21,7 @@ import org.kxml2.io.KXmlParser;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.FormatFactory;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemList;
@@ -40,7 +40,6 @@ import fc.xml.xas.index.VersionedPointer;
 import fc.xml.xas.typing.Codec;
 import fc.xml.xas.typing.DecodeSource;
 import fc.xml.xas.typing.PrimitiveSource;
-import fc.xml.xas.typing.TypingUtil;
 import fc.xml.xas.typing.XmlCodec;
 
 public class XasTest extends TestCase {
@@ -49,6 +48,7 @@ public class XasTest extends TestCase {
     List<ItemList> typeds;
 
 
+    @Override
     protected void setUp() throws IOException {
         fragments = XmlData.getData();
         typeds = XmlData.getTypedData();
@@ -58,10 +58,10 @@ public class XasTest extends TestCase {
 
 
     public void testTreeify() {
-        Log.log("Begin test", Log.DEBUG);
+        Log.log("Begin test", LogLevels.DEBUG);
         for (XasFragment f : fragments) {
             f.treeify();
-            Log.log("Fragment", Log.DEBUG, f);
+            Log.log("Fragment", LogLevels.DEBUG, f);
         }
     }
 
@@ -118,7 +118,7 @@ public class XasTest extends TestCase {
 
 
     public void testIoRoundTrip() throws IOException {
-        Log.log("Begin test", Log.DEBUG);
+        Log.log("Begin test", LogLevels.DEBUG);
         for (XasFragment f : fragments) {
             ioRoundTrip(f);
             // ioRoundTrip(f.flattenPure());
@@ -128,7 +128,7 @@ public class XasTest extends TestCase {
 
 
     public void testTyping() throws IOException {
-        Log.log("Begin test", Log.DEBUG);
+        Log.log("Begin test", LogLevels.DEBUG);
         for (String type : XasUtil.factoryTypes()) {
             for (ItemList source : typeds) {
                 Log.debug("Source fragment", source);
@@ -139,7 +139,7 @@ public class XasTest extends TestCase {
                 XasUtil.copy(source.source(), serTarget);
                 serTarget.flush();
                 byte[] result = bout.toByteArray();
-                Log.log("Document", Log.DEBUG, Util.toPrintable(result));
+                Log.log("Document", LogLevels.DEBUG, Util.toPrintable(result));
                 ByteArrayInputStream bin = new ByteArrayInputStream(result);
                 ParserSource parserSource = factory.createSource(bin);
                 ItemSource primitiveSource = new PrimitiveSource(parserSource, type, "UTF-8");
@@ -155,7 +155,7 @@ public class XasTest extends TestCase {
 
 
     public void testQuery() throws IOException {
-        Log.log("Begin test", Log.DEBUG);
+        Log.log("Begin test", LogLevels.DEBUG);
         for (Queryable fragment : XmlData.getTrees()) {
             if (fragment instanceof Iterable) {
                 ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -165,7 +165,7 @@ public class XasTest extends TestCase {
                     xout.append(i);
                 }
                 xout.flush();
-                Log.log("Document", Log.DEBUG, new String(bout.toByteArray(), "UTF-8"));
+                Log.log("Document", LogLevels.DEBUG, new String(bout.toByteArray(), "UTF-8"));
             }
             int[] k0 = new int[] {};
             int[] k1 = new int[] { 0 };
@@ -195,7 +195,7 @@ public class XasTest extends TestCase {
 
 
     public void testModify() throws IOException {
-        Log.log("Begin test", Log.DEBUG);
+        Log.log("Begin test", LogLevels.DEBUG);
         for (Queryable fragment : XmlData.getTrees()) {
             boolean isVer = fragment instanceof VersionedDocument;
             int[] k001 = new int[] { 0, 0, 1 };
@@ -236,8 +236,8 @@ public class XasTest extends TestCase {
                     xout.append(i);
                 }
                 xout.flush();
-                Log.log("Fragment", Log.DEBUG, fragment);
-                Log.log("Result", Log.DEBUG, new String(bout.toByteArray(), "UTF-8"));
+                Log.log("Fragment", LogLevels.DEBUG, fragment);
+                Log.log("Result", LogLevels.DEBUG, new String(bout.toByteArray(), "UTF-8"));
             }
         }
     }

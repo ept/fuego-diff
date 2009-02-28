@@ -28,6 +28,7 @@ public class DefaultXmlParser extends KXmlParser implements TypedXmlParser {
     private ContentDecoder decoder = new XmlSchemaContentDecoder();
 
 
+    @Override
     public void setProperty(String name, Object value) throws XmlPullParserException {
         if (XasUtil.PROPERTY_CONTENT_CODEC.equals(name)) {
             if (value instanceof ContentDecoder) {
@@ -41,6 +42,7 @@ public class DefaultXmlParser extends KXmlParser implements TypedXmlParser {
     }
 
 
+    @Override
     public Object getProperty(String name) {
         if (XasUtil.PROPERTY_CONTENT_CODEC.equals(name)) {
             return decoder;

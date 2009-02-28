@@ -23,6 +23,7 @@ import java.util.TreeSet;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xmlr.IdAddressableRefTree;
 import fc.xml.xmlr.Key;
 import fc.xml.xmlr.MutableRefTree;
@@ -118,7 +119,7 @@ public class RandomDirectoryTree {
                 if (dscan < 0) {
                     // XmlrDebug.dumpTree(t,System.out);
                     redo = true;
-                    Log.log("No dir found", Log.ERROR);
+                    Log.log("No dir found", LogLevels.ERROR);
                     break top;
                 }
                 assert rndDirNode.getContent() != null;
@@ -225,7 +226,7 @@ public class RandomDirectoryTree {
                         t.move(moveNode, rndDirNode.getId());
                         break;
                     default:
-                        Log.log("Invalid op " + op, Log.ASSERTFAILED);
+                        Log.log("Invalid op " + op, LogLevels.ASSERTFAILED);
                 }
                 if (redo) {
                     // Log.log("Redoing failed "+op,Log.INFO);
@@ -236,14 +237,14 @@ public class RandomDirectoryTree {
                         redos = 0;
                         redoFails++;
                         if (redoFails < 2) // Only report no 1
-                            Log.log("10 redos failed, giving up", Log.INFO);
+                            Log.log("10 redos failed, giving up", LogLevels.INFO);
                     }
                 }
                 pos = np.nextNode();
             } catch (NodeNotFoundException ex) {
                 Log.log(
                         "Selected nonexisting node " + ex.getId() + ", edstring so far=" + edstring,
-                        Log.FATALERROR, ex);
+                        LogLevels.FATALERROR, ex);
             }
         } // End for
     }
@@ -548,7 +549,7 @@ public class RandomDirectoryTree {
                 }
             }
         } catch (NodeNotFoundException ex) {
-            Log.log("Tree construction error", Log.ASSERTFAILED, ex);
+            Log.log("Tree construction error", LogLevels.ASSERTFAILED, ex);
         }
         return t;
     }
@@ -705,6 +706,7 @@ public class RandomDirectoryTree {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             return o instanceof DirectoryEntry &&
                    (Util.equals(((DirectoryEntry) o).getId(), getId()) &&
@@ -712,6 +714,7 @@ public class RandomDirectoryTree {
         }
 
 
+        @Override
         public int hashCode() {
             return type ^ (name == null ? 0 : name.hashCode()) ^ id.hashCode();
         }
@@ -758,6 +761,7 @@ public class RandomDirectoryTree {
         }
 
 
+        @Override
         public String toString() {
             return (type == FILE ? "file" : (type == DIR ? "dir" : "tree ")) + "{name=" + name +
                    ",...}";
@@ -785,11 +789,13 @@ public class RandomDirectoryTree {
 
 
         // The MutableDirectoryTree iface ------
+        @Override
         public RefTreeNode getNode(Key id) {
-            return (RefTreeNode) index.get(id);
+            return index.get(id);
         }
 
 
+        @Override
         public void delete(Key id) throws NodeNotFoundException {
             // Log.debug("Delete",id);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(id);
@@ -816,16 +822,17 @@ public class RandomDirectoryTree {
         }
 
 
+        @Override
         public Key insert(Key parentId, long pos, Key newId, Object content)
                 throws NodeNotFoundException {
             // Log.debug("Insert @"+parentId,newId);
-            if (content == null || pos != MutableDirectoryTree.DEFAULT_POSITION)
-                Log.log("Invalid op", Log.ASSERTFAILED);
+            if (content == null || pos != MutableRefTree.DEFAULT_POSITION)
+                Log.log("Invalid op", LogLevels.ASSERTFAILED);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(parentId);
             if (n == null) throw new NodeNotFoundException(parentId);
             RefTreeNodeImpl newNode = new RefTreeNodeImpl(n, newId, false, content);
             if (index.put(newId, newNode) != null)
-                Log.log("Duplicate id " + newId, Log.ASSERTFAILED);
+                Log.log("Duplicate id " + newId, LogLevels.ASSERTFAILED);
             if (!ordered) n.addChild(newNode);
             else {
                 n.addChild(getTargetPos(n, newNode), newNode);
@@ -834,10 +841,11 @@ public class RandomDirectoryTree {
         }
 
 
+        @Override
         public Key move(Key nodeId, Key parentId, long pos) throws NodeNotFoundException {
             // Log.debug("Move "+nodeId+" to"+parentId);
-            if (pos != MutableDirectoryTree.DEFAULT_POSITION)
-                Log.log("Invalid op", Log.ASSERTFAILED);
+            if (pos != MutableRefTree.DEFAULT_POSITION)
+                Log.log("Invalid op", LogLevels.ASSERTFAILED);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(nodeId);
             if (n == null) throw new NodeNotFoundException(nodeId);
             RefTreeNodeImpl pNew = (RefTreeNodeImpl) index.get(parentId);

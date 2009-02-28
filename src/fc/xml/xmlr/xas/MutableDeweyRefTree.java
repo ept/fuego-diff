@@ -74,6 +74,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
 
     /** @inheritDoc */
+    @Override
     public void delete(Key id) throws NodeNotFoundException {
         DeweyRefNode n = findExist((DeweyKey) id);
         // KEYMAP CODE ------------------
@@ -105,6 +106,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
      *             if the <code>parentId</code> node is not in the tree.
      * @return Key of inserted node
      */
+    @Override
     public Key insert(Key parentId, long pos, Key newId, Object content)
             throws NodeNotFoundException {
         if (newId != AUTO_KEY && find((DeweyKey) newId) != null)
@@ -161,6 +163,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
 
     /** @inheritDoc */
+    @Override
     public Key move(Key nodeId, Key parentId, long pos) throws NodeNotFoundException {
         DeweyRefNode n = findExist((DeweyKey) nodeId);
         DeweyRefNode p = findExist((DeweyKey) parentId);
@@ -184,6 +187,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
 
     /** @inheritDoc */
+    @Override
     public boolean update(Key nodeId, Object content) throws NodeNotFoundException {
         DeweyRefNode n = findExist((DeweyKey) nodeId);
         if (!Util.equals(content, n.getContent())) {
@@ -205,6 +209,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
     /** @inheritDoc */
 
+    @Override
     public RefTreeNode getNode(Key id) {
         return id instanceof DeweyKey ? find((DeweyKey) id) : null; // FIXME:
         // slow-instanceof
@@ -212,12 +217,14 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
 
     /** @inheritDoc */
+    @Override
     public boolean contains(Key id) {
         return getNode(id) != null;
     }
 
 
     /** @inheritDoc */
+    @Override
     public Key getParent(Key nid) throws NodeNotFoundException {
         if (nid.equals(rootKey)) return null;
         return ((DeweyKey) nid).up();
@@ -225,6 +232,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
 
 
     /** @inheritDoc */
+    @Override
     public Iterator<Key> childIterator(Key id) throws NodeNotFoundException {
         final DeweyKey root = (DeweyKey) id;
         DeweyRefNode n = findExist(root);
@@ -402,8 +410,7 @@ public class MutableDeweyRefTree extends AbstractMutableRefTree implements KeyMa
             // Log.debug("replaceAncestorSelf(key="+k+" ,anc="+(DeweyKey)
             // root.getId()+
             // " ,repl="+((DeweyKey) pos.getReference().getTarget()));
-            return k.replaceAncestorSelf((DeweyKey) rootKey,
-                                         ((DeweyKey) pos.getReference().getTarget()));
+            return k.replaceAncestorSelf(rootKey, ((DeweyKey) pos.getReference().getTarget()));
         }
         // FIXME: check that k is a prefix of root, i.e. it is not /1/0 when
         // root is /0

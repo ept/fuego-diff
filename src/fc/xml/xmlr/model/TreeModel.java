@@ -85,18 +85,21 @@ public class TreeModel extends KeyIdentificationModel implements KeyModel, Ident
 
 
     /** @inheritDoc */
+    @Override
     public Key makeKey(Object s) throws IOException {
         return km.makeKey(s);
     }
 
 
     /** @inheritDoc */
+    @Override
     public Key identify(Item i, KeyModel km) throws IOException {
         return im.identify(i, km);
     }
 
 
     /** @inheritDoc */
+    @Override
     public Key identify(Item i) throws IOException {
         return im.identify(i, km);
     }
@@ -201,6 +204,7 @@ public class TreeModel extends KeyIdentificationModel implements KeyModel, Ident
 
 
     /** Return string representation. For debug purposes. */
+    @Override
     public String toString() {
         return "TreeModel(" + (km == null ? "<null>" : km.getClass().toString()) + "," +
                (im == null ? "<null>" : im.getClass().toString()) + "," +

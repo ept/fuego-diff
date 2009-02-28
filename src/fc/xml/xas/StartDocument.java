@@ -24,16 +24,19 @@ public class StartDocument extends Item {
     }
 
 
+    @Override
     public String toString() {
         return "SD()";
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o == instance;
     }
 
 
+    @Override
     public int hashCode() {
         return START_DOCUMENT;
     }

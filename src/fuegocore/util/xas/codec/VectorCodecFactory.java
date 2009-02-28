@@ -45,6 +45,7 @@ public class VectorCodecFactory extends ContentCodecFactory {
     }
 
 
+    @Override
     public ContentEncoder getChainedEncoder(ContentEncoder chain) {
         if (factory != null) {
             chain = factory.getChainedEncoder(chain);
@@ -53,6 +54,7 @@ public class VectorCodecFactory extends ContentCodecFactory {
     }
 
 
+    @Override
     public ContentDecoder getChainedDecoder(ContentDecoder chain) {
         if (factory != null) {
             chain = factory.getChainedDecoder(chain);

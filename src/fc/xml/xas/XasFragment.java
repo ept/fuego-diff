@@ -127,6 +127,7 @@ public class XasFragment extends FragmentItem implements Iterable<Item>, Queryab
     }
 
 
+    @Override
     public int length() {
         return items.size();
     }
@@ -260,6 +261,7 @@ public class XasFragment extends FragmentItem implements Iterable<Item>, Queryab
     // }
     // }
 
+    @Override
     public void appendTo(ItemTarget target) throws IOException {
         int n = items.size();
         int i = 0;
@@ -329,6 +331,7 @@ public class XasFragment extends FragmentItem implements Iterable<Item>, Queryab
     // return new XasFragment(newItems, 0, j);
     // }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -352,11 +355,13 @@ public class XasFragment extends FragmentItem implements Iterable<Item>, Queryab
 
 
     // FIXME: This is broken, items[0] == this
+    @Override
     public int hashCode() {
         return 37 * firstItem.hashCode() + items.hashCode();
     }
 
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("XF[" + firstItem);

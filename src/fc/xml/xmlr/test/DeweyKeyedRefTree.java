@@ -18,7 +18,6 @@ import fc.xml.xmlr.KeyMap;
 import fc.xml.xmlr.RefTree;
 import fc.xml.xmlr.RefTreeNode;
 import fc.xml.xmlr.Reference;
-import fc.xml.xmlr.XmlrDebug;
 import fc.xml.xmlr.xas.DeweyKey;
 
 /**
@@ -45,7 +44,7 @@ public class DeweyKeyedRefTree implements RefTree, KeyMap {
 
 
     public RefTreeNode getRoot() {
-        return new Node(null, (RefTreeNode) t.getRoot(), 0);
+        return new Node(null, t.getRoot(), 0);
     }
 
     private class Node implements RefTreeNode {

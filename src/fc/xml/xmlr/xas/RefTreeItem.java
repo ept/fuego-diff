@@ -50,6 +50,7 @@ public class RefTreeItem extends RefItem {
     }
 
 
+    @Override
     public Object getTarget() {
         return target;
     }

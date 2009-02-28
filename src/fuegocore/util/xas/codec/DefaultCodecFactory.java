@@ -25,11 +25,13 @@ public class DefaultCodecFactory extends ContentCodecFactory {
                                                                                                   new EventSequenceCodecFactory()));
 
 
+    @Override
     public ContentEncoder getChainedEncoder(ContentEncoder chain) {
         return factory.getChainedEncoder(chain);
     }
 
 
+    @Override
     public ContentDecoder getChainedDecoder(ContentDecoder chain) {
         return factory.getChainedDecoder(chain);
     }

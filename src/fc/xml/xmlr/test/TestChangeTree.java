@@ -186,6 +186,7 @@ public class TestChangeTree extends TestCase {
             permutateTreeStringOrder(dt, OPS + lap, PDF, DPROB, new Random(lap ^ RND_SEED),
                                      new KeyGen(startKey) {
 
+                                         @Override
                                          public Key next() {
                                              assert id < max;
                                              return new StringKey(String.valueOf(id++));
@@ -220,11 +221,13 @@ public class TestChangeTree extends TestCase {
 
     private static class LongKeyDestMap extends RefTrees.IdMap {
 
+        @Override
         public Key getDestId(Key srcId, RefTreeNode src) throws NodeNotFoundException {
             return new StringKey(srcId.toString());
         }
 
 
+        @Override
         public Key getSrcId(Key dstId, RefTreeNode dest) throws NodeNotFoundException {
             return null;
         }

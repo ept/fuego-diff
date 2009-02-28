@@ -12,6 +12,7 @@ package fc.xml.xas;
 import java.util.Iterator;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 public class MutableFragmentPointer extends FragmentPointer implements MutablePointer {
 
@@ -44,8 +45,8 @@ public class MutableFragmentPointer extends FragmentPointer implements MutablePo
         if (!xasFragment.convert(index)) { throw new IllegalStateException(
                                                                            "Pointer not at StartTag"); }
         XasFragment frag = (XasFragment) get();
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("Fragment", Log.TRACE, frag);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("Fragment", LogLevels.TRACE, frag);
         }
         frag.insert(1, item);
     }
@@ -60,9 +61,9 @@ public class MutableFragmentPointer extends FragmentPointer implements MutablePo
                                                                                        " failed"); }
             result = get();
         } else if (Item.isEndTag(result)) {
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("Fragment", Log.TRACE, this);
-                Log.log("Subfragment", Log.TRACE, xasFragment.subFragment(index - 2, 3));
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("Fragment", LogLevels.TRACE, this);
+                Log.log("Subfragment", LogLevels.TRACE, xasFragment.subFragment(index - 2, 3));
             }
             throw new IllegalStateException("Attempt to destroy structure at item " + result);
         }
@@ -122,6 +123,7 @@ public class MutableFragmentPointer extends FragmentPointer implements MutablePo
     }
 
 
+    @Override
     public boolean inside(FragmentPointer pointer) {
         if (fragment == pointer.fragment && index <= pointer.index) {
             return pointer.index < index + size();
@@ -160,11 +162,13 @@ public class MutableFragmentPointer extends FragmentPointer implements MutablePo
     }
 
 
+    @Override
     public Pointer query(int[] path) {
         return xasFragment.query(new MutableFragmentPointer(xasFragment, index), path);
     }
 
 
+    @Override
     public void advanceLevel() {
         Verifier.checkSmaller(index, fragment.length());
         int step = 1;

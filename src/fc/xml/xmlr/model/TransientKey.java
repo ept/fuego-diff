@@ -17,6 +17,7 @@ import fc.xml.xmlr.Key;
  */
 public class TransientKey implements Key {
 
+    @Override
     public String toString() {
         assert false : "Tried to serialize transient key";
         return null;

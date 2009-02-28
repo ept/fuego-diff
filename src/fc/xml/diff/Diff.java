@@ -25,6 +25,7 @@ import java.util.Map;
 import org.xmlpull.v1.XmlPullParser;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.util.log.StreamLogger;
 import fc.xml.diff.encode.AlignEncoder;
 import fc.xml.diff.encode.DiffEncoder;
@@ -64,7 +65,7 @@ public class Diff {
             try {
                 encoder = encoderName != null ? Class.forName(encoderName) : null;
             } catch (ClassNotFoundException ex) {
-                Log.log("Cannot locate encoder " + encoderName, Log.FATALERROR);
+                Log.log("Cannot locate encoder " + encoderName, LogLevels.FATALERROR);
             }
         }
         if (filterName != null) {
@@ -73,12 +74,12 @@ public class Diff {
             try {
                 filter = filterName != null ? Class.forName(filterName) : null;
             } catch (ClassNotFoundException ex) {
-                Log.log("Cannot locate filter " + filterName, Log.FATALERROR);
+                Log.log("Cannot locate filter " + filterName, LogLevels.FATALERROR);
             }
         }
         if (args.length < 2) {
             Log.log("Usage [-Dencoder={xml,ref,align,<class>}] [-Dfilter={simple,<class>}] "
-                    + "base.xml new.xml [out.xml]", Log.ERROR);
+                    + "base.xml new.xml [out.xml]", LogLevels.ERROR);
             System.exit(1);
         }
         OutputStream dout = System.out;
@@ -88,7 +89,7 @@ public class Diff {
             if (args.length > 2 && !"-".equals(args[2])) dout = new FileOutputStream(args[2]);
             diff(base, updated, dout, filter, encoder, null /* options */, true);
         } catch (IOException ex) {
-            Log.log("I/O error while diffing", Log.ERROR, ex);
+            Log.log("I/O error while diffing", LogLevels.ERROR, ex);
         } finally {
             if (dout != System.out) dout.close();
         }
@@ -130,9 +131,9 @@ public class Diff {
         }
         if (isEmpty) {
             Log.log("Documents identical " + " (" + base.size() + " XAS events in " +
-                    (_stop - _start) + "ms).", Log.INFO);
+                    (_stop - _start) + "ms).", LogLevels.INFO);
         } else {
-            Log.log("Documents differ.", Log.INFO);
+            Log.log("Documents differ.", LogLevels.INFO);
             // Log.log("Match list is "+ml,Log.DEBUG);
         }
 
@@ -147,7 +148,8 @@ public class Diff {
             throws IOException {
         ItemSource docpa = IoUtil.getXmlParser(docs);
         ItemSource basepa = IoUtil.getXmlParser(bases);
-        Log.log("Comparing by filter " + (filter == null ? "<none>" : filter.getName()), Log.INFO);
+        Log.log("Comparing by filter " + (filter == null ? "<none>" : filter.getName()),
+                LogLevels.INFO);
 
         return diff(IoUtil.getEventSequence(basepa, filter), null, // FIXME-20061113-3:
                     // Passing

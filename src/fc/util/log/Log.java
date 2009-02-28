@@ -109,92 +109,92 @@ public class Log implements LogLevels {
 
 
     public static void trace(Object message) {
-        log(message, Log.TRACE);
+        log(message, LogLevels.TRACE);
     }
 
 
     public static void trace(Object message, Throwable cause) {
-        log(message, Log.TRACE, cause);
+        log(message, LogLevels.TRACE, cause);
     }
 
 
     public static void trace(Object message, Object data) {
-        log(message, Log.TRACE, data);
+        log(message, LogLevels.TRACE, data);
     }
 
 
     public static void debug(Object message) {
-        log(message, Log.DEBUG);
+        log(message, LogLevels.DEBUG);
     }
 
 
     public static void debug(Object message, Throwable cause) {
-        log(message, Log.DEBUG, cause);
+        log(message, LogLevels.DEBUG, cause);
     }
 
 
     public static void debug(Object message, Object data) {
-        log(message, Log.DEBUG, data);
+        log(message, LogLevels.DEBUG, data);
     }
 
 
     public static void info(Object message) {
-        log(message, Log.INFO);
+        log(message, LogLevels.INFO);
     }
 
 
     public static void info(Object message, Throwable cause) {
-        log(message, Log.INFO, cause);
+        log(message, LogLevels.INFO, cause);
     }
 
 
     public static void info(Object message, Object data) {
-        log(message, Log.INFO, data);
+        log(message, LogLevels.INFO, data);
     }
 
 
     public static void warning(Object message) {
-        log(message, Log.WARNING);
+        log(message, LogLevels.WARNING);
     }
 
 
     public static void warning(Object message, Throwable cause) {
-        log(message, Log.WARNING, cause);
+        log(message, LogLevels.WARNING, cause);
     }
 
 
     public static void warning(Object message, Object data) {
-        log(message, Log.WARNING, data);
+        log(message, LogLevels.WARNING, data);
     }
 
 
     public static void error(Object message) {
-        log(message, Log.ERROR);
+        log(message, LogLevels.ERROR);
     }
 
 
     public static void error(Object message, Throwable cause) {
-        log(message, Log.ERROR, cause);
+        log(message, LogLevels.ERROR, cause);
     }
 
 
     public static void error(Object message, Object data) {
-        log(message, Log.ERROR, data);
+        log(message, LogLevels.ERROR, data);
     }
 
 
     public static void fatal(Object message) {
-        log(message, Log.FATALERROR);
+        log(message, LogLevels.FATALERROR);
     }
 
 
     public static void fatal(Object message, Throwable cause) {
-        log(message, Log.FATALERROR, cause);
+        log(message, LogLevels.FATALERROR, cause);
     }
 
 
     public static void fatal(Object message, Object data) {
-        log(message, Log.FATALERROR, data);
+        log(message, LogLevels.FATALERROR, data);
     }
 
 

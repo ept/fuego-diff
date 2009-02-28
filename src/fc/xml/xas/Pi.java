@@ -34,6 +34,7 @@ public class Pi extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -46,11 +47,13 @@ public class Pi extends Item {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * target.hashCode() + instruction.hashCode();
     }
 
 
+    @Override
     public String toString() {
         return "PI(" + target + " " + instruction + ")";
     }

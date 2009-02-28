@@ -40,6 +40,7 @@ public class Utf8Reader extends Reader {
     }
 
 
+    @Override
     public int read(char[] cbuf, int off, int len) throws IOException {
         int olen = len;
         len = len > MAX_CHUNK ? MAX_CHUNK : len;
@@ -52,11 +53,13 @@ public class Utf8Reader extends Reader {
     }
 
 
+    @Override
     public void close() throws IOException {
         in.close();
     }
 
 
+    @Override
     public int read() throws IOException {
         return nextChar();
     }

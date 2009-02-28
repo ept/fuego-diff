@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import fuegocore.util.Util;
@@ -80,14 +81,14 @@ public class EventStream implements EventSequence {
             try {
                 int eventType = source.getEventType();
                 switch (eventType) {
-                    case TypedXmlParser.START_DOCUMENT:
+                    case XmlPullParser.START_DOCUMENT:
                         current.addElement(Event.createStartDocument());
                         break;
-                    case TypedXmlParser.END_DOCUMENT:
+                    case XmlPullParser.END_DOCUMENT:
                         current.addElement(Event.createEndDocument());
                         inProgress = false;
                         break;
-                    case TypedXmlParser.START_TAG: {
+                    case XmlPullParser.START_TAG: {
                         int nsStart = source.getNamespaceCount(source.getDepth() - 1);
                         int nsEnd = source.getNamespaceCount(source.getDepth());
                         for (int i = nsStart; i < nsEnd; i++) {
@@ -106,11 +107,11 @@ public class EventStream implements EventSequence {
                         }
                         break;
                     }
-                    case TypedXmlParser.END_TAG:
+                    case XmlPullParser.END_TAG:
                         current.addElement(Event.createEndElement(source.getNamespace(),
                                                                   source.getName()));
                         break;
-                    case TypedXmlParser.TEXT: {
+                    case XmlPullParser.TEXT: {
                         current.addElement(Event.createContent(source.getText()));
                         break;
                     }
@@ -119,13 +120,13 @@ public class EventStream implements EventSequence {
                                                                     source.getName(),
                                                                     source.getObject()));
                         break;
-                    case TypedXmlParser.COMMENT:
+                    case XmlPullParser.COMMENT:
                         current.addElement(Event.createComment(source.getText()));
                         break;
-                    case TypedXmlParser.PROCESSING_INSTRUCTION:
+                    case XmlPullParser.PROCESSING_INSTRUCTION:
                         current.addElement(Event.createProcessingInstruction(source.getText()));
                         break;
-                    case TypedXmlParser.ENTITY_REF:
+                    case XmlPullParser.ENTITY_REF:
                         String name = source.getName();
                         current.addElement(entityToEvent(name));
                         break;
@@ -156,7 +157,7 @@ public class EventStream implements EventSequence {
     public EventStream(TypedXmlParser source) {
         this.source = source;
         try {
-            source.setFeature(TypedXmlParser.FEATURE_PROCESS_NAMESPACES, true);
+            source.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
         } catch (XmlPullParserException ex) {
             // Don't bother; namespaces must be supported
             ex.printStackTrace();
@@ -168,7 +169,7 @@ public class EventStream implements EventSequence {
     public void reset(TypedXmlParser source) {
         this.source = source;
         try {
-            source.setFeature(TypedXmlParser.FEATURE_PROCESS_NAMESPACES, true);
+            source.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
         } catch (XmlPullParserException ex) {
             // Don't bother; namespaces must be supported
             ex.printStackTrace();
@@ -279,6 +280,7 @@ public class EventStream implements EventSequence {
      *            the object to compare for equality
      * @return whether <code>o</code> is equal to this object
      */
+    @Override
     public boolean equals(Object o) {
         boolean result = false;
         if (o instanceof EventSequence) {
@@ -288,6 +290,7 @@ public class EventStream implements EventSequence {
     }
 
 
+    @Override
     public int hashCode() {
         return XasUtil.sequenceHashCode(this);
     }
@@ -300,6 +303,7 @@ public class EventStream implements EventSequence {
      * debugging code.
      * @return a string representation of this object
      */
+    @Override
     public String toString() {
         fillUntil(-1);
         return current.toString();

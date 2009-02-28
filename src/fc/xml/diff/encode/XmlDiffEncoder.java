@@ -29,6 +29,7 @@ import fc.xml.xmlr.xas.RefTreeItem;
 
 public class XmlDiffEncoder extends RefTreeEncoder {
 
+    @Override
     protected ItemSource getOuputTransform(ItemSource is) {
         return new TransformSource(new TransformSource(is, new RefEStoDiffES()),
                                    new NsPrefixFixer());

@@ -384,6 +384,7 @@ public class XasExtUtil {
         }
 
 
+        @Override
         protected String identify(byte[] magic, int len) {
             final String[] SUBTYPES = { "none", "item", null, "data", "elem", "elit", null, "elid" };
             String ms = new String(magic, 0, len);

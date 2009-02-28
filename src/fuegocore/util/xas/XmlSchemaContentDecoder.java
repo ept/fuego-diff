@@ -35,6 +35,7 @@ public class XmlSchemaContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public Object decode(String typeNs, String typeName, XmlReader reader, EventList attributes) {
         // System.out.println("XSCD.internalDecode called with");
         // System.out.println("typeNs=" + typeNs);

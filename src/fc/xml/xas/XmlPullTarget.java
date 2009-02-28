@@ -18,6 +18,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 import fc.util.Stack;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.typing.ParsedPrimitive;
 
 public class XmlPullTarget implements SerializerTarget {
@@ -78,7 +79,7 @@ public class XmlPullTarget implements SerializerTarget {
 
 
     public void append(Item item) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
+        if (Log.isEnabled(LogLevels.TRACE)) {
             Log.trace("Item", item);
         }
         switch (item.getType()) {

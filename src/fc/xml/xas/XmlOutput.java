@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 // BUGFIX-20060921-2: the getPrefix methods now throw an exception instead of
 // failing silently by returning null
@@ -106,9 +107,9 @@ public class XmlOutput implements SerializerTarget {
 
 
     public void append(Item item) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("Item", Log.TRACE, item);
-            Log.log("Type", Log.TRACE, item.getType());
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("Item", LogLevels.TRACE, item);
+            Log.log("Type", LogLevels.TRACE, item.getType());
         }
         switch (item.getType()) {
             case Item.START_DOCUMENT:

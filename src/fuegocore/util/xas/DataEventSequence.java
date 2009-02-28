@@ -41,6 +41,7 @@ public class DataEventSequence extends TransformedEventStream {
     }
 
 
+    @Override
     protected void transform(Event ev, EventList el, XmlReader xr) {
         // Ignore comments
         if (ev.getType() == Event.COMMENT) return;

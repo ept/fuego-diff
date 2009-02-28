@@ -277,6 +277,7 @@ public class TypedEventStream implements EventSequence {
      *            the object to compare for equality
      * @return whether <code>o</code> is equal to this object
      */
+    @Override
     public boolean equals(Object o) {
         boolean result = false;
         if (o instanceof EventSequence) {
@@ -286,11 +287,13 @@ public class TypedEventStream implements EventSequence {
     }
 
 
+    @Override
     public int hashCode() {
         return XasUtil.sequenceHashCode(this);
     }
 
 
+    @Override
     public String toString() {
         fillUntil(-1);
         return el.toString();

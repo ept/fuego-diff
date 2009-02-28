@@ -124,6 +124,7 @@ public class StreamLogger extends AbstractLogger {
 
             return new FilterOutputStream(out) {
 
+                @Override
                 public void close() throws IOException {
                     flush();
                     StreamLogger.this.out.println("<<EOS");

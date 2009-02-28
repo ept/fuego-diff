@@ -90,6 +90,7 @@ public class TypedItem extends Item implements SerializableItem {
     }
 
 
+    @Override
     public int hashCode() {
         int result = typeName.hashCode();
         if (value != null) {
@@ -99,6 +100,7 @@ public class TypedItem extends Item implements SerializableItem {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -115,6 +117,7 @@ public class TypedItem extends Item implements SerializableItem {
     }
 
 
+    @Override
     public String toString() {
         return "TI(" + String.valueOf(value) + ": " + typeName + ")";
     }

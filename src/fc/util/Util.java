@@ -279,14 +279,17 @@ public final class Util {
     public static final OutputStream SINK = new OutputStream() {
 
         // NOTE: Overriding all variants to avoid calling write(byte) n times
+        @Override
         public void write(int b) throws IOException {
         }
 
 
+        @Override
         public void write(byte[] b, int off, int len) throws IOException {
         }
 
 
+        @Override
         public void write(byte[] b) throws IOException {
         }
 

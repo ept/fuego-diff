@@ -177,12 +177,14 @@ public class GlobalPointer implements MutablePointer {
     }
 
 
+    @Override
     public int hashCode() {
         return (key == null ? 0 : key.hashCode()) ^ System.identityHashCode(document) ^
                pointer.hashCode();
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o instanceof GlobalPointer && Util.equals(((GlobalPointer) o).key, key) &&
                ((GlobalPointer) o).document == document &&
@@ -190,6 +192,7 @@ public class GlobalPointer implements MutablePointer {
     }
 
 
+    @Override
     public String toString() {
         return "GP(" + key + "," + System.identityHashCode(document) + "," + pointer + ")";
     }

@@ -197,7 +197,7 @@ public class XasSerialization {
             throws IOException {
         AutoET aout = new AutoET(out, kim);
         XasUtil.copy(header, aout);
-        writeTree((RefTreeNode) tree.getRoot(), aout, c, c instanceof XasCodec.ReferenceCodec);
+        writeTree(tree.getRoot(), aout, c, c instanceof XasCodec.ReferenceCodec);
         XasUtil.copy(trailer, aout);
     }
 

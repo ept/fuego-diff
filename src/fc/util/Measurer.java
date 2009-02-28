@@ -154,6 +154,7 @@ public final class Measurer {
      * @deprecated A drop-in replacement is {@link #outputSummary(PrintStream)} but
      *             {@link #outputFull(PrintStream)} is preferable
      */
+    @Deprecated
     public void output(PrintStream out) {
         outputSummary(out);
     }

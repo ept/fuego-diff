@@ -14,8 +14,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
-
 public class StartTag extends Item {
 
     private Qname name;
@@ -265,6 +263,7 @@ public class StartTag extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -306,6 +305,7 @@ public class StartTag extends Item {
     }
 
 
+    @Override
     public int hashCode() {
         int result = START_TAG;
         for (AttributeNode a = atts; a != null; a = a.getNext()) {
@@ -315,6 +315,7 @@ public class StartTag extends Item {
     }
 
 
+    @Override
     public String toString() {
         return "ST(" + name.toString() + " <" + String.valueOf(prefixes) + "> <" +
                String.valueOf(atts) + ">)";

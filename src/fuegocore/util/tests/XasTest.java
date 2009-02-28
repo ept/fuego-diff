@@ -10,21 +10,15 @@
 package fuegocore.util.tests;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.Enumeration;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.io.StringWriter;
 import java.io.StringReader;
-import java.io.IOException;
-
 import org.w3c.dom.Node;
 
 import junit.framework.TestCase;
 
-import fuegocore.util.Util;
 import fuegocore.util.xas.*;
 
 /**
@@ -45,6 +39,7 @@ public class XasTest extends TestCase {
     }
 
 
+    @Override
     protected void setUp() {
         sequences = XasData.getSequences();
     }

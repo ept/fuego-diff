@@ -137,9 +137,9 @@ public class DerefRefTree implements IdAddressableRefTree {
 
 
     protected RefTreeNode getExistingBackNode(RefTreeNode m) {
-        Reference r = ((RefTreeNode) m).getReference();
+        Reference r = m.getReference();
         if (r == null) return null;
-        RefTreeNode bn = ((RefTreeNode) backingTree.getNode(r.getTarget()));
+        RefTreeNode bn = (backingTree.getNode(r.getTarget()));
         if (bn == null) trap(new NodeNotFoundException(r.getTarget()));
         return bn;
     }
@@ -179,9 +179,9 @@ public class DerefRefTree implements IdAddressableRefTree {
             assert checkModCount() == true;
             if (n.isNodeRef()) {
                 RefTreeNode bn = getExistingBackNode(n);
-                return ((RefTreeNode) bn).getReference();
+                return bn.getReference();
             }
-            return ((RefTreeNode) n).getReference();
+            return n.getReference();
         }
 
 
@@ -203,7 +203,7 @@ public class DerefRefTree implements IdAddressableRefTree {
             assert checkModCount() == true;
             if (n.isNodeRef()) {
                 RefTreeNode bn = getExistingBackNode(n);
-                Object c = ((RefTreeNode) bn).getContent();
+                Object c = bn.getContent();
                 return c;
             }
             return n.getContent();
@@ -254,18 +254,21 @@ public class DerefRefTree implements IdAddressableRefTree {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             assert checkModCount() == true;
             return n.isNodeRef() ? getExistingBackNode(n).equals(o) : n.equals(o);
         }
 
 
+        @Override
         public int hashCode() {
             assert checkModCount() == true;
             return n.isNodeRef() ? getExistingBackNode(n).hashCode() : n.hashCode();
         }
 
 
+        @Override
         public String toString() {
             return "[FP] " + n.toString();
         }
@@ -304,17 +307,20 @@ public class DerefRefTree implements IdAddressableRefTree {
         }
 
 
+        @Override
         public Reference getReference() {
-            return ((RefTreeNode) n).getReference();
+            return n.getReference();
         }
 
 
+        @Override
         public Key getId() {
             assert checkModCount() == true;
             return km.getFrontKey(n.getId());
         }
 
 
+        @Override
         public RefTreeNode getParent() {
             // BUGFIX 150906-1: Broken getParent()
             // This one is tricky; we have two cases
@@ -336,12 +342,14 @@ public class DerefRefTree implements IdAddressableRefTree {
         }
 
 
+        @Override
         public Object getContent() {
             assert checkModCount() == true;
             return n.getContent();
         }
 
 
+        @Override
         public Iterator getChildIterator() {
             // NOTE: No tricks, since going downwards cannot jump trees
             assert checkModCount() == true;
@@ -365,24 +373,28 @@ public class DerefRefTree implements IdAddressableRefTree {
         }
 
 
+        @Override
         public boolean isReference() {
             assert checkModCount() == true;
             return n.isReference();
         }
 
 
+        @Override
         public boolean isTreeRef() {
             assert checkModCount() == true;
             return n.isTreeRef();
         }
 
 
+        @Override
         public boolean isNodeRef() {
             assert checkModCount() == true;
             return n.isNodeRef();
         }
 
 
+        @Override
         public String toString() {
             return "[BP] " + n.toString();
         }

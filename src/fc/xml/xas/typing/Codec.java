@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.Qname;
 import fc.xml.xas.Verifier;
 import fc.xml.xas.XasUtil;
@@ -54,7 +55,7 @@ public class Codec {
 
     public static void registerValueCodec(ValueCodec codec) {
         Verifier.checkNotNull(codec);
-        if (Log.isEnabled(Log.DEBUG)) {
+        if (Log.isEnabled(LogLevels.DEBUG)) {
             Log.debug("Registering value codec", codec);
         }
         valueCodecs.add(codec);
@@ -89,7 +90,7 @@ public class Codec {
     public static void registerPrimitiveCodec(PrimitiveCodec codec) {
         Verifier.checkNotNull(codec);
         String type = codec.getType();
-        if (Log.isEnabled(Log.DEBUG)) {
+        if (Log.isEnabled(LogLevels.DEBUG)) {
             Log.debug("Registering primitive codec for type " + type, codec);
         }
         List<PrimitiveCodec> list = primitiveCodecs.get(type);

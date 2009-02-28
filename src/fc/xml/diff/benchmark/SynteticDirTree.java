@@ -19,6 +19,7 @@ import java.util.Random;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.util.log.SysoutLogger;
 import fc.xml.diff.IoUtil;
 import fc.xml.diff.test.DirTreeGenerator;
@@ -79,7 +80,7 @@ public class SynteticDirTree extends BenchMark {
         String patcher = getSetProperty("patcher", "!fc.xml.diff.Patch");
         String harvester = getSetProperty("reporter", null);
         String baseName = getSetProperty("basefile", "b.xml");
-        Log.log("basename=" + baseName, Log.INFO);
+        Log.log("basename=" + baseName, LogLevels.INFO);
         String newName = getSetProperty("newfile", "n.xml");
         String diffName = getSetProperty("deltafile", "d.xml");
         String diffLogFile = getSetProperty("difflog", null);
@@ -100,7 +101,8 @@ public class SynteticDirTree extends BenchMark {
                     try {
                         DirTreeGenerator.permutateTree(dt, edits, pdf, DELTREEP, rnd);
                     } catch (Exception ex) {
-                        Log.log("Dirtree generator bombed; not computing this lap", Log.ERROR, ex);
+                        Log.log("Dirtree generator bombed; not computing this lap",
+                                LogLevels.ERROR, ex);
                         continue;
                     }
                     // Flush trees to disk
@@ -114,14 +116,15 @@ public class SynteticDirTree extends BenchMark {
                         IoUtil.writeRefTree(dt, newf, new DirTreeGenerator.DirTreeModel());
                         deltaf = new File(workDir, diffName);
                     } catch (IOException ex) {
-                        Log.log("Error writing test trees. WorkDir=" + workDir, Log.FATALERROR, ex);
+                        Log.log("Error writing test trees. WorkDir=" + workDir,
+                                LogLevels.FATALERROR, ex);
                     }
                     long dstart = 0, dend = -1;
                     try {
                         // Do a match test
                         // Calm down
                         if (deltaf.exists() && !deltaf.delete())
-                            Log.log("Cannot remove old " + deltaf, Log.ERROR);
+                            Log.log("Cannot remove old " + deltaf, LogLevels.ERROR);
                         /*
                          * for( int i=0;i<10;i++) try { System.gc(); Thread.sleep(100); } catch(
                          * InterruptedException ex){};
@@ -132,12 +135,12 @@ public class SynteticDirTree extends BenchMark {
                                                    deltaf.toString() }, true, diffLogFile, timeout);
                         dend = System.currentTimeMillis();
                         if (--forceStop == 0) {
-                            Log.log("===FORCED TEST STOP===", Log.INFO);
+                            Log.log("===FORCED TEST STOP===", LogLevels.INFO);
                             return;
                         }
-                        Log.log("Done in " + (dend - dstart) + " msec", Log.INFO);
+                        Log.log("Done in " + (dend - dstart) + " msec", LogLevels.INFO);
                     } catch (Exception ex) {
-                        Log.log("FAILED: ", Log.ERROR, ex);
+                        Log.log("FAILED: ", LogLevels.ERROR, ex);
                     }
                     if (verify) verifyDiff(patcher, basef, newf, deltaf);
                     try {
@@ -149,7 +152,7 @@ public class SynteticDirTree extends BenchMark {
                             exec(harvester, new String[] {}, false, null, Long.MAX_VALUE);
                         }
                     } catch (IOException ex) {
-                        Log.log("Reporter excepted", Log.ERROR, ex);
+                        Log.log("Reporter excepted", LogLevels.ERROR, ex);
                     }
                     dt.reset(); // Forget edits in this lap
                 } // endfor edits
@@ -169,7 +172,7 @@ public class SynteticDirTree extends BenchMark {
         try {
             File patchf = new File(workDir, "p.xml");
             if (patchf.exists() && !patchf.delete())
-                Log.log("Cannot remove old " + patchf, Log.ERROR);
+                Log.log("Cannot remove old " + patchf, LogLevels.ERROR);
             exec(patcher, new String[] { basef.toString(), deltaf.toString(), patchf.toString() },
                  true, null, Long.MAX_VALUE);
             vPatchIn = new FileInputStream(patchf);
@@ -187,7 +190,7 @@ public class SynteticDirTree extends BenchMark {
             refTreeCmp(pT.getRoot(), nT.getRoot(), nT, null);
             // End verify
         } catch (IOException ex) {
-            Log.log("Verify IOExcepted", Log.FATALERROR, ex);
+            Log.log("Verify IOExcepted", LogLevels.FATALERROR, ex);
         } finally {
             try {
                 for (InputStream in : new InputStream[] { vPatchIn, vNewIn })
@@ -195,7 +198,7 @@ public class SynteticDirTree extends BenchMark {
                         in.close();
                     }
             } catch (IOException ex1) {
-                Log.log("Can't close a verify stream", Log.FATALERROR, ex1);
+                Log.log("Can't close a verify stream", LogLevels.FATALERROR, ex1);
             }
         }
     }
@@ -207,10 +210,10 @@ public class SynteticDirTree extends BenchMark {
         Object c2 = n2.getContent();
         if (n1.isNodeRef()) {
             RefTreeNode refd = base.getNode(n1.getId());
-            if (refd == null) Log.log("Broken noderef " + n1.getId(), Log.FATALERROR);
+            if (refd == null) Log.log("Broken noderef " + n1.getId(), LogLevels.FATALERROR);
             c1 = refd.getContent();
         } else if (n2.isNodeRef()) {
-            Log.log("May not have refs", Log.FATALERROR);
+            Log.log("May not have refs", LogLevels.FATALERROR);
             /*
              * if (!n2.getId().equals(n1.getId())) Log.log("Mismatching n2 noderef: " + n1.getId() +
              * "," + n2.getId(), Log.FATALERROR);
@@ -218,21 +221,23 @@ public class SynteticDirTree extends BenchMark {
         }
         if (!Util.equals(c1, c2)) {
             if (rtId != null)
-                Log.log("The following error occured when comparing in treeref " + rtId, Log.ERROR);
+                Log.log("The following error occured when comparing in treeref " + rtId,
+                        LogLevels.ERROR);
             String c1s = n1.isNodeRef() ? "#node ref " + n1.getId() : c1.toString();
-            Log.log("Mismatching content " + "\nP:" + c1s + "\nF:" + c2.toString(), Log.FATALERROR);
+            Log.log("Mismatching content " + "\nP:" + c1s + "\nF:" + c2.toString(),
+                    LogLevels.FATALERROR);
         }
         for (Iterator i = n1.getChildIterator(), j = n2.getChildIterator(); i.hasNext() &&
                                                                             j.hasNext();) {
             RefTreeNode cn1 = (RefTreeNode) i.next(), cn2 = (RefTreeNode) j.next();
             if (cn1.isTreeRef()) {
                 RefTreeNode refd = base.getNode(cn1.getId());
-                if (refd == null) Log.log("Broken treeref " + cn1.getId(), Log.FATALERROR);
+                if (refd == null) Log.log("Broken treeref " + cn1.getId(), LogLevels.FATALERROR);
                 refTreeCmp(refd, cn2, base, cn1.getId());
             } else if (cn2.isTreeRef()) {
-                Log.log("May not have refs", Log.FATALERROR);
+                Log.log("May not have refs", LogLevels.FATALERROR);
             } else refTreeCmp(cn1, cn2, base, null);
-            if (i.hasNext() != j.hasNext()) Log.log("Differing child count", Log.FATALERROR);
+            if (i.hasNext() != j.hasNext()) Log.log("Differing child count", LogLevels.FATALERROR);
         }
     }
 

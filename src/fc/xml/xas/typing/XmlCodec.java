@@ -23,6 +23,7 @@ import net.iharder.Base64;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.Qname;
 import fc.xml.xas.SerializerTarget;
 import fc.xml.xas.StartTag;
@@ -134,8 +135,8 @@ public class XmlCodec implements PrimitiveCodec {
         Object result = null;
         String name = typeName.getName();
         String content = new String(value, offset, length, encoding);
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("decode(" + typeName + ", " + content + ", " + encoding + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("decode(" + typeName + ", " + content + ", " + encoding + ")", LogLevels.TRACE);
         }
         if (name.equals("QName")) {
             int index = content.indexOf(':');

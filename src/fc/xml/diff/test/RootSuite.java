@@ -15,16 +15,19 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.util.log.SysoutLogger;
 import fc.xml.diff.benchmark.SynteticDirTree;
 import fc.xml.diff.benchmark.UseCases;
 
 public class RootSuite extends TestCase {
 
+    @Override
     public void setUp() throws Exception {
     }
 
 
+    @Override
     public void tearDown() throws Exception {
         // 
     }
@@ -45,7 +48,7 @@ public class RootSuite extends TestCase {
 
 
     public void testFixTests() {
-        Log.log("Fixing incompatible property setting between tests", Log.WARNING);
+        Log.log("Fixing incompatible property setting between tests", LogLevels.WARNING);
         System.setProperty("basefile", "b.xml");
         System.setProperty("newfile", "n.xml");
         System.setProperty("deltafile", "d.xml");

@@ -26,6 +26,7 @@ public class Text extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -38,11 +39,13 @@ public class Text extends Item {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * TEXT + data.hashCode();
     }
 
 
+    @Override
     public String toString() {
         return "T(" + data + ")";
     }

@@ -58,6 +58,7 @@ public class AttributeNode implements Comparable<AttributeNode> {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -74,6 +75,7 @@ public class AttributeNode implements Comparable<AttributeNode> {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * name.hashCode() + (value == null ? 0 : value.hashCode());
     }
@@ -85,6 +87,7 @@ public class AttributeNode implements Comparable<AttributeNode> {
     }
 
 
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder(String.valueOf(name) + "=\"" + value + "\"");
         if (next != null) {

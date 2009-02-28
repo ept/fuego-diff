@@ -11,6 +11,7 @@ package fc.xml.xas.index;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.Item;
 import fc.xml.xas.MutableFragmentPointer;
 import fc.xml.xas.MutablePointer;
@@ -33,6 +34,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public DeweyKey getKey() {
         update();
         return key;
@@ -46,28 +48,28 @@ public class VersionedPointer extends GlobalPointer {
 
 
     private void directUpdate() {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("directUpdate()", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("directUpdate()", LogLevels.TRACE);
         }
         while (!current.isSentinel()) {
-            Log.log("Current", Log.TRACE, current);
+            Log.log("Current", LogLevels.TRACE, current);
             if (pointer != null) {
                 // System.out.println("Current: " + current);
                 DeweyKey newKey = current.update(key);
-                Log.log("Old key", Log.TRACE, key);
-                Log.log("New key", Log.TRACE, newKey);
+                Log.log("Old key", LogLevels.TRACE, key);
+                Log.log("New key", LogLevels.TRACE, newKey);
                 if (key != newKey) {
-                    if (Log.isEnabled(Log.TRACE)) {
-                        Log.log("Key update: " + key + " -> " + newKey, Log.TRACE);
+                    if (Log.isEnabled(LogLevels.TRACE)) {
+                        Log.log("Key update: " + key + " -> " + newKey, LogLevels.TRACE);
                     }
                     key = newKey;
                     if (key != null) {
-                        if (Log.isEnabled(Log.TRACE)) {
-                            Log.log("Pointer update: " + pointer, Log.TRACE);
+                        if (Log.isEnabled(LogLevels.TRACE)) {
+                            Log.log("Pointer update: " + pointer, LogLevels.TRACE);
                         }
                         pointer = new MutableFragmentPointer(current.update(pointer));
-                        if (Log.isEnabled(Log.TRACE)) {
-                            Log.log(" -> " + pointer, Log.TRACE);
+                        if (Log.isEnabled(LogLevels.TRACE)) {
+                            Log.log(" -> " + pointer, LogLevels.TRACE);
                         }
                     } else {
                         pointer = null;
@@ -85,6 +87,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public Item get() {
         // System.out.println("get(),this=" + this);
         update();
@@ -97,6 +100,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public void set(Item item) {
         update();
         super.set(item);
@@ -108,6 +112,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public void insert(Item item) {
         update();
         ((VersionedDocument) document).insertAfter(key, pointer);
@@ -120,6 +125,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public void insertFirstChild(Item item) {
         update();
         ((VersionedDocument) document).insertAt(key.down(), pointer);
@@ -132,6 +138,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public Item delete() {
         update();
         ((VersionedDocument) document).delete(key, pointer);
@@ -139,6 +146,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public void move(MutablePointer target) {
         if (!(target instanceof GlobalPointer)) { throw new IllegalArgumentException("Pointer " +
                                                                                      target +
@@ -165,6 +173,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public void moveFirstChild(MutablePointer target) {
         if (!(target instanceof GlobalPointer)) { throw new IllegalArgumentException("Pointer " +
                                                                                      target +
@@ -194,6 +203,7 @@ public class VersionedPointer extends GlobalPointer {
     }
 
 
+    @Override
     public String toString() {
         return "VP(" + current + "," + key + "," + pointer + ")";
     }

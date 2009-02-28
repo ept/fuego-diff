@@ -32,6 +32,7 @@ public abstract class ChainedContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public void insertPrefixMapping(String namespace, String prefix) {
         // System.out.println(this.toString());
         // System.out.println("Mapping: " + namespace + "=" + prefix);
@@ -43,6 +44,7 @@ public abstract class ChainedContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public void deletePrefixMapping(String prefix) {
         if (chain != null) {
             chain.deletePrefixMapping(prefix);
@@ -52,6 +54,7 @@ public abstract class ChainedContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public String mapNamespace(String prefix) {
         // System.out.println(this.toString());
         // System.out.println("Getting namespace for " + prefix);
@@ -63,6 +66,7 @@ public abstract class ChainedContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public void setRoot(ContentDecoder root) {
         super.setRoot(root);
         if (chain != null) {
@@ -71,6 +75,7 @@ public abstract class ChainedContentDecoder extends ContentDecoder {
     }
 
 
+    @Override
     public String toString() {
         return this.getClass().toString() + "(" + chain + ")";
     }

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fc.util.log.Log;
 import fc.xml.xmlr.Key;
 import fc.xml.xmlr.MutableRefTree;
 import fc.xml.xmlr.RefTreeNode;

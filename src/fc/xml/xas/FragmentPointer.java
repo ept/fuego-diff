@@ -152,12 +152,14 @@ public class FragmentPointer implements Pointer {
     }
 
 
+    @Override
     public String toString() {
         return "P(" + index + "," + System.identityHashCode(fragment) + ")";
         // return "P(" + index + ", " + fragment + ")";
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o != null &&
                o == this ||
@@ -165,6 +167,7 @@ public class FragmentPointer implements Pointer {
     }
 
 
+    @Override
     public int hashCode() {
         return index ^ System.identityHashCode(fragment);
     }

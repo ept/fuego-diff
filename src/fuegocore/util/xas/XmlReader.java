@@ -522,6 +522,7 @@ public class XmlReader {
     }
 
 
+    @Override
     public String toString() {
         return "XmlReader(" + index + ")" + es.toString();
     }

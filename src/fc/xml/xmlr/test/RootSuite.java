@@ -24,10 +24,12 @@ public class RootSuite extends TestCase {
                                                TestDeweyTrees.class };
 
 
+    @Override
     public void setUp() throws Exception {
     }
 
 
+    @Override
     public void tearDown() throws Exception {
         // 
     }

@@ -94,6 +94,7 @@ public final class ByteArray {
     }
 
 
+    @Override
     public int hashCode() {
         if (hash == 0) {
             for (int i = 0; i < data.length; i++) {
@@ -104,6 +105,7 @@ public final class ByteArray {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

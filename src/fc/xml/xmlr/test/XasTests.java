@@ -63,6 +63,7 @@ public class XasTests extends TestCase implements IOExceptionTrap {
     // Stringkey generator
     private RandomDirectoryTree.KeyGen kg = new RandomDirectoryTree.KeyGen(0) {
 
+        @Override
         public Key next() {
             return StringKey.createKey(this.id++);
         }
@@ -223,6 +224,7 @@ public class XasTests extends TestCase implements IOExceptionTrap {
         public static final Qname NAME_ATTR = new Qname("", "name");
 
 
+        @Override
         public void append(Item i) throws IOException {
             if (i.getType() == Item.START_TAG) {
                 StartTag t = (StartTag) i;
@@ -247,6 +249,7 @@ public class XasTests extends TestCase implements IOExceptionTrap {
         private Stack<StartTag> openTags = new Stack<StartTag>();
 
 
+        @Override
         public void append(Item i) throws IOException {
             if (i.getType() == Item.START_TAG) return; // Just ignore it...
             else if (i.getType() == TypedItem.TYPED) {

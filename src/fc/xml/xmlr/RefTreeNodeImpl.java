@@ -81,6 +81,7 @@ public class RefTreeNodeImpl implements RefTreeNode {
      * @param content
      *            content of node, or <code>null</code> if the node is a reference node.
      */
+    @Deprecated
     public RefTreeNodeImpl(RefTreeNode parent, Key id, boolean isTreeRef, Object content) {
         // Below: die if TreeRef content but isTreeRef=false
         assert !(content instanceof NodeReference);
@@ -246,6 +247,7 @@ public class RefTreeNodeImpl implements RefTreeNode {
      * {@link java.lang.Object#equals} properly.
      */
 
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof RefTreeNode)) return false;
         RefTreeNode n = (RefTreeNode) obj;
@@ -254,6 +256,7 @@ public class RefTreeNodeImpl implements RefTreeNode {
     }
 
 
+    @Override
     public int hashCode() {
         return (id == null ? 0 : id.hashCode()) ^ (content == null ? 0 : content.hashCode());
     }

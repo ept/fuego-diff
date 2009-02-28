@@ -85,6 +85,7 @@ public class Segment<E> {
     }
 
 
+    @Override
     public String toString() {
         String insstr = ins != null ? ins.toString() : null;
         if (insstr != null && insstr.length() > 48)

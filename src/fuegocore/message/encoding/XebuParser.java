@@ -18,8 +18,6 @@ import java.io.Reader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import fuegocore.util.Util;
@@ -139,7 +137,7 @@ public class XebuParser extends ContentDecoder implements TypedXmlParser {
 
     private int readTypedToken() throws IOException {
         if (offset < typedData.length()) {
-            return (int) typedData.charAt(offset++);
+            return typedData.charAt(offset++);
         } else {
             return readToken();
         }
@@ -1196,6 +1194,7 @@ public class XebuParser extends ContentDecoder implements TypedXmlParser {
     }
 
 
+    @Override
     public Object decode(String typeNs, String typeName, XmlReader reader, EventList attributes) {
         Object result = null;
         // System.out.println("decode(" + typeNs + "," + typeName + "," + reader

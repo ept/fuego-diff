@@ -81,6 +81,7 @@ public class StringKey implements Key {
 
 
     /** @inheritDoc */
+    @Override
     public boolean equals(Object obj) {
         // NOTE: We don't want equals to succeed with String, because we can't
         // make
@@ -93,12 +94,14 @@ public class StringKey implements Key {
 
 
     /** @inheritDoc */
+    @Override
     public int hashCode() {
         return key == null ? 0x0 : key.hashCode() ^ 0xdead;
     }
 
 
     /** @inheritDoc */
+    @Override
     public String toString() {
         return key == null ? null : key;
     }
@@ -109,17 +112,20 @@ public class StringKey implements Key {
      */
     public static class UniqueStringKey extends StringKey {
 
+        @Override
         public boolean equals(Object obj) {
             return obj == this;
         }
 
 
+        @Override
         public int hashCode() {
             return System.identityHashCode(this);
         }
 
 
         // NOTE: Serialized form is not necessarily unique
+        @Override
         public String toString() {
             return "#" + hashCode();
         }

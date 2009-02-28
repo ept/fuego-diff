@@ -28,6 +28,7 @@ public class XasBridgeTarget extends XmlPullTarget {
     }
 
 
+    @Override
     public void append(Item item) throws IOException {
         if (TypedItem.isTyped(item)) {
             TypedItem ti = (TypedItem) item;

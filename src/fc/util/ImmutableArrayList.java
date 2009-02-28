@@ -59,6 +59,7 @@ public class ImmutableArrayList<E> implements List<E> {
     }
 
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < len; i++) {
@@ -114,6 +115,7 @@ public class ImmutableArrayList<E> implements List<E> {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         throw new UnsupportedOperationException();
     }

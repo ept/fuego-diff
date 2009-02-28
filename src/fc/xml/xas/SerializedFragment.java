@@ -66,6 +66,7 @@ public class SerializedFragment extends FragmentItem implements SerializableItem
     }
 
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("SerF(type=");
         sb.append(type);

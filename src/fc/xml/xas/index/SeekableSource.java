@@ -36,6 +36,8 @@ public interface SeekableSource extends ItemSource {
      * 
      * 
      * 
+     * 
+     * 
      * int pos = source.getCurrentPosition();
      * Item i = source.next();
      * </pre>
@@ -43,6 +45,8 @@ public interface SeekableSource extends ItemSource {
      * and
      * 
      * <pre>
+     * 
+     * 
      * 
      * 
      * 

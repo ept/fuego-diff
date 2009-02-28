@@ -11,6 +11,7 @@ package fc.xml.xas.index;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.FragmentPointer;
 import fc.xml.xas.StartTag;
 import fc.xml.xas.Verifier;
@@ -35,8 +36,8 @@ public class VersionNode {
     private VersionNode make(Kind kind, DeweyKey source, FragmentPointer sourcePointer,
                              DeweyKey target, FragmentPointer targetPointer, boolean isAfter) {
         Verifier.checkNull(this.kind);
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("make(" + kind + "," + source + "," + target + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("make(" + kind + "," + source + "," + target + ")", LogLevels.TRACE);
         }
         this.kind = kind;
         this.source = source;
@@ -237,6 +238,7 @@ public class VersionNode {
     }
 
 
+    @Override
     public String toString() {
         return "Ver(" + kind + "," + source + (target != null ? "," + target : "") + "," + isAfter +
                ")";

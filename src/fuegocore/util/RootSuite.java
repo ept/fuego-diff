@@ -49,6 +49,7 @@ public class RootSuite extends TestCase {
      * A useful place to set up resources needed by the tests. Once for each test. Also _the_ place
      * to initialize any instance variables or other data needed for tests.
      */
+    @Override
     protected void setUp() {
     }
 
@@ -57,6 +58,7 @@ public class RootSuite extends TestCase {
      * May be defined in any class and it is called after each test method has been executed. A
      * useful place to free the resources from method setUp(). Once for each test.
      */
+    @Override
     protected void tearDown() {
     }
 

@@ -22,6 +22,7 @@ public class QueueTest extends TestCase {
     private Queue queue;
 
 
+    @Override
     protected void setUp() {
         queue = new Queue();
     }

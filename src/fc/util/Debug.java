@@ -322,6 +322,7 @@ public class Debug {
             final long l = since(handle);
             return new Object() {
 
+                @Override
                 public String toString() {
                     return l == -1 ? "n/a" : String.valueOf(l) + " msec";
                 }
@@ -387,6 +388,7 @@ public class Debug {
             final long l = get(handle);
             return new Object() {
 
+                @Override
                 public String toString() {
                     return l == NO_VALUE ? "n/a" : String.valueOf(l);
                 }

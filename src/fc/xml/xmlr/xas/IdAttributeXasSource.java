@@ -228,11 +228,13 @@ public abstract class IdAttributeXasSource implements RandomAccessSource<Key> {
         }
 
 
+        @Override
         protected GlobalPointer lookup(Key id) {
             return index.get(id);
         }
 
 
+        @Override
         protected void initLookup(Document xd) {
             index = new HashMap<Key, GlobalPointer>();
             try {

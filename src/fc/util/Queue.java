@@ -97,6 +97,7 @@ public class Queue {
     }
 
 
+    @Override
     public String toString() {
         Node node = head;
         StringBuffer result = new StringBuffer("[");

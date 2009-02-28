@@ -26,6 +26,7 @@ public class Comment extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -38,6 +39,7 @@ public class Comment extends Item {
     }
 
 
+    @Override
     public String toString() {
         return "C(" + text + ")";
     }

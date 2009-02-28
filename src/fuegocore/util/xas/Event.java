@@ -299,6 +299,7 @@ public class Event {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         boolean equal = false;
         if (o instanceof Event) {
@@ -310,11 +311,13 @@ public class Event {
     }
 
 
+    @Override
     public int hashCode() {
         return type ^ Util.hashCode(namespace) ^ Util.hashCode(name) ^ Util.hashCode(value);
     }
 
 
+    @Override
     public String toString() {
         switch (type) {
             case START_DOCUMENT:

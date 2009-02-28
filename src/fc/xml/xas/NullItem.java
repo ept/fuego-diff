@@ -40,16 +40,19 @@ public class NullItem extends Item implements AppendableItem {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o == instance;
     }
 
 
+    @Override
     public int hashCode() {
         return NULL;
     }
 
 
+    @Override
     public String toString() {
         return "NI()";
     }

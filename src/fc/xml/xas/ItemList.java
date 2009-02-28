@@ -71,6 +71,7 @@ public class ItemList implements Iterable<Item>, ItemTarget {
     }
 
 
+    @Override
     public int hashCode() {
         return items.hashCode();
     }
@@ -81,6 +82,7 @@ public class ItemList implements Iterable<Item>, ItemTarget {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -93,6 +95,7 @@ public class ItemList implements Iterable<Item>, ItemTarget {
     }
 
 
+    @Override
     public String toString() {
         return items.toString();
     }

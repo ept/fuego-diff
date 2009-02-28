@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 /**
  * Rolling window matcher. Should be wickedly fast for small changes. Inspired by rsync algorithms.
@@ -78,7 +79,7 @@ public class GlMatcher<E> {
 
     // Test position() consistency
     private static final <E> boolean _testPositionConsistency(List<Segment<E>> ml) {
-        Log.log("testing position list consistency", Log.INFO);
+        Log.log("testing position list consistency", LogLevels.INFO);
         int pos = 0;
         for (Segment<E> s : ml) {
             if (pos != s.getPosition()) return false;
@@ -229,10 +230,10 @@ public class GlMatcher<E> {
             // Flush any collated inserts
             if (collatedIns != null && (scanpos == -1 || !i.hasNext() || match != null)) {
                 int origin = collatedIns.getOffset();
-                collatedIns = collatedIns.createIns(origin + m.getOffset(),
-                                                    m.getInsert().subList(origin,
-                                                                          origin + collatedLen),
-                                                    origin + m.getPosition());
+                collatedIns = Segment.createIns(
+                                                origin + m.getOffset(),
+                                                m.getInsert().subList(origin, origin + collatedLen),
+                                                origin + m.getPosition());
                 i.add(collatedIns);
                 collatedIns = null;
             }
@@ -282,7 +283,8 @@ public class GlMatcher<E> {
                 if (tokenBoundaries != null) {
                     int start = -1, end = -1, regionMax = region.getOffset() + region.getLength(), regionMin = region.getOffset();
                     Log.log("Unaligned match is " +
-                            region.getInsert().subList(offlen[0], offlen[0] + offlen[1]), Log.INFO);
+                            region.getInsert().subList(offlen[0], offlen[0] + offlen[1]),
+                            LogLevels.INFO);
                     // Try alignment on token boundaries
                     // Determine low
                     {
@@ -325,7 +327,8 @@ public class GlMatcher<E> {
                     assert (region.getLength() == region.getInsert().size());
                     // Log.log("=== off "+offlen[0]+", len="+offlen[1],Log.INFO);
                     Log.log("Aligned match is " +
-                            region.getInsert().subList(offlen[0], offlen[0] + offlen[1]), Log.INFO);
+                            region.getInsert().subList(offlen[0], offlen[0] + offlen[1]),
+                            LogLevels.INFO);
                 }
                 baseRegions.remove(i); // NOTE: i.remove() is wrong; watch out
                 // for this

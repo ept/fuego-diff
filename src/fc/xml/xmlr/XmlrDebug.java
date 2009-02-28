@@ -19,6 +19,7 @@ import fc.util.CompareUtil;
 import fc.util.Debug;
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xmlr.model.TransientKey;
 
 /** Various utility functions to aid debugging. */
@@ -102,14 +103,14 @@ public class XmlrDebug {
             throws NodeNotFoundException {
         if (r1 == null || r2 == null) {
             Log.log("A node is missing, id=" + (r1 == null ? r2.getId() : r1.getId()) + " tree " +
-                    (r1 == null ? "1" : "2"), Log.ERROR);
+                    (r1 == null ? "1" : "2"), LogLevels.ERROR);
             return fc + 1;
         }
         if (idcmp.compare(r1.getId(), r2.getId()) != 0) {
             if (flagerrors) {
-                Log.log("ID mismatch: " + r1.getId() + ", " + r2.getId(), Log.ERROR);
+                Log.log("ID mismatch: " + r1.getId() + ", " + r2.getId(), LogLevels.ERROR);
                 Log.log("ID classes: " + r1.getId().getClass() + ", " + r2.getId().getClass(),
-                        Log.FATALERROR);
+                        LogLevels.FATALERROR);
             }
 
             fc++;
@@ -125,7 +126,7 @@ public class XmlrDebug {
                 if (flagerrors)
                     Log.log("Content mismatch at key " + r1.getId() + ": " +
                             Debug.toString(r1.getContent()) + "<->" +
-                            Debug.toString(r2.getContent()), Log.FATALERROR);
+                            Debug.toString(r2.getContent()), LogLevels.FATALERROR);
                 fc++;
             }
         }
@@ -140,7 +141,7 @@ public class XmlrDebug {
         r2cc = r2Index.size();
         for (Iterator i = r1.getChildIterator(); i.hasNext();) {
             RefTreeNode n = (RefTreeNode) i.next();
-            Key mappedid = (Key) map.getDestId(n);
+            Key mappedid = map.getDestId(n);
             fc = treeComp(n, (RefTreeNode) r2Index.get(mappedid), map, fc, idcmp, contentAsStrings,
                           flagerrors);
             r1cc++;
@@ -148,7 +149,7 @@ public class XmlrDebug {
         if (r1cc != r2cc) {
             if (flagerrors)
                 Log.log("Childcount mismatch below " + r1.getId() + " (counts are " + r1cc + "," +
-                        r2cc + ")", Log.FATALERROR);
+                        r2cc + ")", LogLevels.FATALERROR);
             return fc++;
         }
         return fc;
@@ -207,14 +208,14 @@ public class XmlrDebug {
      */
 
     public static void dumpTree(RefTree t) {
-        if (!Log.isEnabled(Log.DEBUG)) return;
-        dumpTree(t, new PrintStream(Log.getLogStream(Log.DEBUG)));
+        if (!Log.isEnabled(LogLevels.DEBUG)) return;
+        dumpTree(t, new PrintStream(Log.getLogStream(LogLevels.DEBUG)));
     }
 
 
     public static void dumpTree(RefTree t, Class keyClass) {
-        if (!Log.isEnabled(Log.DEBUG)) return;
-        dumpTree(t.getRoot(), keyClass, 0, new PrintStream(Log.getLogStream(Log.DEBUG)));
+        if (!Log.isEnabled(LogLevels.DEBUG)) return;
+        dumpTree(t.getRoot(), keyClass, 0, new PrintStream(Log.getLogStream(LogLevels.DEBUG)));
     }
 
 

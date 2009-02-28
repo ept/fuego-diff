@@ -26,6 +26,7 @@ import java.util.Properties;
 import junit.framework.TestCase;
 import fc.util.IOUtil;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 public class BenchMark extends TestCase {
 
@@ -44,11 +45,11 @@ public class BenchMark extends TestCase {
             }
             System.setProperties(setup);
         } catch (IOException ex) {
-            Log.log("Can't load settings", Log.FATALERROR);
+            Log.log("Can't load settings", LogLevels.FATALERROR);
         }
         workDir = new File(setup.getProperty("workdir", "+tmp-test"));
         if (!workDir.exists() && !workDir.mkdir())
-            Log.log("Can't create workdir " + workDir, Log.FATALERROR);
+            Log.log("Can't create workdir " + workDir, LogLevels.FATALERROR);
     }
 
 
@@ -78,22 +79,23 @@ public class BenchMark extends TestCase {
                     }
                     final Thread runner = new Thread() {
 
+                        @Override
                         public void run() {
                             try {
                                 main.invoke(null, new Object[] { args });
                             } catch (InvocationTargetException ex) {
                                 if (ex.getCause() instanceof ThreadDeath) Log.log(
                                                                                   "Killed by timeout",
-                                                                                  Log.WARNING);
-                                else Log.log("Exception executing " + program, Log.ERROR, ex);
+                                                                                  LogLevels.WARNING);
+                                else Log.log("Exception executing " + program, LogLevels.ERROR, ex);
                             } catch (IllegalArgumentException ex) {
-                                Log.log("Exception executing " + program, Log.ERROR, ex);
+                                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
                             } catch (IllegalAccessException ex) {
-                                Log.log("Exception executing " + program, Log.ERROR, ex);
+                                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
                             } catch (ThreadDeath ex) {
-                                Log.log("Killed by timeout", Log.WARNING);
+                                Log.log("Killed by timeout", LogLevels.WARNING);
                             } catch (Throwable ex) {
-                                Log.log("Exception executing " + program, Log.ERROR, ex);
+                                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
                             }
                         }
                     };
@@ -124,11 +126,11 @@ public class BenchMark extends TestCase {
                     }
                 }
             } catch (SecurityException ex) {
-                Log.log("Exception executing " + program, Log.ERROR, ex);
+                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
             } catch (NoSuchMethodException ex) {
-                Log.log("Exception executing " + program, Log.ERROR, ex);
+                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
             } catch (ClassNotFoundException ex) {
-                Log.log("Exception executing " + program, Log.ERROR, ex);
+                Log.log("Exception executing " + program, LogLevels.ERROR, ex);
             }
         } else {
             // Log.log("SPAWN: "+program+" to "+timeout,Log.INFO);
@@ -145,11 +147,12 @@ public class BenchMark extends TestCase {
             final Thread mainThread = Thread.currentThread();
             Thread watchDog = new Thread() {
 
+                @Override
                 public void run() {
                     try {
                         // Log.log("Watchdog sleeping " + timeout, Log.INFO);
                         Thread.sleep(timeout);
-                        Log.log("Interrupting process.", Log.WARNING);
+                        Log.log("Interrupting process.", LogLevels.WARNING);
                         mainThread.interrupt();// mainThread.interrupt();
                     } catch (InterruptedException ex) {
                         ; // Log.log("Watchdog done " + timeout, Log.INFO);
@@ -159,20 +162,21 @@ public class BenchMark extends TestCase {
             watchDog.start();
             (new Thread() {
 
+                @Override
                 public void run() {
                     OutputStream lout = System.out;
                     try {
                         if (logFile != null) lout = new FileOutputStream(logFile);
                         IOUtil.copyStream(stderr ? p.getErrorStream() : p.getInputStream(), lout);
                     } catch (IOException ex) {
-                        Log.log("Error copying process out", Log.ERROR);
+                        Log.log("Error copying process out", LogLevels.ERROR);
                     } finally {
                         if (logFile != null) {
                             try {
                                 lout.flush();
                                 lout.close();
                             } catch (IOException ex) {
-                                Log.log("Cannot close log-out", Log.ERROR);
+                                Log.log("Cannot close log-out", LogLevels.ERROR);
                             }
                         }
                     }
@@ -184,7 +188,7 @@ public class BenchMark extends TestCase {
                 getSetProperty("killed", 0);
                 // Log.log("Ending wait4",Log.INFO);
             } catch (InterruptedException ex) {
-                Log.log("Timeout of " + program + ", now I kill it", Log.WARNING);
+                Log.log("Timeout of " + program + ", now I kill it", LogLevels.WARNING);
                 p.destroy();
                 getSetProperty("killed", 1);
             }

@@ -342,11 +342,13 @@ public final class DeweyKey {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * Util.hashCode(parent) + value;
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -359,6 +361,7 @@ public final class DeweyKey {
     }
 
 
+    @Override
     public String toString() {
         if (isRoot()) {
             return "/";

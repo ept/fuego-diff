@@ -90,6 +90,7 @@ public class ParsedPrimitive extends Item implements SerializableItem {
     }
 
 
+    @Override
     public int hashCode() {
         int result = typeName.hashCode();
         if (value != null) {
@@ -108,6 +109,7 @@ public class ParsedPrimitive extends Item implements SerializableItem {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -124,6 +126,7 @@ public class ParsedPrimitive extends Item implements SerializableItem {
     }
 
 
+    @Override
     public String toString() {
         return "PP(" + String.valueOf(value) + ": " + typeName + ")";
     }

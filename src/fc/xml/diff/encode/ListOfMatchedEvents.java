@@ -100,6 +100,7 @@ public class ListOfMatchedEvents implements ItemSource {
     }
 
 
+    @Override
     public boolean equals(Object obj) {
         throw new UnsupportedOperationException();
         /*
@@ -108,11 +109,13 @@ public class ListOfMatchedEvents implements ItemSource {
     }
 
 
+    @Override
     public String toString() {
         return el.toString();
     }
 
 
+    @Override
     public int hashCode() {
         return el.hashCode();
     }

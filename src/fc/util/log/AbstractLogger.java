@@ -31,14 +31,14 @@ public abstract class AbstractLogger implements Logger {
      * values for this property are given by each log level in {@link LogLevels}. It may be freely
      * changed at run time with the changes being visible in the object's behavior.
      */
-    protected int minLevel = Logger.INFO;
+    protected int minLevel = LogLevels.INFO;
 
 
     protected AbstractLogger() {
         String level = System.getProperty(PROPERTY_LEVEL);
         if (level != null) {
-            for (int i = 0; i < Logger.names.length; i++) {
-                if (level.equals(Logger.names[i])) {
+            for (int i = 0; i < LogLevels.names.length; i++) {
+                if (level.equals(LogLevels.names[i])) {
                     minLevel = i;
                     break;
                 }
@@ -95,77 +95,77 @@ public abstract class AbstractLogger implements Logger {
 
 
     public void debug(Object message) {
-        log(message, Log.DEBUG);
+        log(message, LogLevels.DEBUG);
     }
 
 
     public void debug(Object message, Throwable cause) {
-        log(message, Log.DEBUG, cause);
+        log(message, LogLevels.DEBUG, cause);
     }
 
 
     public void debug(Object message, Object data) {
-        log(message, Log.DEBUG, data);
+        log(message, LogLevels.DEBUG, data);
     }
 
 
     public void info(Object message) {
-        log(message, Log.INFO);
+        log(message, LogLevels.INFO);
     }
 
 
     public void info(Object message, Throwable cause) {
-        log(message, Log.INFO, cause);
+        log(message, LogLevels.INFO, cause);
     }
 
 
     public void info(Object message, Object data) {
-        log(message, Log.INFO, data);
+        log(message, LogLevels.INFO, data);
     }
 
 
     public void warning(Object message) {
-        log(message, Log.WARNING);
+        log(message, LogLevels.WARNING);
     }
 
 
     public void warning(Object message, Throwable cause) {
-        log(message, Log.WARNING, cause);
+        log(message, LogLevels.WARNING, cause);
     }
 
 
     public void warning(Object message, Object data) {
-        log(message, Log.WARNING, data);
+        log(message, LogLevels.WARNING, data);
     }
 
 
     public void error(Object message) {
-        log(message, Log.ERROR);
+        log(message, LogLevels.ERROR);
     }
 
 
     public void error(Object message, Throwable cause) {
-        log(message, Log.ERROR, cause);
+        log(message, LogLevels.ERROR, cause);
     }
 
 
     public void error(Object message, Object data) {
-        log(message, Log.ERROR, data);
+        log(message, LogLevels.ERROR, data);
     }
 
 
     public void fatal(Object message) {
-        log(message, Log.FATALERROR);
+        log(message, LogLevels.FATALERROR);
     }
 
 
     public void fatal(Object message, Throwable cause) {
-        log(message, Log.FATALERROR, cause);
+        log(message, LogLevels.FATALERROR, cause);
     }
 
 
     public void fatal(Object message, Object data) {
-        log(message, Log.FATALERROR, data);
+        log(message, LogLevels.FATALERROR, data);
     }
 
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import fc.util.Measurer;
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.AttributeNode;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemSource;
@@ -74,7 +75,7 @@ public class DecodeSource implements ItemSource {
             }
             addToBuffer(item);
         }
-        if (Log.isEnabled(Log.TRACE)) {
+        if (Log.isEnabled(LogLevels.TRACE)) {
             Log.trace("Stack state, top = " + stackTop, tagStack);
             Log.trace("Buffer state, index=" + index + ",end=" + end, buffer);
         }
@@ -83,7 +84,7 @@ public class DecodeSource implements ItemSource {
         AttributeNode an = st.getAttribute(XasUtil.XSI_TYPE);
         ParsedPrimitive pp = (ParsedPrimitive) an.getValue();
         Qname typeName = (Qname) pp.getValue();
-        if (Log.isEnabled(Log.DEBUG)) {
+        if (Log.isEnabled(LogLevels.DEBUG)) {
             Log.debug("Trying to decode type", typeName);
         }
         ValueCodec codec = Codec.getValueCodec(typeName);
@@ -92,7 +93,7 @@ public class DecodeSource implements ItemSource {
             Object result = codec.decode(typeName,
                                          new XasUtil.ArraySource(buffer, top + 1, end - 1));
             Measurer.get(Measurer.TIMING).finish(token, "Complex type decoding");
-            if (Log.isEnabled(Log.DEBUG)) {
+            if (Log.isEnabled(LogLevels.DEBUG)) {
                 Log.debug("Decoder found with result", result);
             }
             if (result != null) {
@@ -129,7 +130,7 @@ public class DecodeSource implements ItemSource {
                 buffer.clear();
                 index = end = 0;
             }
-            if (Log.isEnabled(Log.TRACE)) {
+            if (Log.isEnabled(LogLevels.TRACE)) {
                 Log.trace("Returning buffered item", item);
             }
             return item;
@@ -139,7 +140,7 @@ public class DecodeSource implements ItemSource {
                 parseToBuffer(item);
                 index = 1;
             }
-            if (Log.isEnabled(Log.TRACE)) {
+            if (Log.isEnabled(LogLevels.TRACE)) {
                 Log.trace("Returning normal item", item);
             }
             return item;

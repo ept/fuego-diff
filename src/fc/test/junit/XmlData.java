@@ -26,19 +26,16 @@ import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.params.RSAKeyParameters;
 import org.kxml2.io.KXmlParser;
 
-import fc.util.Util;
 import fc.xml.xas.EndDocument;
 import fc.xml.xas.EndTag;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemList;
 import fc.xml.xas.ItemSource;
 import fc.xml.xas.ItemTarget;
-import fc.xml.xas.MutableFragmentPointer;
 import fc.xml.xas.Qname;
 import fc.xml.xas.Queryable;
 import fc.xml.xas.StartDocument;
 import fc.xml.xas.StartTag;
-import fc.xml.xas.Text;
 import fc.xml.xas.XasFragment;
 import fc.xml.xas.XasUtil;
 import fc.xml.xas.XmlPullSource;
@@ -245,11 +242,13 @@ public class XmlData {
         }
 
 
+        @Override
         public int hashCode() {
             return name.hashCode() ^ age ^ birthday.hashCode();
         }
 
 
+        @Override
         public boolean equals(Object o) {
             if (o instanceof Person) {
                 Person p = (Person) o;
@@ -260,6 +259,7 @@ public class XmlData {
         }
 
 
+        @Override
         public String toString() {
             return "Person(name=" + name + ",age=" + age + ",birthday=" + birthday + ")";
         }

@@ -67,6 +67,7 @@ public class Doctype extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -80,11 +81,13 @@ public class Doctype extends Item {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * (37 * name.hashCode() + systemId.hashCode()) + Util.hashCode(publicId);
     }
 
 
+    @Override
     public String toString() {
         return "DTD(" + name + (publicId != null ? " PUBLIC=" + publicId : "") + " SYSTEM=" +
                systemId + ")";

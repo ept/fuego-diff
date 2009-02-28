@@ -20,6 +20,7 @@ import java.util.Stack;
 import fc.util.IOUtil;
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.FragmentItem;
 import fc.xml.xas.FragmentPointer;
 import fc.xml.xas.Item;
@@ -60,9 +61,9 @@ public class LazyFragment extends FragmentItem implements Queryable {
         super(LAZY_FRAGMENT, 1);
         Verifier.checkNotNull(firstItem);
         Verifier.checkNotFragment(firstItem);
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("LazyFragment(" + key + ", " + firstItem + ")", Log.TRACE);
-            Log.log("entry=" + index.find(key), Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("LazyFragment(" + key + ", " + firstItem + ")", LogLevels.TRACE);
+            Log.log("entry=" + index.find(key), LogLevels.TRACE);
         }
         this.index = index;
         this.key = key;
@@ -72,9 +73,9 @@ public class LazyFragment extends FragmentItem implements Queryable {
 
     private static void copyStream(InputStream in, String inEncoding, int length, OutputStream out,
                                    String outEncoding) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
+        if (Log.isEnabled(LogLevels.TRACE)) {
             Log.log("copyStream(" + in + ", " + inEncoding + ", " + length + ", " + out + ", " +
-                    outEncoding + ")", Log.TRACE);
+                    outEncoding + ")", LogLevels.TRACE);
         }
         if (inEncoding.equalsIgnoreCase(outEncoding)) {
             IOUtil.copyStream(in, out, length);
@@ -92,6 +93,7 @@ public class LazyFragment extends FragmentItem implements Queryable {
     }
 
 
+    @Override
     public void appendTo(ItemTarget target) throws IOException {
         Verifier.checkNotNull(target);
         if (isEvaluated()) {
@@ -138,8 +140,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
      *             if parsing the external source during forcing fails
      */
     public void force(int depth) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("force(" + depth + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("force(" + depth + ")", LogLevels.TRACE);
         }
         if (depth <= 0 || isEvaluated()) { return; }
         items = new ArrayList<Item>();
@@ -149,19 +151,20 @@ public class LazyFragment extends FragmentItem implements Queryable {
         boolean isText = false;
         SeekableSource source = index.getSource();
         Index.Entry entry = index.find(key);
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("entry=" + entry, Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("entry=" + entry, LogLevels.TRACE);
         }
         source.setPosition(entry.getOffset(), entry.getContext());
         int end = entry.getEnd();
         while (source.getCurrentPosition() < end) {
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("force, pos=" + source.getCurrentPosition() + ", end=" + end, Log.TRACE);
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("force, pos=" + source.getCurrentPosition() + ", end=" + end,
+                        LogLevels.TRACE);
             }
             if (current < depth) {
                 Item item = source.next();
-                if (Log.isEnabled(Log.TRACE)) {
-                    Log.log("Item: " + item, Log.TRACE);
+                if (Log.isEnabled(LogLevels.TRACE)) {
+                    Log.log("Item: " + item, LogLevels.TRACE);
                 }
                 if (Item.isStartTag(item)) {
                     stack.push((StartTag) item);
@@ -199,8 +202,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
 
 
     private void passLevel(DeweyKey k, StartTag context, int end) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("passLevel(" + k + ", " + end + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("passLevel(" + k + ", " + end + ")", LogLevels.TRACE);
         }
         SeekableSource source = index.getSource();
         boolean isText = false;
@@ -252,15 +255,15 @@ public class LazyFragment extends FragmentItem implements Queryable {
 
 
     private void passUntil(DeweyKey k, StartTag context, int end) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("passUntil(" + k + ", " + context + ", " + end + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("passUntil(" + k + ", " + context + ", " + end + ")", LogLevels.TRACE);
         }
         SeekableSource source = index.getSource();
         boolean isText = false;
         while (source.getCurrentPosition() < end) {
             Item item = source.next();
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("passUntil, item=" + item, Log.TRACE);
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("passUntil, item=" + item, LogLevels.TRACE);
             }
             if (isText && !Item.isContent(item)) {
                 k = k.next();
@@ -269,8 +272,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
             if (Item.isStartTag(item)) {
                 Index.Entry entry = index.find(k);
                 if (entry != null) {
-                    if (Log.isEnabled(Log.TRACE)) {
-                        Log.log("context=" + entry.getContext(), Log.TRACE);
+                    if (Log.isEnabled(LogLevels.TRACE)) {
+                        Log.log("context=" + entry.getContext(), LogLevels.TRACE);
                     }
                     items.add(new LazyFragment(index, k, item));
                     source.setPosition(entry.getEnd(), context);
@@ -306,8 +309,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
 
 
     private FragmentItem forceLevel(List<DeweyKey> l, int i) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("forceLevel(" + l + ", " + i + ")", Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("forceLevel(" + l + ", " + i + ")", LogLevels.TRACE);
         }
         if (i == 0) {
             DeweyKey k = l.get(0);
@@ -324,18 +327,18 @@ public class LazyFragment extends FragmentItem implements Queryable {
             DeweyKey c = l.get(i - 1);
             Index.Entry e = index.find(k);
             Index.Entry ce = index.find(c);
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("Key=" + k + ",entry=" + e, Log.TRACE);
-                Log.log("Child=" + c + ",entry=" + ce, Log.TRACE);
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("Key=" + k + ",entry=" + e, LogLevels.TRACE);
+                Log.log("Child=" + c + ",entry=" + ce, LogLevels.TRACE);
             }
             SeekableSource source = index.getSource();
             source.setPosition(e.getOffset(), e.getContext());
             items.add(source.next());
             passUntil(k.down(), ce.getContext(), ce.getOffset());
             FragmentItem result = forceLevel(l, i - 1);
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("Key=" + k + ",entry=" + e, Log.TRACE);
-                Log.log("Child=" + c + ",entry=" + ce, Log.TRACE);
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("Key=" + k + ",entry=" + e, LogLevels.TRACE);
+                Log.log("Child=" + c + ",entry=" + ce, LogLevels.TRACE);
             }
             source.setPosition(ce.getEnd(), ce.getContext());
             passUntil(c.next(), ce.getContext(), e.getEnd());
@@ -357,8 +360,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
      *             if parsing the external source during forcing fails
      */
     public FragmentItem force(DeweyKey k) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("force(" + k + "), key=" + key, Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("force(" + k + "), key=" + key, LogLevels.TRACE);
         }
         if (isEvaluated()) {
             return null;
@@ -402,8 +405,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
 
 
     FragmentPointer query(FragmentPointer pointer, int[] path) {
-        if (Log.isEnabled(Log.TRACE)) {
-            Log.log("query(" + Arrays.toString(path) + "),this=" + this, Log.TRACE);
+        if (Log.isEnabled(LogLevels.TRACE)) {
+            Log.log("query(" + Arrays.toString(path) + "),this=" + this, LogLevels.TRACE);
         }
         int offset = key.size();
         if (!isEvaluated()) {
@@ -439,8 +442,8 @@ public class LazyFragment extends FragmentItem implements Queryable {
                 pointer.advanceLevel();
             }
             item = pointer.get();
-            if (Log.isEnabled(Log.TRACE)) {
-                Log.log("Item(" + i + "," + path[i] + ")=" + item, Log.TRACE);
+            if (Log.isEnabled(LogLevels.TRACE)) {
+                Log.log("Item(" + i + "," + path[i] + ")=" + item, LogLevels.TRACE);
             }
             if (Item.isEndItem(item)) { return null; }
         }
@@ -467,6 +470,7 @@ public class LazyFragment extends FragmentItem implements Queryable {
     }
 
 
+    @Override
     public String toString() {
         return "LF(" + key + "," + firstItem + "," +
                (isEvaluated() ? "size=" + items.size() : " (unforced)") + ")";

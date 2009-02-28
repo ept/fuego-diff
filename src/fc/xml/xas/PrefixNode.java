@@ -100,6 +100,7 @@ public class PrefixNode implements Comparable<PrefixNode> {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -112,6 +113,7 @@ public class PrefixNode implements Comparable<PrefixNode> {
     }
 
 
+    @Override
     public int hashCode() {
         return 0x1234 + namespace.hashCode();
     }
@@ -123,6 +125,7 @@ public class PrefixNode implements Comparable<PrefixNode> {
     }
 
 
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder("{" + prefix + "=" + namespace + "}");
         if (next != null) {

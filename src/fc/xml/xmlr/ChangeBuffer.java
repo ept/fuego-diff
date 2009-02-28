@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import fc.util.Util;
-import fc.util.log.Log;
 
 /**
  * A mutable reftree that buffers changes as a reftree. The class implements a mutable reftree that
@@ -336,7 +335,7 @@ public class ChangeBuffer extends DerefRefTree implements MutableRefTree, BatchM
 
     protected void addToDeletia(RefTreeNode n) {
         if (n.isReference()) {
-            Key target = ((RefTreeNode) n).getReference().getTarget();
+            Key target = n.getReference().getTarget();
             if (n.isNodeRef()) delNodes.add(target);
             else delRoots.add(target);
         } else {

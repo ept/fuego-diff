@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-import fc.util.log.Log;
 import fc.xml.diff.Segment;
 import fc.xml.xas.Item;
 import fc.xml.xas.Qname;

@@ -21,6 +21,7 @@ public class CoalescedEventSequence extends TransformedEventStream {
     private StringBuffer content = new StringBuffer();
 
 
+    @Override
     protected void transform(Event ev, EventList el, XmlReader xr) {
         if (ev != null) {
             if (ev.getType() == Event.CONTENT) {

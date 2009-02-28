@@ -11,8 +11,6 @@ package fc.xml.xmlr;
 
 import java.util.Iterator;
 
-import fc.util.log.Log;
-
 /**
  * Miscellaneous XMLR utilities.
  */

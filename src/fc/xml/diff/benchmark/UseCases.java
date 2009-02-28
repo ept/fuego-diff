@@ -21,6 +21,7 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import junit.framework.Assert;
 
 public class UseCases extends BenchMark {
@@ -124,7 +125,7 @@ public class UseCases extends BenchMark {
                  (long) (1000 * getSetProperty("timeout", 1000000000.0)));
         } catch (Exception ex) {
             fail++;
-            Log.log("FAILED: ", Log.ERROR, ex);
+            Log.log("FAILED: ", LogLevels.ERROR, ex);
             return;
         }
         System.setProperty("lap.time", String.valueOf(System.currentTimeMillis() - now));

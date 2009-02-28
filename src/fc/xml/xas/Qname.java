@@ -33,6 +33,7 @@ public final class Qname implements Comparable<Qname> {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -45,6 +46,7 @@ public final class Qname implements Comparable<Qname> {
     }
 
 
+    @Override
     public int hashCode() {
         return name.hashCode() ^ namespace.hashCode();
     }
@@ -60,6 +62,7 @@ public final class Qname implements Comparable<Qname> {
     }
 
 
+    @Override
     public String toString() {
         return "{" + namespace + "}" + name;
     }

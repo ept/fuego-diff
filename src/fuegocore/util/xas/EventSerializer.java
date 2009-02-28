@@ -198,6 +198,7 @@ public class EventSerializer implements TypedXmlSerializer {
     }
 
 
+    @Override
     public String toString() {
         return current.toString();
     }

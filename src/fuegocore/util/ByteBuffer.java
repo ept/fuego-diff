@@ -484,6 +484,7 @@ public final class ByteBuffer implements Serializable {
      * modifications to this buffer do not affect the String.
      * @return the characters in this ByteBuffer
      */
+    @Override
     public String toString() {
         // The string will set this.shared = true.
         return new String(this.value, 0, count);

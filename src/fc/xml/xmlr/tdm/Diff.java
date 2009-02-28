@@ -24,6 +24,7 @@ import java.util.Stack;
 
 import tdm.lib.DiffAlgorithm;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.AttributeNode;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemSource;
@@ -349,7 +350,7 @@ public class Diff implements RefTree {
 
 
         public RefTreeDiffer(IdAddressableRefTree base, SequenceTester st) {
-            if (base != null && st != null) Log.log("Either must be null", Log.ASSERTFAILED);
+            if (base != null && st != null) Log.log("Either must be null", LogLevels.ASSERTFAILED);
             this.base = base;
             this.st = st;
         }
@@ -360,6 +361,7 @@ public class Diff implements RefTree {
         }
 
 
+        @Override
         protected List getStopNodes(Object changeNode) {
             RefTreeNode n = ((RefTreeNode) changeNode);
             List l = null;
@@ -372,6 +374,7 @@ public class Diff implements RefTree {
         }
 
 
+        @Override
         protected Object lookupBase(Object changeNode) {
             RefTreeNode n = ((RefTreeNode) changeNode);
             if (n.isTreeRef()) {
@@ -388,6 +391,7 @@ public class Diff implements RefTree {
         }
 
 
+        @Override
         protected void content(Object node, boolean start) {
             RefTreeNodeImpl n = null;
             if (node instanceof DiffAlgorithm.DiffOperation) {
@@ -410,16 +414,18 @@ public class Diff implements RefTree {
         }
 
 
+        @Override
         protected Iterator getChildIterator(Object changeNode) {
             return ((RefTreeNode) changeNode).getChildIterator();
         }
 
 
+        @Override
         protected boolean appends(Object baseTailO, Object baseNextO) {
             RefTreeNode baseTail = (RefTreeNode) baseTailO;
             RefTreeNode baseNext = (RefTreeNode) baseNextO;
             if (st != null) return st.inSequence(baseTail, baseNext);
-            Key baseId = ((RefTreeNode) baseTail).getId();
+            Key baseId = baseTail.getId();
             Key succ = ensureSuccessor(baseId, successors, base);
             /*
              * if( succ != NO_SUCCESSOR && !succ.equals(baseNext.getId() ) )
@@ -432,7 +438,7 @@ public class Diff implements RefTree {
         protected Key identify(Object node) {
             if (node == DiffAlgorithm.DiffOperation.NO_VALUE) return null;
             if (!(node instanceof RefTreeNode)) {
-                Log.log("Erroneous node class", Log.ASSERTFAILED);
+                Log.log("Erroneous node class", LogLevels.ASSERTFAILED);
                 return StringKey.createKey("ERROR:" + node.toString());
             }
             return ((RefTreeNode) node).getId();
@@ -458,10 +464,11 @@ public class Diff implements RefTree {
                 }
                 succcessors.put(prev, NO_SUCCESSOR);
                 succ = succcessors.get(baseId);
-                if (succ == null) Log.log("Broken parent/child relationship", Log.ASSERTFAILED);
+                if (succ == null)
+                    Log.log("Broken parent/child relationship", LogLevels.ASSERTFAILED);
             }
         } catch (NodeNotFoundException x) {
-            Log.log("Broken reftree", Log.FATALERROR, x); // Not sure how to
+            Log.log("Broken reftree", LogLevels.FATALERROR, x); // Not sure how to
             // report this...
         }
         return succ;
@@ -552,6 +559,7 @@ public class Diff implements RefTree {
         }
 
 
+        @Override
         public String toString() {
             return "diff{" +
                    (operation == COPY ? "cpy" : (operation == INSERT ? "ins"
@@ -686,7 +694,7 @@ public class Diff implements RefTree {
             if (!baseTree.contains(id)) throw new NodeNotFoundException(id);
             ensureSuccessor(id, successors, baseTree);
             left = op.getRun() != null ? op.getRun().longValue() : 1;
-            if (left < 1) Log.log("CS iter should never map to <1 elems.", Log.ASSERTFAILED);
+            if (left < 1) Log.log("CS iter should never map to <1 elems.", LogLevels.ASSERTFAILED);
             this.parent = parent;
         }
 

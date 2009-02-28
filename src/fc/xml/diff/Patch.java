@@ -16,37 +16,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.util.log.StreamLogger;
-import fc.xml.diff.encode.XmlDiffEncoder;
-import fc.xml.xas.AttributeNode;
-import fc.xml.xas.IdentityTransform;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemSource;
 import fc.xml.xas.ItemTarget;
-import fc.xml.xas.ItemTransform;
 import fc.xml.xas.ParserSource;
-import fc.xml.xas.StartTag;
 import fc.xml.xas.TransformSource;
 import fc.xml.xas.TransformTarget;
-import fc.xml.xas.XasDebug;
-import fc.xml.xas.XasUtil;
 import fc.xml.xas.XmlOutput;
 import fc.xml.xas.transform.CoalesceContent;
 import fc.xml.xas.transform.DataItems;
 import fc.xml.xas.transform.NsPrefixFixer;
 import fc.xml.xmlr.IdAddressableRefTree;
 import fc.xml.xmlr.NodeNotFoundException;
-import fc.xml.xmlr.NodeReference;
 import fc.xml.xmlr.RefTree;
 import fc.xml.xmlr.RefTrees;
-import fc.xml.xmlr.TreeReference;
-import fc.xml.xmlr.model.StringKey;
 import fc.xml.xmlr.model.TransientKey;
 import fc.xml.xmlr.model.TreeModel;
 import fc.xml.xmlr.model.TreeModels;
@@ -56,8 +42,6 @@ import fc.xml.xmlr.xas.DeweyRefNode;
 import fc.xml.xmlr.xas.MutableDeweyRefTree;
 import fc.xml.xmlr.xas.PeekableItemSource;
 import fc.xml.xmlr.xas.RefItem;
-import fc.xml.xmlr.xas.RefNodeItem;
-import fc.xml.xmlr.xas.RefTreeItem;
 import fc.xml.xmlr.xas.ReferenceItemTransform;
 import fc.xml.xmlr.xas.XasSerialization;
 
@@ -141,11 +125,11 @@ public class Patch {
             XasSerialization.writeTree(patched, wr, baseXpCC);
             // End verify
         } catch (NodeNotFoundException ex) {
-            Log.log("Patch references illegal node " + ex.getId(), Log.ERROR, ex);
+            Log.log("Patch references illegal node " + ex.getId(), LogLevels.ERROR, ex);
         } catch (FileNotFoundException ex) {
-            Log.log(ex.getMessage(), Log.ERROR);
+            Log.log(ex.getMessage(), LogLevels.ERROR);
         } catch (IOException ex) {
-            Log.log("Patch I/O exception", Log.FATALERROR, ex);
+            Log.log("Patch I/O exception", LogLevels.FATALERROR, ex);
         } finally {
             try {
                 for (InputStream in : new InputStream[] { vBaseIn, vDiffIn })
@@ -153,7 +137,7 @@ public class Patch {
                         in.close();
                     }
             } catch (IOException ex1) {
-                Log.log("Can't close an input file stream", Log.FATALERROR, ex1);
+                Log.log("Can't close an input file stream", LogLevels.FATALERROR, ex1);
             }
         }
     }
@@ -170,7 +154,7 @@ public class Patch {
     public static void main(String[] args) throws IOException {
         Log.setLogger(new StreamLogger(System.err));
         if (args.length < 2) {
-            Log.log("Usage base.xml diff.xml [patched.xml]", Log.ERROR);
+            Log.log("Usage base.xml diff.xml [patched.xml]", LogLevels.ERROR);
             System.exit(1);
         }
         OutputStream dout = System.out;
@@ -178,7 +162,7 @@ public class Patch {
             if (args.length > 2 && !"-".equals(args[2])) dout = new FileOutputStream(args[2]);
             patch(new File(args[0]), new File(args[1]), dout);
         } catch (IOException ex) {
-            Log.log("IO error while patching", Log.ERROR, ex);
+            Log.log("IO error while patching", LogLevels.ERROR, ex);
         } finally {
             if (dout != System.out) dout.close();
         }

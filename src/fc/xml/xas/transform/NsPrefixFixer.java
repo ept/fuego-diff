@@ -12,7 +12,6 @@ package fc.xml.xas.transform;
 import java.io.IOException;
 import java.util.Iterator;
 
-import fc.util.log.Log;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemTransform;
 import fc.xml.xas.PrefixNode;

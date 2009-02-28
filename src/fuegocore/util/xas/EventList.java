@@ -240,6 +240,7 @@ public class EventList implements EventSequence {
      *            the object to compare for equality
      * @return whether <code>o</code> is equal to this object
      */
+    @Override
     public boolean equals(Object o) {
         boolean result = false;
         if (o instanceof EventSequence) {
@@ -249,11 +250,13 @@ public class EventList implements EventSequence {
     }
 
 
+    @Override
     public int hashCode() {
         return XasUtil.sequenceHashCode(this);
     }
 
 
+    @Override
     public String toString() {
         return current.toString();
     }
@@ -325,6 +328,7 @@ public class EventList implements EventSequence {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             boolean result = false;
             if (o instanceof EventSequence) {
@@ -334,11 +338,13 @@ public class EventList implements EventSequence {
         }
 
 
+        @Override
         public int hashCode() {
             return XasUtil.sequenceHashCode(this);
         }
 
 
+        @Override
         public String toString() {
             Vector result = new Vector(high - low);
             for (int i = 0; i < high - low; i++) {

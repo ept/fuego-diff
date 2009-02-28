@@ -26,6 +26,7 @@ public class EndTag extends Item {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -38,11 +39,13 @@ public class EndTag extends Item {
     }
 
 
+    @Override
     public int hashCode() {
         return 37 * END_TAG + name.hashCode();
     }
 
 
+    @Override
     public String toString() {
         return "ET(" + name + ")";
     }

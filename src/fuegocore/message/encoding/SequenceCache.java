@@ -199,6 +199,7 @@ public class SequenceCache {
      * reflects the implementation strongly. It is unintelligible to people not familiar with the
      * internals.
      */
+    @Override
     public String toString() {
         return buffer.toString() + "\n" + indices.toString();
     }

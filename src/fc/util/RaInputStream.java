@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 /**
  * @author Tancred Lindholm
@@ -48,6 +49,7 @@ public class RaInputStream extends InputStream implements SeekableInputStream {
     }
 
 
+    @Override
     public int read() throws IOException {
         if (left <= 0) {
             left = file.read(buffer);
@@ -64,11 +66,13 @@ public class RaInputStream extends InputStream implements SeekableInputStream {
     }
 
 
+    @Override
     public int read(byte[] b) throws IOException {
         return read(b, 0, b.length);
     }
 
 
+    @Override
     public int read(byte[] b, int off, int len) throws IOException {
         if (left > 0) {
             // First, return any bytes left in internal buffer
@@ -107,15 +111,16 @@ public class RaInputStream extends InputStream implements SeekableInputStream {
     }
 
 
+    @Override
     public void close() throws IOException {
         file.close();
     }
 
 
     public void seek(long pos) throws IOException {
-        if (Log.isEnabled(Log.TRACE)) {
+        if (Log.isEnabled(LogLevels.TRACE)) {
             Log.log("seek(" + pos + "), bOff=" + currentFilePos + " offset=" + offset +
-                    ", length=" + left, Log.TRACE);
+                    ", length=" + left, LogLevels.TRACE);
         }
         if (pos == currentFilePos - left) // Check quickly for NOP seek
             return;
@@ -140,6 +145,7 @@ public class RaInputStream extends InputStream implements SeekableInputStream {
     }
 
 
+    @Override
     public String toString() {
         try {
             return "RaInputStream(" + (currentFilePos - left) + ", " + file.length() + ")";

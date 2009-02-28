@@ -21,6 +21,7 @@ public class DefaultXmlSerializer extends org.kxml2.io.KXmlSerializer implements
     private ContentEncoder encoder = new XmlSchemaContentEncoder();
 
 
+    @Override
     public void setProperty(String name, Object value) {
         if (XasUtil.PROPERTY_CONTENT_CODEC.equals(name)) {
             if (value instanceof ContentEncoder) {
@@ -34,6 +35,7 @@ public class DefaultXmlSerializer extends org.kxml2.io.KXmlSerializer implements
     }
 
 
+    @Override
     public Object getProperty(String name) {
         if (XasUtil.PROPERTY_CONTENT_CODEC.equals(name)) {
             return encoder;

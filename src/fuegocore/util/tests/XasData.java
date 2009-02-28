@@ -215,6 +215,7 @@ public class XasData {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             if (!(o instanceof Compound)) { return false; }
             Compound cp = (Compound) o;

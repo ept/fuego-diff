@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.AttributeNode;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemTarget;
@@ -101,9 +102,9 @@ public class DirTreeGenerator {
             int dscan = treeNodes.size();
             while (((DirectoryEntry) rndDirNode.getContent()).getType() == DirectoryEntry.FILE) {
                 pos = nextPos(pos, treeNodes);
-                rndDirNode = (RefTreeNode) t.getNode(StringKey.createKey((String) pos));
+                rndDirNode = t.getNode(StringKey.createKey((String) pos));
                 dscan--;
-                if (dscan < 0) Log.log("No dir found", Log.ASSERTFAILED);
+                if (dscan < 0) Log.log("No dir found", LogLevels.ASSERTFAILED);
             }
             // treeNodes.remove(rndId);
             // Log.log("Picked "+rndId,Log.INFO);
@@ -151,7 +152,7 @@ public class DirTreeGenerator {
                             try {
                                 t.delete(rndNode.getId());
                             } catch (IllegalArgumentException ex) {
-                                Log.log("Ignoring ChangeTree delete bug", Log.WARNING);
+                                Log.log("Ignoring ChangeTree delete bug", LogLevels.WARNING);
                                 break;
                             }
                             treeSet(t, rndNode, treeNodes, '-');
@@ -193,7 +194,7 @@ public class DirTreeGenerator {
                         t.move(moveNode, rndDirNode.getId());
                         break;
                     default:
-                        Log.log("Invalid op " + op, Log.ASSERTFAILED);
+                        Log.log("Invalid op " + op, LogLevels.ASSERTFAILED);
                 }
                 if (redo) {
                     // Log.log("Redoing failed "+op,Log.INFO);
@@ -202,12 +203,12 @@ public class DirTreeGenerator {
                     if (redos > 10) {
                         redo = false;
                         redos = 0;
-                        Log.log("10 redos failed, giving up", Log.INFO);
+                        Log.log("10 redos failed, giving up", LogLevels.INFO);
                     }
                 }
                 pos = nextPos(pos, treeNodes).toString();
             } catch (NodeNotFoundException ex) {
-                Log.log("Selected nonexisting node", Log.FATALERROR);
+                Log.log("Selected nonexisting node", LogLevels.FATALERROR);
             }
         } // End for
     }
@@ -222,7 +223,7 @@ public class DirTreeGenerator {
                 s.remove(root.getId().toString());
                 break;
             default:
-                Log.log("Invalid op " + op, Log.ASSERTFAILED);
+                Log.log("Invalid op " + op, LogLevels.ASSERTFAILED);
         }
         for (Iterator i = root.getChildIterator(); i.hasNext();) {
             treeSet(t, (RefTreeNode) i.next(), s, op);
@@ -267,7 +268,7 @@ public class DirTreeGenerator {
                 }
             }
         } catch (NodeNotFoundException ex) {
-            Log.log("Tree construction error", Log.ASSERTFAILED, ex);
+            Log.log("Tree construction error", LogLevels.ASSERTFAILED, ex);
         }
         return t;
     }
@@ -374,11 +375,13 @@ public class DirTreeGenerator {
 
 
         // The MutableRefTree iface ------
+        @Override
         public RefTreeNode getNode(Key id) {
             return (RefTreeNode) index.get(id);
         }
 
 
+        @Override
         public void delete(Key id) throws NodeNotFoundException {
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(id);
             if (n == null) throw new NodeNotFoundException(id);
@@ -396,27 +399,30 @@ public class DirTreeGenerator {
         }
 
 
+        @Override
         public Key insert(Key parentId, long pos, Key newId, Object content)
                 throws NodeNotFoundException {
-            if (content == null || pos != MutableRefTree.DEFAULT_POSITION)
-                Log.log("Invalid op", Log.ASSERTFAILED);
+            if (content == null || pos != fc.xml.xmlr.MutableRefTree.DEFAULT_POSITION)
+                Log.log("Invalid op", LogLevels.ASSERTFAILED);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(parentId);
             if (n == null) throw new NodeNotFoundException(parentId);
             RefTreeNodeImpl newNode = new RefTreeNodeImpl(n, newId, content);
-            if (index.put(newId, newNode) != null) Log.log("Duplicate id", Log.ASSERTFAILED);
+            if (index.put(newId, newNode) != null) Log.log("Duplicate id", LogLevels.ASSERTFAILED);
             n.addChild(newNode);
             return newId;
         }
 
 
+        @Override
         public Key move(Key nodeId, Key parentId, long pos) throws NodeNotFoundException {
-            if (pos != MutableRefTree.DEFAULT_POSITION) Log.log("Invalid op", Log.ASSERTFAILED);
+            if (pos != fc.xml.xmlr.MutableRefTree.DEFAULT_POSITION)
+                Log.log("Invalid op", LogLevels.ASSERTFAILED);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(nodeId);
             if (n == null) throw new NodeNotFoundException(nodeId);
             RefTreeNodeImpl pNew = (RefTreeNodeImpl) index.get(parentId);
             if (pNew == null) throw new NodeNotFoundException(parentId);
             RefTreeNodeImpl p = (RefTreeNodeImpl) n.getParent();
-            if (p == null) Log.log("Tried to move root", Log.ASSERTFAILED);
+            if (p == null) Log.log("Tried to move root", LogLevels.ASSERTFAILED);
             p.removeChild(n);
             pNew.addChild(n);
             // n.setParent(pNew);
@@ -424,8 +430,9 @@ public class DirTreeGenerator {
         }
 
 
+        @Override
         public boolean update(Key nodeId, Object content) throws NodeNotFoundException {
-            if (content == null) Log.log("Invalid op", Log.ASSERTFAILED);
+            if (content == null) Log.log("Invalid op", LogLevels.ASSERTFAILED);
             RefTreeNodeImpl n = (RefTreeNodeImpl) index.get(nodeId);
             if (n == null) throw new NodeNotFoundException(nodeId);
             if (!content.equals(n.getContent())) {
@@ -442,7 +449,8 @@ public class DirTreeGenerator {
 
 
         private void init(RefTreeNode root) {
-            if (index.put(root.getId(), root) != null) Log.log("Duplicate ids", Log.ASSERTFAILED);
+            if (index.put(root.getId(), root) != null)
+                Log.log("Duplicate ids", LogLevels.ASSERTFAILED);
             for (Iterator i = root.getChildIterator(); i.hasNext();)
                 init((RefTreeNode) i.next());
         }
@@ -456,6 +464,7 @@ public class DirTreeGenerator {
         public static final Qname NAME_ATTR = new Qname("", "name");
 
 
+        @Override
         public void append(Item i) throws IOException {
             if (i.getType() == Item.START_TAG) {
                 StartTag t = (StartTag) i;
@@ -593,6 +602,7 @@ public class DirTreeGenerator {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             return o instanceof DirectoryEntry &&
                    (Util.equals(((DirectoryEntry) o).getId(), getId()) &&
@@ -600,6 +610,7 @@ public class DirTreeGenerator {
         }
 
 
+        @Override
         public int hashCode() {
             return type ^ (name == null ? 0 : name.hashCode()) ^ id.hashCode();
         }
@@ -646,6 +657,7 @@ public class DirTreeGenerator {
         }
 
 
+        @Override
         public String toString() {
             return (type == FILE ? "file" : (type == DIR ? "dir" : "tree ")) + "{name=" + name +
                    ",...}";

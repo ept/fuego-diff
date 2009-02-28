@@ -24,16 +24,19 @@ public class EndDocument extends Item {
     }
 
 
+    @Override
     public String toString() {
         return "ED()";
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o == instance;
     }
 
 
+    @Override
     public int hashCode() {
         return END_DOCUMENT;
     }

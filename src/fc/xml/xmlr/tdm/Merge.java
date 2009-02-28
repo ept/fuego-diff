@@ -23,6 +23,7 @@ import tdm.lib.MatchedNodes;
 import tdm.lib.Node;
 import fc.util.Stack;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.xas.EndTag;
 import fc.xml.xas.Item;
 import fc.xml.xas.ItemList;
@@ -199,7 +200,7 @@ public class Merge {
                 cl.writeConflicts(new SaxToItems(log));
             }
         } catch (Exception x) {
-            Log.log("Merge ex", Log.ERROR, x);
+            Log.log("Merge ex", LogLevels.ERROR, x);
             if (x instanceof IOException) throw (IOException) x;
         }
     }
@@ -396,16 +397,19 @@ public class Merge {
         }
 
 
+        @Override
         public tdm.lib.BaseNode getBaseMatch() {
             return baseMatch;
         }
 
 
+        @Override
         public int getBaseMatchType() {
             return getBaseMatch() == null ? 0 : MATCH_FULL;
         }
 
 
+        @Override
         public tdm.lib.BranchNode getFirstPartner(int typeFlags) {
             // BUGFIX 20060920-4: returning partners when there is no base
             // match is not really correct (The idea was to merge identical
@@ -415,6 +419,7 @@ public class Merge {
         }
 
 
+        @Override
         public MatchedNodes getPartners() {
             tdm.lib.MatchedNodes partners = new tdm.lib.MatchedNodes(baseMatch);
             if (hasBaseMatch()) partners.addMatch(getFirstPartner(MATCH_FULL));
@@ -422,6 +427,7 @@ public class Merge {
         }
 
 
+        @Override
         public boolean hasBaseMatch() {
             // BUGFIX 20060920-3: hasBaseMatch() returned true on same-id
             // inserts in both trees, although no base match, because we
@@ -430,6 +436,7 @@ public class Merge {
         }
 
 
+        @Override
         public boolean isLeftTree() {
             return isLeft;
         }
@@ -444,21 +451,25 @@ public class Merge {
          */
 
         // Not needed
+        @Override
         public void addChild(Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void addChild(int ix, Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void debug(PrintWriter pw, int indent) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void debugTree(PrintWriter pw, int indent) {
             /*
              * pw.println("                ".substring(15-indent)
@@ -469,51 +480,61 @@ public class Merge {
         }
 
 
+        @Override
         public MatchArea getMatchArea() {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void removeChild(int ix) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void removeChildren() {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void replaceChild(int ix, Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setContent(tdm.lib.XMLNode aContent) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setMatchArea(MatchArea anArea) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void delBaseMatch() {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setBaseMatch(tdm.lib.BaseNode p, int amatchType) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setMatchType(int amatchType) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setPartners(MatchedNodes p) {
             throw NO_SUCH_OP;
         }
@@ -549,18 +570,18 @@ public class Merge {
         }
 
 
+        @Override
         public MatchedNodes getLeft() {
             tdm.lib.MatchedNodes matches = new tdm.lib.MatchedNodes(this);
-            if (leftIx.containsKey(n.getId()))
-                matches.addMatch((BranchNode) leftIx.get(n.getId()));
+            if (leftIx.containsKey(n.getId())) matches.addMatch(leftIx.get(n.getId()));
             return matches;
         }
 
 
+        @Override
         public MatchedNodes getRight() {
             tdm.lib.MatchedNodes matches = new tdm.lib.MatchedNodes(this);
-            if (rightIx.containsKey(n.getId()))
-                matches.addMatch((BranchNode) rightIx.get(n.getId()));
+            if (rightIx.containsKey(n.getId())) matches.addMatch(rightIx.get(n.getId()));
             return matches;
         }
 
@@ -574,21 +595,25 @@ public class Merge {
          */
 
         // Not needed
+        @Override
         public void addChild(Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void addChild(int ix, Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void debug(PrintWriter pw, int indent) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void debugTree(PrintWriter pw, int indent) {
             /*
              * pw.println("                ".substring(15-indent)+ this+": "
@@ -599,36 +624,43 @@ public class Merge {
         }
 
 
+        @Override
         public MatchArea getMatchArea() {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void removeChild(int ix) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void removeChildren() {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void replaceChild(int ix, Node n) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setContent(tdm.lib.XMLNode aContent) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void setMatchArea(MatchArea anArea) {
             throw NO_SUCH_OP;
         }
 
 
+        @Override
         public void swapLeftRightMatchings() {
             throw NO_SUCH_OP;
         }
@@ -644,17 +676,20 @@ public class Merge {
         }
 
 
+        @Override
         public boolean contentEquals(Object a) {
             return n.equals(((XMLNode) a).n);
         }
 
 
+        @Override
         public int getContentHash() {
             // Not needed in 3dm merge phase
             throw new UnsupportedOperationException();
         }
 
 
+        @Override
         public int getInfoSize() {
             // Not needed in 3dm merge phase
             throw new UnsupportedOperationException();

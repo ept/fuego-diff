@@ -108,11 +108,13 @@ public class DeweyKey implements Key {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return o instanceof DeweyKey && Util.equals(k, ((DeweyKey) o).k);
     }
 
 
+    @Override
     public int hashCode() {
         return k.isRoot() ? 0 : k.hashCode();
     }
@@ -206,6 +208,7 @@ public class DeweyKey implements Key {
     }
 
 
+    @Override
     public String toString() {
         return k.toString();
     }

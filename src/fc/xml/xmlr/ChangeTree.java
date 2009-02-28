@@ -21,6 +21,7 @@ import java.util.TreeMap;
 import fc.util.CompareUtil;
 import fc.util.Util;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 
 /**
  * A mutable reftree that buffers changes as a reftree. The class implements a mutable reftree that
@@ -143,6 +144,7 @@ public class ChangeTree extends AbstractMutableRefTree {
             }
 
 
+            @Override
             public RefTreeNode getNode(Key id) {
                 return ChangeTree.this.getNode(id, false);
             }
@@ -175,6 +177,7 @@ public class ChangeTree extends AbstractMutableRefTree {
     // Test case: faxma.test.SyntheticDirTree rev 1.3 27.2.2006
     // On fix: remove bug description from class javadoc!
 
+    @Override
     public RefTreeNode getNode(Key id) {
         return getNode(id, true);
     }
@@ -212,6 +215,7 @@ public class ChangeTree extends AbstractMutableRefTree {
 
     // Mutability
 
+    @Override
     public void delete(Key id) throws NodeNotFoundException {
         assert frontkey(id);
         RefTreeNode m = getNode(id);
@@ -223,7 +227,7 @@ public class ChangeTree extends AbstractMutableRefTree {
         Node n = findNode(id);
         // Remove from reftree
         if (((Node) n.getParent()).children.remove(id) == null)
-            Log.log("Parent/child inconsistency", Log.ASSERTFAILED);
+            Log.log("Parent/child inconsistency", LogLevels.ASSERTFAILED);
         ki.remove(id);
         delRoots.add(id);
         changeCount++;
@@ -232,6 +236,7 @@ public class ChangeTree extends AbstractMutableRefTree {
     }
 
 
+    @Override
     public Key insert(Key parentId, long pos, Key newId, Object content)
             throws NodeNotFoundException {
         assert frontkey(parentId);
@@ -259,6 +264,7 @@ public class ChangeTree extends AbstractMutableRefTree {
     }
 
 
+    @Override
     public Key move(Key nodeId, Key parentId, long pos) throws NodeNotFoundException {
         assert frontkey(parentId);
         assert frontkey(nodeId);
@@ -275,7 +281,7 @@ public class ChangeTree extends AbstractMutableRefTree {
             origParent.children.remove(nodeId);
         } else {
             ((Node) n.getParent()).children.remove(nodeId);
-            ((Node) n).parent = p;
+            n.parent = p;
         }
         // ...to dest code
         p.children.put(nodeId, n);
@@ -287,6 +293,7 @@ public class ChangeTree extends AbstractMutableRefTree {
     }
 
 
+    @Override
     public boolean update(Key nodeId, Object content) throws NodeNotFoundException {
         assert frontkey(nodeId);
         Object oldContent = getNode(nodeId).getContent();
@@ -320,7 +327,7 @@ public class ChangeTree extends AbstractMutableRefTree {
             try {
                 verifyMove(id, getParent(newParent));
             } catch (NodeNotFoundException ex) {
-                Log.log("Broken tree", Log.ASSERTFAILED);
+                Log.log("Broken tree", LogLevels.ASSERTFAILED);
             }
         }
     }
@@ -340,7 +347,8 @@ public class ChangeTree extends AbstractMutableRefTree {
             // No such node, taint parent
             taint(ki.getFrontKey(backingTree.getParent(ki.getBackKey(id))), null, true);
             n = findNode(id);
-            if (n == null) Log.log("The node " + id + " should exist now.", Log.ASSERTFAILED);
+            if (n == null)
+                Log.log("The node " + id + " should exist now.", LogLevels.ASSERTFAILED);
         }
         if (expandChildren && n.isTreeRef) {
             n.expandChildren(backingTree, ki.getBackKey(id));
@@ -368,7 +376,7 @@ public class ChangeTree extends AbstractMutableRefTree {
         public Node(Key id, RefTreeNode parent, Object content, boolean isTreeRef, boolean isNodeRef) {
             assert frontkey(id);
             if (content == null && !(isTreeRef || isNodeRef))
-                Log.log("null content when not ref not supported", Log.ASSERTFAILED);
+                Log.log("null content when not ref not supported", LogLevels.ASSERTFAILED);
             this.id = id;
             this.parent = parent;
             this.content = content;
@@ -394,7 +402,7 @@ public class ChangeTree extends AbstractMutableRefTree {
 
         public int getChildCount() {
             if (children == null && isNodeRef)
-                Log.log("A nodref should always have an expanded chlist", Log.ASSERTFAILED);
+                Log.log("A nodref should always have an expanded chlist", LogLevels.ASSERTFAILED);
             return children == null ? 0 : children.size();
         }
 
@@ -416,7 +424,7 @@ public class ChangeTree extends AbstractMutableRefTree {
 
         public Iterator getChildIterator() {
             if (children == null && isNodeRef)
-                Log.log("A nodref should always have an expanded chlist", Log.ASSERTFAILED);
+                Log.log("A nodref should always have an expanded chlist", LogLevels.ASSERTFAILED);
             return children != null ? children.values().iterator()
                     : Collections.EMPTY_LIST.iterator();
         }
@@ -487,7 +495,7 @@ public class ChangeTree extends AbstractMutableRefTree {
 
         public ProxyNode(RefTreeNode n, boolean transparent) {
             assert !(n instanceof Node) || frontkey(n.getId());
-            if (n == null) Log.log("Can't proxy null", Log.ASSERTFAILED);
+            if (n == null) Log.log("Can't proxy null", LogLevels.ASSERTFAILED);
             this.n = n;
             this.transparent = transparent;
         }
@@ -567,7 +575,7 @@ public class ChangeTree extends AbstractMutableRefTree {
                 return n2 != null ? n2.isTreeRef() : n.isTreeRef();
             }
             if ((!n.isTreeRef()) ^ (((Node) n).childrenExpanded()))
-                Log.log("treeref/child discrepancy", Log.ASSERTFAILED);
+                Log.log("treeref/child discrepancy", LogLevels.ASSERTFAILED);
             return n.isTreeRef();
         }
 
@@ -579,8 +587,8 @@ public class ChangeTree extends AbstractMutableRefTree {
                 return n2 != null ? n2.isNodeRef() : n.isNodeRef();
             }
             if ((n.isNodeRef()) ^ (n.getContent() == null) && !n.isTreeRef())
-                Log.log("ref/content discrepancy; nr=" + n.isNodeRef() + " cnt", Log.ASSERTFAILED,
-                        n.getContent());
+                Log.log("ref/content discrepancy; nr=" + n.isNodeRef() + " cnt",
+                        LogLevels.ASSERTFAILED, n.getContent());
             return n.isNodeRef();
         }
 
@@ -636,31 +644,37 @@ public class ChangeTree extends AbstractMutableRefTree {
         private Map nodeById = new HashMap();
 
 
+        @Override
         public Key getBackKey(Key fk) {
             return fk;
         }
 
 
+        @Override
         public Key getFrontKey(Key bk) {
             return bk;
         }
 
 
+        @Override
         public Key forge(Key insKey) {
             return insKey;
         }
 
 
+        @Override
         public RefTreeNode get(Key fk) {
             return (RefTreeNode) nodeById.get(fk);
         }
 
 
+        @Override
         public void move(Key fk, RefTreeNode n) {
             nodeById.put(fk, n);
         }
 
 
+        @Override
         public RefTreeNode remove(Key fk) {
             return (RefTreeNode) nodeById.remove(fk);
         }

@@ -20,6 +20,7 @@ import java.util.TreeMap;
 
 import fc.util.StringUtil;
 import fc.util.log.Log;
+import fc.util.log.LogLevels;
 import fc.xml.diff.Segment;
 import fc.xml.xas.EndDocument;
 import fc.xml.xas.Item;
@@ -295,14 +296,14 @@ public class RefTreeEncoder implements DiffEncoder {
         public void moveto(int target) {
             int _op = pos;
             if (target < pos) {
-                Log.log("Backing: target=" + target + ", pos=" + pos, Log.FATALERROR,
+                Log.log("Backing: target=" + target + ", pos=" + pos, LogLevels.FATALERROR,
                         new Throwable());
             }
             assert (target >= pos); // Never go back.
             for (; pos < target; pos++) {
                 Item e = es.get(pos);
                 if (e == null && es.get(pos - 1) == null)
-                    Log.log("Moved >1 beyond ED(). This should not happen...", Log.WARNING);
+                    Log.log("Moved >1 beyond ED(). This should not happen...", LogLevels.WARNING);
                 int type = e == null ? -1 : e.getType(); // Allow moving beyond
                 // ED
                 lastWasText = isTextLike(e);
@@ -354,6 +355,7 @@ public class RefTreeEncoder implements DiffEncoder {
         };
 
 
+        @Override
         public String toString() {
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < len; i++) {
