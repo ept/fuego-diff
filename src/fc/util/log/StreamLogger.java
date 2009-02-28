@@ -66,9 +66,7 @@ public class StreamLogger extends AbstractLogger {
         }
         if (isEnabled(level)) {
             String name = (level >= 0 && level < names.length) ? names[level] : "UNKNOWN";
-            out.println(name + ": " + format.format(new Date()));
-            out.println(" - " + callingMethod());
-            out.println(" - " + message);
+            out.println(name + " " + callingMethod() + ": " + message);
             if (data != null) {
                 out.print(" - ");
                 if (data instanceof Throwable) {

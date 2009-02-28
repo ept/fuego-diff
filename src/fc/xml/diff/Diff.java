@@ -114,6 +114,7 @@ public class Diff {
         List<Item> preamble = new ArrayList<Item>();
         List<Item> base = IoUtil.makeEventList(baseEs, preamble, posListBase, baseParser);
         List<Item> doc = IoUtil.makeEventList(docEs, null, posListNew, docParser);
+        Log.debug(base.toString());
         GlMatcher<Item> m = new GlMatcher<Item>(IoUtil.getEventHashAlgorithm());
         List<Segment<Item>> ml = m.match(base, doc, CHUNK_SIZES);
         long _stop = System.currentTimeMillis();
@@ -134,7 +135,7 @@ public class Diff {
                     (_stop - _start) + "ms).", LogLevels.INFO);
         } else {
             Log.log("Documents differ.", LogLevels.INFO);
-            // Log.log("Match list is "+ml,Log.DEBUG);
+            Log.log("Match list is "+ml,Log.DEBUG);
         }
 
         return !isEmpty;
@@ -151,16 +152,9 @@ public class Diff {
         Log.log("Comparing by filter " + (filter == null ? "<none>" : filter.getName()),
                 LogLevels.INFO);
 
-        return diff(IoUtil.getEventSequence(basepa, filter), null, // FIXME-20061113-3:
-                    // Passing
-                    // of
-                    // XmlPull
-                    // parser
-                    // basepa,
-                    IoUtil.getEventSequence(docpa, filter), null, // FIXME-20061113-3:
-                    // Passing of
-                    // XmlPull
-                    // parser docpa,
+        // FIXME-20061113-3: Passing of XmlPullParser
+        return diff(IoUtil.getEventSequence(basepa, filter), null,
+                    IoUtil.getEventSequence(docpa, filter), null, 
                     dout, outputEncoding, encoderOptions, emitEmpty);
     }
 
