@@ -45,9 +45,6 @@ import fc.xml.xas.XasFragment;
 import fc.xml.xas.XasUtil;
 import fc.xml.xas.XmlPullSource;
 import fc.xml.xas.index.VersionedDocument;
-import fc.xml.xas.security.DsSignature;
-import fc.xml.xas.security.EncryptedKey;
-import fc.xml.xas.security.SecUtil;
 import fc.xml.xas.typing.ParsedPrimitive;
 import fc.xml.xas.typing.TypedItem;
 import fc.xml.xas.typing.ValueCodec;
@@ -153,66 +150,6 @@ public class XmlData {
 	return result;
     }
 
-    public static List<XasFragment> getSecurityData () throws IOException {
-	List<XasFragment> result = new ArrayList<XasFragment>();
-	List<Item> list = new ArrayList<Item>();
-	list.add(StartDocument.instance());
-	StartTag root = new StartTag(new Qname(TEST_NS, "security"));
-	root.addPrefix(TEST_NS, "test");
-	list.add(root);
-	DsSignature sigItem =
-	    new DsSignature(keyPair.getPrivate(), root, SecUtil.RSA_SIGNATURE);
-	list.add(sigItem);
-	int start = list.size();
-	list.add(new StartTag(new Qname(TEST_NS, "foo"), root));
-	list.add(new Text("xxx"));
-	list.add(new EndTag(new Qname(TEST_NS, "foo")));
-	int middle = list.size();
-	list.add(new StartTag(new Qname(TEST_NS, "bar"), root));
-	list.add(new Text("yyy"));
-	list.add(new EndTag(new Qname(TEST_NS, "bar")));
-	int end = list.size();
-	list.add(new EndTag(new Qname(TEST_NS, "security")));
-	list.add(EndDocument.instance());
-	XasFragment fragment = new XasFragment(list, list.get(0));
-	MutableFragmentPointer pointer = fragment.pointer();
-	sigItem.addSignature(pointer, start, middle - start,
-	    SecUtil.SHA_1_DIGEST);
-	sigItem.addSignature(pointer, middle, end - middle,
-	    SecUtil.SHA_1_DIGEST);
-	result.add(fragment);
-	sigCounts.put(fragment, 3);
-	list.clear();
-	list.add(StartDocument.instance());
-	StartTag encRoot = new StartTag(new Qname(TEST_NS, "security"));
-	encRoot.addPrefix(TEST_NS, "test");
-	// encRoot.addPrefix(SecUtil.XENC_NS, "xenc");
-	list.add(encRoot);
-	EncryptedKey encKey = new EncryptedKey(keyPair.getPublic(), encRoot);
-	list.add(encKey);
-	start = list.size();
-	list.add(new StartTag(new Qname(TEST_NS, "foo"), root));
-	list.add(new Text("xxx"));
-	list.add(new EndTag(new Qname(TEST_NS, "foo")));
-	middle = list.size();
-	list.add(new StartTag(new Qname(TEST_NS, "bar"), root));
-	list.add(new Text("yyy"));
-	list.add(new EndTag(new Qname(TEST_NS, "bar")));
-	end = list.size();
-	list.add(new EndTag(new Qname(TEST_NS, "security")));
-	list.add(EndDocument.instance());
-	fragment = new XasFragment(list, list.get(0));
-	pointer = fragment.pointer();
-	encKey.addDataReference(pointer, start, middle - start);
-	encKey.addDataReference(pointer, middle, end - middle);
-	// XXX - need to figure out how to pass the key size correctly
-	byte[] key = new byte[16];
-	SecUtil.getRandom().nextBytes(key);
-	encKey.setKey(key);
-	result.add(fragment);
-	sigCounts.put(fragment, 0);
-	return result;
-    }
 
     public static int getSignatureCount (XasFragment f) {
 	Integer count = sigCounts.get(f);

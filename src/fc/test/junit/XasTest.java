@@ -39,9 +39,6 @@ import fc.xml.xas.XmlOutput;
 import fc.xml.xas.XmlPullSource;
 import fc.xml.xas.index.VersionedDocument;
 import fc.xml.xas.index.VersionedPointer;
-import fc.xml.xas.security.DecryptSource;
-import fc.xml.xas.security.TypeAttributeSource;
-import fc.xml.xas.security.VerifySource;
 import fc.xml.xas.typing.Codec;
 import fc.xml.xas.typing.DecodeSource;
 import fc.xml.xas.typing.PrimitiveSource;
@@ -52,12 +49,10 @@ public class XasTest extends TestCase {
 
     List<XasFragment> fragments;
     List<ItemList> typeds;
-    List<XasFragment> secs;
 
     protected void setUp () throws IOException {
 	fragments = XmlData.getData();
 	typeds = XmlData.getTypedData();
-	secs = XmlData.getSecurityData();
 	Codec.registerPrimitiveCodec(new XmlCodec());
 	Codec.registerValueCodec(new XmlData.PersonCodec());
     }
@@ -157,50 +152,6 @@ public class XasTest extends TestCase {
 	}
     }
 
-    public void testSecurity () throws IOException {
-	Log.log("Begin test", Log.DEBUG);
-	for (String type : XasUtil.factoryTypes()) {
-	    for (XasFragment f : secs) {
-		Log.debug("Source fragment", f);
-		ByteArrayOutputStream bout = new ByteArrayOutputStream();
-		FormatFactory factory = XasUtil.getFactory(type);
-		SerializerTarget target = factory.createTarget(bout, "UTF-8");
-		Iterator<Item> it = f.iterator();
-		while (it.hasNext()) {
-		    target.append(it.next());
-		}
-		byte[] result = bout.toByteArray();
-		Log.log("Document", Log.DEBUG, Util.toPrintable(result));
-		ByteArrayInputStream bin = new ByteArrayInputStream(result);
-		ParserSource source = factory.createSource(bin);
-		ParserSource typeSource = new TypeAttributeSource(source);
-		ItemSource decodeSource =
-		    TypingUtil.typedSource(typeSource, type, "UTF-8");
-		ItemSource decryptSource =
-		    new DecryptSource(decodeSource, XmlData.getKeyPair()
-			.getPrivate());
-		VerifySource verifySource =
-		    new VerifySource(type, decryptSource, XmlData.getKeyPair()
-			.getPublic());
-		List<Item> list = new ArrayList<Item>();
-		Item i;
-		while ((i = verifySource.next()) != null) {
-		    list.add(i);
-		}
-		XasFragment f2 = new XasFragment(list, list.get(0));
-		Log.log("Target fragment", Log.DEBUG, f2);
-		Log.log("Verify source", Log.DEBUG, verifySource);
-		assertTrue("Verification not finished", verifySource
-		    .isFinished());
-		assertEquals("Did not verify correct number of signatures",
-		    XmlData.getSignatureCount(f), verifySource
-			.numberSuccesses());
-		assertEquals("Some signature verification failed", 0,
-		    verifySource.numberFailures());
-	    }
-	    secs = XmlData.getSecurityData();
-	}
-    }
 
     public void testQuery () throws IOException {
 	Log.log("Begin test", Log.DEBUG);
