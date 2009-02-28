@@ -1,0 +1,15 @@
+contrib
+raxs/=build
+raxs/contrib/fc-util-0.1.0.jar
+raxs/contrib/fc-xas-0.1.0.jar
+util/=build
+xas/=build
+xas/contrib/fc-util-0.1.0.jar
+xebu/code/java/=build
+xebu/code/java/contrib/=binstamp
+xebu/code/java/contrib/jar
+xebu/code/java/contrib/src
+xmldiff/=build
+xmldiff/contrib/fc-raxs-0.1.0.jar
+xmldiff/contrib/fc-util-0.1.0.jar
+xmldiff/contrib/fc-xas-0.1.0.jar
