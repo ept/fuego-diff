@@ -28,7 +28,6 @@ public class MessageSuite extends TestCase {
         TestSuite suite = new TestSuite();
 
         suite.addTestSuite(CacheTest.class);
-        suite.addTestSuite(XebuTest.class);
 
         return suite;
     }
