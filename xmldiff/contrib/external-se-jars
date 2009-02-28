@@ -12,5 +12,6 @@
 # ../xebu/code/java/=build/lib/fc-util.jar
 ../${fc.contrib}/servlet-api-2.3.jar
 ../${fc.contrib}/org.mortbay.jetty-5.1.4.jar
+../${fc.contrib}/3dm-0.1.5b1.jar
 # Needs to go here because it provides an annotation
 ../${fc.contrib}/findbugs-0.9.4.jar

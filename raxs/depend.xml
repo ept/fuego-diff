@@ -1,6 +1,0 @@
-<subproject name="raxs">
-  <depend>util</depend>
-  <depend>xas</depend>
-</subproject>
-<!-- arch-tag: 71732b67-3a0a-4e95-ade6-03cf953fb646
--->

@@ -76,17 +76,18 @@ checking its hash, and then unpacking to ${src}
 	  unpackloc1="junit3.8.1/junit.jar"
           sha="99129f16442844f6a4a11ae22fbbee40b14d774f" />
 
+    <!--3dm.jar-->
+    <wget id="3dm" 
+        href1="http://download.berlios.de/tdm/3dm-0.1.5Beta1.jar" 
+        href2="http://hoslab.cs.helsinki.fi/downloads/fuego-core/contrib/3dm-0.1.5beta1.jar" 
+        target="${lib}/3dm-0.1.5b1.jar" 
+        sha="db50bfa18a16e8f8d8b8a7e34066d3d5427d234f" />
+
     <!-- FC Util -->
     <wget id="fc-util"
 	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-util/fc-util-0.1.0.jar"
 	  target="${llib}/fc-util-0.1.0.jar"
 	  sha = "6c8b6e8c3801c0cc672c421a994f5ddb04be46f5" />
-
-    <!-- FC RAXS -->
-    <wget id="fc-raxs"
-	  href1="http://hoslab.cs.helsinki.fi/downloads/fc-raxs/fc-raxs-0.1.0.jar"
-	  target="${llib}/fc-raxs-0.1.0.jar"
-	  sha = "e8bcf2b134d97ce86ce82b27cae6e65ab9cb7f96" />
 
     <!-- Bouncy Castle. We're sorry for the inconvenience (25MB archive). -->
     <wget id="bouncy-castle-cldc"
