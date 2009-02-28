@@ -30,8 +30,8 @@ Installation
 
 Fuego Diff is currently available only in source form. You can download the
 source from GitHub:
-* [Download Fuego Diff as tarball](http://github.com/ept/fuego-diff/tarball/master)
-* [Download Fuego Diff as ZIP file](http://github.com/ept/fuego-diff/zipball/master)
+* Download Fuego Diff [as tarball](http://github.com/ept/fuego-diff/tarball/master)
+* Download Fuego Diff [as ZIP file](http://github.com/ept/fuego-diff/zipball/master)
 
 ...or you can clone the [git](http://git-scm.com/) repository by typing:
 
