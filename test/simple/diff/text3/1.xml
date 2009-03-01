@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <a foo="foo">
+        <b />
+        <cc>
+            <d />
+            <e />
+            Text
+            <g />
+            <h />
+        </cc>
+    </a>
+    <x>
+        <y />
+        <z />
+    </x>
+</root>

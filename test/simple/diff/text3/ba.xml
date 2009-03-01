@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:diff="http://ept.github.com/fuego-diff" diff:ref1="/0">
+    <x diff:ref1="/0/1">
+        <y />
+        <z />
+    </x>
+    <a foo="foo" diff:ref1="/0/0">
+        <b diff:ref1="/0/0/0" />
+        <c diff:cmp1="/0/0/1" >
+            <d />
+            <e />
+            Text
+            <g />
+            <h  />
+        </c>
+    </a>
+</root>
