@@ -37,13 +37,58 @@ import fc.xml.xmlr.TreeReference;
 import fc.xml.xmlr.model.StringKey;
 import fc.xml.xmlr.xas.RefItem;
 
+/**
+ * Base implementation of an encoder which produces an XML diff whose structure is modelled
+ * along the structure of the right-hand document of the comparison, copying parts from the
+ * left-hand document by specifying XPath-like addresses in the left-hand document.
+ * For example, comparing the following two documents:
+ * 
+ * <pre>
+ * &lt;root&gt;                        &lt;root&gt;
+ * &lt;x&gt;                           &lt;a foo="foo"&gt;
+ *     &lt;y /&gt;                         &lt;b /&gt;
+ *     &lt;z /&gt;                         &lt;cc&gt;
+ * &lt;/x&gt;                                  &lt;d /&gt;
+ * &lt;a foo="foo"&gt;                         &lt;e /&gt;
+ *     &lt;b /&gt;         ----\               Text
+ *     &lt;c&gt;                \              &lt;g /&gt;
+ *         &lt;d /&gt;          /              &lt;h /&gt;
+ *         &lt;e /&gt;     ----/           &lt;/cc&gt;
+ *         Text                  &lt;/a&gt;
+ *         &lt;g /&gt;                 &lt;x&gt;
+ *         &lt;h /&gt;                     &lt;y /&gt;
+ *     &lt;/c&gt;                          &lt;z /&gt;
+ * &lt;/a&gt;                          &lt;/x&gt;
+ * &lt;/root&gt;                       &lt;/root&gt;
+ * </pre>
+ * 
+ * RefTreeEncoder produces the following diff:
+ * 
+ * <pre>
+ * &lt;ref:node xmlns:ref="http://www.hiit.fi/fc/xml/ref" id="/0"&gt;
+ *     &lt;ref:node id="/0/1"&gt;
+ *         &lt;ref:tree id="/0/1/0" /&gt;
+ *         &lt;cc&gt;
+ *             &lt;ref:tree id="/0/1/1/0" /&gt;
+ *             &lt;ref:tree id="/0/1/1/1" /&gt;
+ *             &lt;ref:tree id="/0/1/1/2" /&gt;
+ *             &lt;ref:tree id="/0/1/1/3" /&gt;
+ *             &lt;ref:tree id="/0/1/1/4" /&gt;
+ *         &lt;/cc&gt;
+ *     &lt;/ref:node&gt;
+ *     &lt;ref:tree id="/0/0" /&gt;
+ * &lt;/ref:node&gt;
+ * </pre>
+ */
 public class RefTreeEncoder implements DiffEncoder {
 
     public RefTreeEncoder() {
-
     }
 
 
+    /**
+     * @see DiffEncoder.encodeDiff
+     */
     public void encodeDiff(List<Item> base, List<Item> doc, List<Segment<Item>> matches,
                            List<Item> preamble, OutputStream out) throws IOException {
         // time("match_end", times);
@@ -53,8 +98,7 @@ public class RefTreeEncoder implements DiffEncoder {
         do {
             rd.next();
         } while (!Item.isStartItem(rd.peek()));
-        encodeDiff(rd, elr, true, new LinkedList<RefItem>(), new MultiXPath(base), new String[1],
-                   base);
+        encodeDiff(rd, elr, true, new LinkedList<RefItem>(), new MultiXPath(base), new String[1], base);
         elr.append(EndDocument.instance());
         // Log.debug("Diff as reftee seq");
         // OutputStream rtout = new java.io.FileOutputStream("/tmp/rt");
@@ -67,11 +111,9 @@ public class RefTreeEncoder implements DiffEncoder {
 
         XmlOutput dser = new XmlOutput(out, "UTF-8");
         dser.FIXMEdisableContextCheck();
-        // dser.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output",
-        // true);
+        // dser.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
         XasUtil.copy(des, dser);
-        dser.flush(); // BUGFIX070619-2: You should always flush for clean
-        // results
+        dser.flush();
         out.close();
     }
 

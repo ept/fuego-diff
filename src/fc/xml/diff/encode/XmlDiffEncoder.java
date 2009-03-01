@@ -27,6 +27,48 @@ import fc.xml.xmlr.xas.RefItem;
 import fc.xml.xmlr.xas.RefNodeItem;
 import fc.xml.xmlr.xas.RefTreeItem;
 
+
+/**
+ * This diff encoder specialises RefTreeEncoder, shortening XPath expressions and grouping together
+ * runs of elements.
+ * For example, comparing the following two documents:
+ * 
+ * <pre>
+ * &lt;root&gt;                        &lt;root&gt;
+ * &lt;x&gt;                           &lt;a foo="foo"&gt;
+ *     &lt;y /&gt;                         &lt;b /&gt;
+ *     &lt;z /&gt;                         &lt;cc&gt;
+ * &lt;/x&gt;                                  &lt;d /&gt;
+ * &lt;a foo="foo"&gt;                         &lt;e /&gt;
+ *     &lt;b /&gt;         ----\               Text
+ *     &lt;c&gt;                \              &lt;g /&gt;
+ *         &lt;d /&gt;          /              &lt;h /&gt;
+ *         &lt;e /&gt;     ----/           &lt;/cc&gt;
+ *         Text                  &lt;/a&gt;
+ *         &lt;g /&gt;                 &lt;x&gt;
+ *         &lt;h /&gt;                     &lt;y /&gt;
+ *     &lt;/c&gt;                          &lt;z /&gt;
+ * &lt;/a&gt;                          &lt;/x&gt;
+ * &lt;/root&gt;                       &lt;/root&gt;
+ * </pre>
+ * 
+ * XmlDiffEncoder produces the following diff:
+ * 
+ * <pre>
+ * &lt;diff:diff xmlns:diff="http://www.hiit.fi/fc/xml/tdm/diff"
+ *            xmlns:ref="http://www.hiit.fi/fc/xml/ref" op="insert"&gt;
+ *     &lt;ref:node id="/0"&gt;
+ *         &lt;ref:node id="./1"&gt;
+ *             &lt;diff:copy run="1" src="./0" /&gt;
+ *             &lt;cc&gt;
+ *                 &lt;diff:copy run="5" src="./1/0" /&gt;
+ *             &lt;/cc&gt;
+ *         &lt;/ref:node&gt;
+ *         &lt;diff:copy run="1" src="./0" /&gt;
+ *     &lt;/ref:node&gt;
+ * &lt;/diff:diff&gt;
+ * </pre>
+ */
 public class XmlDiffEncoder extends RefTreeEncoder {
 
     @Override
