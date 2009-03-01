@@ -82,59 +82,6 @@ checking its hash, and then unpacking to ${src}
         target="${lib}/3dm-0.1.5b1.jar" 
         sha="db50bfa18a16e8f8d8b8a7e34066d3d5427d234f" />
 
-    <!-- Apache commons-codec -->
-    <wget id="commons-codec"
-          href1="http://archive.apache.org/dist/commons/codec/binaries/commons-codec-1.3.zip"
-          target="${lib}/commons-codec-1.3.jar"
-          target.get="${temp.file}"
-          unpack1="unpack-zip"
-          unpackloc1="commons-codec-1.3/commons-codec-1.3.jar"
-          sha="fd32786786e2adb664d5ecc965da47629dca14ba" />
-
-    <!-- Apache commons-fileupload -->
-    <wget id="commons-fileupload"
-          href1="http://archive.apache.org/dist/commons/fileupload/binaries/commons-fileupload-1.0.zip"
-          target="${lib}/commons-fileupload-1.0.jar"
-          target.get="${temp.file}"
-          unpack1="unpack-zip"
-          unpackloc1="commons-fileupload-1.0/commons-fileupload-1.0.jar"
-          sha="2366159e25523d99e96d05211a2fa5399c938735" />
-
-    <!-- Apache commons-httpclient -->
-    <wget id="commons-httpclient"
-          href1="http://archive.apache.org/dist/httpcomponents/commons-httpclient/3.0/binary/commons-httpclient-3.0.tar.gz"
-          target="${lib}/commons-httpclient-3.0.jar"
-          target.get="${temp.file}"
-          unpack1="unpack-tgz"
-          unpackloc1="commons-httpclient-3.0/commons-httpclient-3.0.jar"
-          sha="336a280d178bb957e5233189f0f32e067366c4e5" />
-
-    <!-- Apache Xerces2 -->
-    <wget id="xerces2"
-          href1="http://www.apache.org/dist/xerces/j/Xerces-J-bin.2.9.1.tar.gz"
-          target="${lib}/xercesImpl-2.9.1.jar"
-          target.get="${temp.file}"
-          unpack1="unpack-tgz"
-          unpackloc1="xerces-2_9_1/xercesImpl.jar"
-          sha="7bc7e49ddfe4fb5f193ed37ecc96c12292c8ceb6" />
-
-    <!--servlet-api.jar. NOTE: Also in debian libservlet2.3-java package, 
-        but we can't expand debs :( in Ant. So we eat this 2.3M archive instead :(-->
-    <wget id="servlet-api"
-          href1=
-"http://archive.apache.org/dist/tomcat/tomcat-5/archive/v5.5.15/bin/apache-tomcat-5.5.15-embed.tar.gz"
-          target.get="${temp.file}"
-          target="${lib}/servlet-api-2.3.jar"
-          unpack1="unpack-tgz"
-          unpackloc1="apache-tomcat-5.5.15-embed/lib/servlet-api.jar"
-          sha="2bdbb4faff35908eb7121884886a81018d8e21e2" />
-
-    <!--org.mortbay.jetty.jar-->
-    <wget id="jetty"
-          href1="http://repo1.maven.org/maven/jetty/jars/org.mortbay.jetty-5.1.4.jar"
-          target="${lib}/org.mortbay.jetty-5.1.4.jar"
-          sha="9f8b9485ef1ac5a3e7549f21287510280f460371" />
-
 
     <!-- ########## Build System Jars ######## -->
 
@@ -163,6 +110,7 @@ checking its hash, and then unpacking to ${src}
 	  unpackloc1="proguard3.5/lib/proguard.jar"
           sha="4b5a9ce786d00f53c9687fe0affb65a864cb6f3f" />
   </target>
+  
   <target name="unpack-findbugs-bin" >
     <mkdir dir="${temp.dir}" />
     <untar src="${target.get}" dest="${temp.dir}" compression="gzip" />
