@@ -30,6 +30,46 @@ public class XmlOutput implements SerializerTarget {
     private Stack<StartTag> sts;
     private boolean insideDocument;
     private boolean _checkCtx = false;
+    private int depth = 0;
+    private final boolean format;
+    private final int indent;
+
+
+    public XmlOutput(OutputStream out) throws IOException {
+        this(out, "UTF-8", true, 4);
+    }
+    
+    
+    public XmlOutput(OutputStream out, String encoding) throws IOException {
+        this(out, encoding, true, 4);
+    }
+
+
+    public XmlOutput(OutputStream out, String encoding, boolean format, int indent) throws IOException {
+        this.writer = new OutputStreamWriter(out, encoding);
+        this.out = new TargetOutputStream(this, out);
+        this.encoding = encoding;
+        this.format = format;
+        this.indent = indent;
+        this.sts = new Stack<StartTag>();
+        sts.push(null);
+        this.insideDocument = false;
+    }
+
+
+    public OutputStream getOutputStream() {
+        return out;
+    }
+
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+
+    public StartTag getContext() {
+        return sts.peek();
+    }
 
 
     private void writeValue(String value) throws IOException {
@@ -79,33 +119,16 @@ public class XmlOutput implements SerializerTarget {
             }
         }
     }
-
-
-    public XmlOutput(OutputStream out, String encoding) throws IOException {
-        this.writer = new OutputStreamWriter(out, encoding);
-        this.out = new TargetOutputStream(this, out);
-        this.encoding = encoding;
-        this.sts = new Stack<StartTag>();
-        sts.push(null);
-        this.insideDocument = false;
+    
+    
+    private void writeSpaces() throws IOException {
+        if (!format) return;
+        for (int i = 0; i < depth; i++)
+            for (int j = 0; j < indent; j++)
+                writer.write(' ');
     }
-
-
-    public OutputStream getOutputStream() {
-        return out;
-    }
-
-
-    public String getEncoding() {
-        return encoding;
-    }
-
-
-    public StartTag getContext() {
-        return sts.peek();
-    }
-
-
+    
+    
     public void append(Item item) throws IOException {
         if (Log.isEnabled(LogLevels.TRACE)) {
             Log.log("Item", LogLevels.TRACE, item);
@@ -116,7 +139,7 @@ public class XmlOutput implements SerializerTarget {
                 if (!insideDocument) {
                     writer.write("<?xml version=\"1.0\" encoding=\"");
                     writer.write(encoding);
-                    writer.write("\"?>");
+                    writer.write("\"?>\n");
                 } else {
                     throw new IOException("Attempt to write StartDocument inside document");
                 }
@@ -141,6 +164,7 @@ public class XmlOutput implements SerializerTarget {
                                                     realCtx.getName());
                     // }
                 }
+                writeSpaces();
                 writer.write('<');
                 String prefix = st.getPrefix();
                 if (prefix.length() > 0) {
@@ -192,11 +216,15 @@ public class XmlOutput implements SerializerTarget {
                     writer.write('"');
                 }
                 writer.write('>');
+                if (format) writer.write('\n');
+                depth += 1;
                 break;
             }
             case Item.END_TAG: {
                 EndTag et = (EndTag) item;
                 StartTag st = sts.pop();
+                depth -= 1;
+                writeSpaces();
                 writer.write("</");
                 if (st != null) {
                     String pr = st.getPrefix(et.getName().getNamespace());
@@ -209,15 +237,19 @@ public class XmlOutput implements SerializerTarget {
                 }
                 writer.write(et.getName().getName());
                 writer.write('>');
+                if (format) writer.write('\n');
                 break;
             }
             case Item.TEXT: {
                 Text t = (Text) item;
+                writeSpaces();
                 writeText(t.getData());
+                if (format) writer.write('\n');
                 break;
             }
             case Item.PI: {
                 Pi p = (Pi) item;
+                writeSpaces();
                 writer.write("<?");
                 writer.write(p.getTarget());
                 String instruction = p.getInstruction();
@@ -226,13 +258,16 @@ public class XmlOutput implements SerializerTarget {
                     writer.write(instruction);
                 }
                 writer.write("?>");
+                if (format) writer.write('\n');
                 break;
             }
             case Item.COMMENT: {
                 Comment c = (Comment) item;
+                writeSpaces();
                 writer.write("<!--");
                 writer.write(c.getText());
                 writer.write("-->");
+                if (format) writer.write('\n');
                 break;
             }
             case Item.ENTITY_REF: {
@@ -258,6 +293,7 @@ public class XmlOutput implements SerializerTarget {
                 writer.write(' ');
                 dtd.outputSystemLiteral(writer);
                 writer.write('>');
+                if (format) writer.write('\n');
                 break;
             }
             default:
