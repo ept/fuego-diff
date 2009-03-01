@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import fc.util.log.Log;
+
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -26,8 +26,6 @@ import org.xml.sax.helpers.AttributesImpl;
 // ctl: sorry for not writing tip-top code, this is because im in a slight
 // hurry...
 public class SaxBridge {
-
-    private static Log log = LogFactory.getLog(SaxReader.class.getName());
 
     protected EventSequence es;
 
@@ -52,9 +50,7 @@ public class SaxBridge {
             int eventType = e.getType();
             switch (eventType) {
                 case Event.START_DOCUMENT: {
-                    if (log.isDebugEnabled()) {
-                        log.debug("START_DOCUMENT");
-                    }
+                    Log.debug("START_DOCUMENT");
                     if (contentHandler != null) {
                         contentHandler.startDocument();
                     }
@@ -65,9 +61,7 @@ public class SaxBridge {
                     String uri = e.getNamespace();
                     contentHandler.startPrefixMapping(prefix, uri);
                     prefixMapping.put(uri, prefix);
-                    if (log.isDebugEnabled()) {
-                        log.debug("PM(" + e.getNamespace() + ", " + e.getValue() + ")");
-                    }
+                    Log.debug("PM(" + e.getNamespace() + ", " + e.getValue() + ")");
                     break;
                 }
                 case Event.START_ELEMENT: {
@@ -75,9 +69,7 @@ public class SaxBridge {
                     String localName = e.getName();
                     String prefix = (String) prefixMapping.get(namespace);
                     AttributesImpl atts = new AttributesImpl();
-                    if (log.isDebugEnabled()) {
-                        log.debug("START_TAG(" + namespace + ", " + localName + ")");
-                    }
+                    Log.debug("START_TAG(" + namespace + ", " + localName + ")");
                     // ctl: Scan attributes; is there any other event that may
                     // occur inside attributes than COMMENT?
                     for (Event e2 = null; (e2 = r.advance()) != null;) {
@@ -105,9 +97,7 @@ public class SaxBridge {
                 case Event.END_ELEMENT: {
                     String namespace = e.getNamespace();
                     String localName = e.getName();
-                    if (log.isDebugEnabled()) {
-                        log.debug("END_TAG(" + namespace + ", " + localName + ")");
-                    }
+                    Log.debug("END_TAG(" + namespace + ", " + localName + ")");
                     if (contentHandler != null) {
                         contentHandler.endElement(
                                                   makeNameSpace(prefixMapping, namespace, localName),
@@ -118,9 +108,7 @@ public class SaxBridge {
                 }
                 case Event.CONTENT: {
                     char[] ch = e.getValue().toString().toCharArray();
-                    if (log.isDebugEnabled()) {
-                        log.debug("TEXT(" + new String(ch, textParams[0], textParams[1]) + ")");
-                    }
+                    Log.debug("TEXT(" + new String(ch, textParams[0], textParams[1]) + ")");
                     if (contentHandler != null) {
                         contentHandler.characters(ch, 0, ch.length);
                     }

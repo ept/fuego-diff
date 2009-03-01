@@ -1,6 +1,5 @@
 # List of path elements in fuego core common pool
 # needed to run the software
 ${fc.contrib}/3dm-0.1.5b1.jar
-${fc.contrib}/commons-logging-1.1.1.jar
 ${fc.contrib}/junit-3.8.1.jar
 ${fc.contrib}/xmlpull_1_1_3_4c.jar

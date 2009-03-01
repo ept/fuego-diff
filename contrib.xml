@@ -51,15 +51,6 @@ checking its hash, and then unpacking to ${src}
   <target name="get-contrib" >
     <mkdir dir="${lib}" />
 
-    <!-- Apache commons-logging.jar -->
-    <wget id="commons-logging"
-          href1="http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.tar.gz"
-          target="${lib}/commons-logging-1.1.1.jar"
-          target.get="${temp.file}"
-          unpack1="unpack-tgz"
-          unpackloc1="commons-logging-1.1.1/commons-logging-1.1.1.jar"
-          sha="2d859791fbf7d880591864bd4004d8442a8a3b81" />
-
     <!--- XMLPull API -->
     <wget id="xmlpull-api"
 	  href1="http://www.xmlpull.org/v1/download/xmlpull_1_1_3_4c.jar"

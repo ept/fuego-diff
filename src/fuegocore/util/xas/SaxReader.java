@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.io.InputStream;
 import java.io.IOException;
 
+import fc.util.log.Log;
+
 import org.xml.sax.XMLReader;
 import org.xml.sax.InputSource;
 import org.xml.sax.ContentHandler;
@@ -28,9 +30,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.helpers.AttributesImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -46,8 +45,6 @@ import org.xmlpull.v1.XmlPullParserException;
  * non-empty string.
  */
 public class SaxReader implements XMLReader {
-
-    private static Log log = LogFactory.getLog(SaxReader.class.getName());
 
     private static final String NS_URI = "http://xml.org/sax/features/namespaces";
     private static final String NSPRE_URI = "http://xml.org/sax/features/namespace-prefixes";
@@ -169,9 +166,7 @@ public class SaxReader implements XMLReader {
             for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.nextToken()) {
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT: {
-                        if (log.isDebugEnabled()) {
-                            log.debug("START_DOCUMENT");
-                        }
+                        Log.debug("START_DOCUMENT");
                         if (contentHandler != null) {
                             contentHandler.startDocument();
                         }
@@ -183,9 +178,7 @@ public class SaxReader implements XMLReader {
                         for (int i = nsStart; i < nsEnd; i++) {
                             String prefix = parser.getNamespacePrefix(i);
                             String uri = parser.getNamespaceUri(i);
-                            if (log.isDebugEnabled()) {
-                                log.debug("PM(" + prefix + ", " + uri + ")");
-                            }
+                            Log.debug("PM(" + prefix + ", " + uri + ")");
                             if (contentHandler != null) {
                                 contentHandler.startPrefixMapping(prefix, uri);
                             }
@@ -196,17 +189,12 @@ public class SaxReader implements XMLReader {
                         String localName = parser.getName();
                         AttributesImpl atts = new AttributesImpl();
                         int attLen = parser.getAttributeCount();
-                        if (log.isDebugEnabled()) {
-                            log.debug("START_TAG(" + namespace + ", " + localName + ", " + attLen +
-                                      ")");
-                        }
+                        Log.debug("START_TAG(" + namespace + ", " + localName + ", " + attLen + ")");
                         for (int i = 0; i < attLen; i++) {
                             String aNamespace = parser.getAttributeNamespace(i);
                             String aName = parser.getAttributeName(i);
                             String aValue = parser.getAttributeValue(i);
-                            if (log.isDebugEnabled()) {
-                                log.debug("A(" + aNamespace + ", " + aName + ", " + aValue + ")");
-                            }
+                            Log.debug("A(" + aNamespace + ", " + aName + ", " + aValue + ")");
                             String aqName = aName;
                             String aPrefix = (String) prefixMapping.get(aNamespace);
                             if (aPrefix != null && aPrefix.length() > 0) {
@@ -230,9 +218,7 @@ public class SaxReader implements XMLReader {
                     case XmlPullParser.END_TAG: {
                         String namespace = parser.getNamespace();
                         String localName = parser.getName();
-                        if (log.isDebugEnabled()) {
-                            log.debug("END_TAG(" + namespace + ", " + localName + ")");
-                        }
+                        Log.debug("END_TAG(" + namespace + ", " + localName + ")");
                         String qName = localName;
                         String prefix = (String) prefixMapping.get(namespace);
                         if (prefix != null && prefix.length() > 0) {
@@ -253,9 +239,7 @@ public class SaxReader implements XMLReader {
                     }
                     case XmlPullParser.TEXT: {
                         char[] ch = parser.getTextCharacters(textParams);
-                        if (log.isDebugEnabled()) {
-                            log.debug("TEXT(" + new String(ch, textParams[0], textParams[1]) + ")");
-                        }
+                        Log.debug("TEXT(" + new String(ch, textParams[0], textParams[1]) + ")");
                         if (contentHandler != null) {
                             contentHandler.characters(ch, textParams[0], textParams[1]);
                         }
@@ -263,9 +247,7 @@ public class SaxReader implements XMLReader {
                     }
                     case XmlPullParser.PROCESSING_INSTRUCTION: {
                         String target = parser.getText();
-                        if (log.isDebugEnabled()) {
-                            log.debug("PI(" + target + ")");
-                        }
+                        Log.debug("PI(" + target + ")");
                         if (contentHandler != null) {
                             String data = null;
                             int i = target.indexOf(' ');

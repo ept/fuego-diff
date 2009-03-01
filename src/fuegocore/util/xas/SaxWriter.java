@@ -14,13 +14,12 @@ import java.util.HashMap;
 import java.io.OutputStream;
 import java.io.IOException;
 
+import fc.util.log.Log;
+
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -33,8 +32,6 @@ import org.xmlpull.v1.XmlSerializer;
  */
 public class SaxWriter implements ContentHandler {
 
-    private static Log log = LogFactory.getLog(SaxWriter.class.getName());
-
     protected XmlSerializer target;
     private Map prefixes = new HashMap();
 
@@ -45,9 +42,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public SaxWriter(XmlSerializer target, OutputStream os) {
-        if (log.isDebugEnabled()) {
-            log.debug("Constructor: target=" + target + ", os=" + os);
-        }
+        Log.debug("Constructor: target=" + target + ", os=" + os);
         this.target = target;
         if (os != null) {
             try {
@@ -67,9 +62,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public void startDocument() throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("startDocument()");
-        }
+        Log.debug("startDocument()");
         if (target != null) {
             try {
                 target.startDocument("ISO-8859-1", null);
@@ -81,9 +74,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public void endDocument() throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("endDocument()");
-        }
+        Log.debug("endDocument()");
         if (target != null) {
             try {
                 target.endDocument();
@@ -96,9 +87,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public void startPrefixMapping(String prefix, String uri) throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("startPrefixMapping(" + prefix + ", " + uri + ")");
-        }
+        Log.debug("startPrefixMapping(" + prefix + ", " + uri + ")");
         prefixes.put(prefix, uri);
         if (target != null) {
             try {
@@ -111,18 +100,14 @@ public class SaxWriter implements ContentHandler {
 
 
     public void endPrefixMapping(String prefix) throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("endPrefixMapping(" + prefix + ")");
-        }
+        Log.debug("endPrefixMapping(" + prefix + ")");
         prefixes.remove(prefix);
     }
 
 
     public void startElement(String namespaceURI, String localName, String qName,
                              Attributes attributes) throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("startElement(" + namespaceURI + ", " + localName + ", " + qName + ")");
-        }
+        Log.debug("startElement(" + namespaceURI + ", " + localName + ", " + qName + ")");
         if (target != null) {
             try {
                 if (localName == null || localName.equals("")) {
@@ -163,9 +148,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("endElement(" + namespaceURI + ", " + localName + ", " + qName + ")");
-        }
+        Log.debug("endElement(" + namespaceURI + ", " + localName + ", " + qName + ")");
         if (target != null) {
             try {
                 if (localName == null || localName.equals("")) {
@@ -187,9 +170,7 @@ public class SaxWriter implements ContentHandler {
 
 
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (log.isDebugEnabled()) {
-            log.debug("characters(" + new String(ch, start, length) + ")");
-        }
+        Log.debug("characters(" + new String(ch, start, length) + ")");
         if (target != null) {
             try {
                 target.text(ch, start, length);
