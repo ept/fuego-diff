@@ -1,6 +1,5 @@
 # List of path elements in fuego core common pool
 # needed to run the software
-${fc.contrib}/bouncy-castle-cldc.zip
 ${fc.contrib}/commons-codec-1.3.jar
 ${fc.contrib}/commons-fileupload-1.0.jar
 ${fc.contrib}/commons-httpclient-3.0-rc2.jar

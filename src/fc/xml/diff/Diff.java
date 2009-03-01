@@ -55,6 +55,18 @@ public class Diff {
 
     public static void main(String[] args) throws IOException {
         Log.setLogger(new StreamLogger(System.err));
+        java.io.StringWriter writer = new java.io.StringWriter();
+        try {
+            javax.xml.stream.XMLStreamWriter xmlWriter = javax.xml.stream.XMLOutputFactory.newInstance().createXMLStreamWriter(writer);
+            xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("ns", "foo", "http://www.example.com/namespace");
+            xmlWriter.writeAttribute("bar", "baz");
+            xmlWriter.writeEndElement();
+            xmlWriter.writeEndDocument();
+            Log.info(writer.toString());
+        } catch (javax.xml.stream.XMLStreamException e) {
+            Log.info(e);
+        }
         Class encoder = fc.xml.diff.encode.XmlDiffEncoder.class;
         Class filter = DataItems.class;
         String encoderName = System.getProperty("encoder");
@@ -114,7 +126,6 @@ public class Diff {
         List<Item> preamble = new ArrayList<Item>();
         List<Item> base = IoUtil.makeEventList(baseEs, preamble, posListBase, baseParser);
         List<Item> doc = IoUtil.makeEventList(docEs, null, posListNew, docParser);
-        Log.debug(base.toString());
         GlMatcher<Item> m = new GlMatcher<Item>(IoUtil.getEventHashAlgorithm());
         List<Segment<Item>> ml = m.match(base, doc, CHUNK_SIZES);
         long _stop = System.currentTimeMillis();

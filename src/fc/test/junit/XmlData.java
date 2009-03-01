@@ -12,7 +12,6 @@ package fc.test.junit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
-import org.bouncycastle.crypto.params.RSAKeyParameters;
 import org.kxml2.io.KXmlParser;
 
 import fc.xml.xas.EndDocument;
@@ -47,7 +44,6 @@ import fc.xml.xas.typing.ValueCodec;
 public class XmlData {
 
     static final String TEST_NS = "http://www.hiit.fi/fuego/fc/test";
-    private static final AsymmetricCipherKeyPair keyPair;
     private static final Map<XasFragment, Integer> sigCounts = new IdentityHashMap<XasFragment, Integer>();
 
     static StartDocument sd;
@@ -57,17 +53,6 @@ public class XmlData {
 
 
     private XmlData() {
-    }
-
-    static {
-        BigInteger modulus = new BigInteger(
-                                            "114223138481062383818743472854345446729415521820579721478671411120076686448918620302220709845014730631814478188984612465856840519852245805751892337820823145686311359090114506894126920369485682523288840662511969165284005936035859388250282090838456799125935768645086141305672131191153192376610593502582005436827");
-        BigInteger pub = new BigInteger("65537");
-        BigInteger priv = new BigInteger(
-                                         "70156155961948275567326563815950795233214260644274158546789757111501088844901677266662957312531515817361615431606536850758127492036749476157451855811245452516036408423715290481767027536732741413397901727264890487785997545700283017129062803344411768517700818077537872436050914359831030152123534899150431708577");
-        RSAKeyParameters privParam = new RSAKeyParameters(true, modulus, priv);
-        RSAKeyParameters pubParam = new RSAKeyParameters(true, modulus, pub);
-        keyPair = new AsymmetricCipherKeyPair(pubParam, privParam);
     }
 
 
@@ -80,11 +65,6 @@ public class XmlData {
             item = source.next();
         }
         return new XasFragment(items, firstItem);
-    }
-
-
-    public static AsymmetricCipherKeyPair getKeyPair() {
-        return keyPair;
     }
 
 

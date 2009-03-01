@@ -82,18 +82,6 @@ checking its hash, and then unpacking to ${src}
         target="${lib}/3dm-0.1.5b1.jar" 
         sha="db50bfa18a16e8f8d8b8a7e34066d3d5427d234f" />
 
-    <!-- Bouncy Castle. We're sorry for the inconvenience (25MB archive). -->
-    <wget id="bouncy-castle-cldc"
-	  href1="file:///tmp/crypto-140.tar.gz"
-	  href2="http://bouncycastle.org/download/crypto-140.tar.gz"
-	  target="${lib}/bouncy-castle-cldc-1.40.zip"
-          target.get="${temp.file}"
-          unpack1="unpack-tgz"
-          unpack2="unpack-tgz"	  
-	  unpackloc1="crypto-140/zips/cldc_classes.zip"
-	  unpackloc2="crypto-140/zips/cldc_classes.zip"
-	  sha="2c7ff4f406f71595abd72fe8a992767a26e72c78" />
-
     <!-- Apache commons-codec -->
     <wget id="commons-codec"
           href1="http://archive.apache.org/dist/commons/codec/binaries/commons-codec-1.3.zip"
