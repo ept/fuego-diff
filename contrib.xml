@@ -59,7 +59,7 @@ checking its hash, and then unpacking to ${src}
 
     <!-- junit -->
     <wget id="junit"
-          href1="http://${sourceforge}/sourceforge/junit/junit3.8.1.zip"
+          href1="http://${sourceforge}/junit/junit3.8.1.zip"
           target="${lib}/junit-3.8.1.jar"
           target.get="${temp.file}"
           unpack1="unpack-zip"
@@ -78,7 +78,7 @@ checking its hash, and then unpacking to ${src}
 
     <!-- Findbugs -->
     <wget id="findbugs"
-          href1="http://${sourceforge}/sourceforge/findbugs/findbugs-0.9.4.tar.gz"
+          href1="http://${sourceforge}/findbugs/findbugs-0.9.4.tar.gz"
           target="${lib}/findbugs-0.9.4.jar"
           target.get="${temp.file}"
           unpack1="unpack-findbugs-bin"
@@ -86,7 +86,7 @@ checking its hash, and then unpacking to ${src}
 
     <!-- dom4j (probably not used by anything but FindBugs) -->
     <wget id="dom4j"
-          href1="http://${sourceforge}/sourceforge/findbugs/findbugs-0.9.4.tar.gz"
+          href1="http://${sourceforge}/findbugs/findbugs-0.9.4.tar.gz"
           target="${lib}/findbugs-0.9.4-dom4j-full.jar"
           target.get="${temp.file}"
           unpack1="unpack-findbugs-bin"
@@ -94,7 +94,7 @@ checking its hash, and then unpacking to ${src}
 
     <!-- proguard -->
     <wget id="proguard"
-          href1="http://${sourceforge}/sourceforge/proguard/proguard3.5.tar.gz"
+          href1="http://${sourceforge}/proguard/proguard3.5.tar.gz"
           target.get="${temp.file}"
           target="${lib}/proguard-3.5.jar"
           unpack1="unpack-tgz"
