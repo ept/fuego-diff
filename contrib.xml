@@ -53,9 +53,8 @@ checking its hash, and then unpacking to ${src}
 
     <!--- XMLPull API -->
     <wget id="xmlpull-api"
-	  href1="http://www.xmlpull.org/v1/download/xmlpull_1_1_3_4c.jar"
-	  target="${lib}/xmlpull_1_1_3_4c.jar" 
-          sha = "25df3046aed28cb0e774e5cf7d8437bc1bee00f3" />
+	  href1="http://repo1.maven.org/maven2/xmlpull/xmlpull/1.1.3.4a/xmlpull-1.1.3.4a.jar"
+	  target="${lib}/xmlpull-1.1.3.4a.jar" />
 
     <!-- junit -->
     <wget id="junit"
